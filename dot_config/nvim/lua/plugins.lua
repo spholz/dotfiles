@@ -1,19 +1,10 @@
 -- automatically run :PackerCompile whenever plugins.lua is updated
-local packer_user_config = vim.api.nvim_create_augroup('packer_user_config', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost', {
-    pattern = 'plugins.lua',
-    -- command = 'source <afile> | PackerUpdate',
-    callback = function()
-        local file, err = loadfile(vim.fn.expand('<afile>'))
-        if file then
-            file()
-        else
-            vim.api.nvim_err_writeln(err)
-        end
-        require'packer'.compile()
-    end,
-    group = packer_user_config,
-})
+vim.cmd [[
+augroup packer_user_config
+  autocmd!
+  autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+augroup end
+]]
 
 require'packer'.startup(function(use)
     use { 'wbthomason/packer.nvim' }
@@ -178,13 +169,6 @@ require'packer'.startup(function(use)
 end)
 
 if PACKER_BOOTSTRAP then
-    vim.api.nvim_create_autocmd('User', {
-        pattern = 'PackerComplete',
-        callback = function()
-            print('Restart Neovim to complete installation')
-        end,
-        once = true,
-    })
     return
 end
 
