@@ -19,10 +19,14 @@ require'packer'.startup(function(use)
     use { 'wbthomason/packer.nvim' }
 
     -- Themes --------------------------------------------------------
-    use { 'tomasr/molokai' }
-    use { 'joshdick/onedark.vim' }
-    use { 'tomasiser/vim-code-dark' }
-    use { 'ayu-theme/ayu-vim' }
+    use { 'tomasr/molokai',
+        config = function()
+            vim.cmd [[colorscheme molokai]]
+        end
+    }
+    -- use { 'joshdick/onedark.vim' }
+    -- use { 'tomasiser/vim-code-dark' }
+    -- use { 'ayu-theme/ayu-vim' }
     use { 'vim-airline/vim-airline' }
     use { 'vim-airline/vim-airline-themes' }
 
@@ -191,7 +195,6 @@ end
 -- auto install missing plugins
 require'packer'.install()
 
-vim.cmd [[colorscheme molokai]]
 
 -- fix theme for global status line
 vim.api.nvim_set_hl(0, 'WinSeparator', {
