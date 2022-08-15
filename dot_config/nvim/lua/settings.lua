@@ -42,4 +42,4 @@ vim.o.timeoutlen = 500
 vim.o.ttimeoutlen = 10
 
 -- global status line
-vim.o.laststatus = 3
+-- vim.o.laststatus = 3 -- now set in statusline.lua (`globalstatus = true`)

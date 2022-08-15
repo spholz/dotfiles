@@ -24,17 +24,20 @@ require'packer'.startup(function(use)
             vim.cmd [[colorscheme molokai]]
         end
     }
-    -- use { 'joshdick/onedark.vim' }
+    use { 'joshdick/onedark.vim' }
     -- use { 'tomasiser/vim-code-dark' }
-    -- use { 'ayu-theme/ayu-vim' }
-    use { 'vim-airline/vim-airline' }
-    use { 'vim-airline/vim-airline-themes' }
+    use { 'ayu-theme/ayu-vim' }
+    use { 'NLKNguyen/papercolor-theme' }
+    use { 'nvim-lualine/lualine.nvim' }
+    -- use { 'vim-airline/vim-airline' }
+    -- use { 'vim-airline/vim-airline-themes' }
 
     -- LSP -----------------------------------------------------------
     use { 'neovim/nvim-lspconfig' }
     -- use { 'tjdevries/nlua.nvim' }
     use { 'nvim-lua/lsp-status.nvim' }
     use { 'onsails/lspkind-nvim' }
+    use { 'folke/trouble.nvim' }
     -- use { 'glepnir/lspsaga.nvim',
     --     config = function()
     --         require'lspsaga'.init_lsp_saga()
@@ -175,6 +178,12 @@ require'packer'.startup(function(use)
     }
 
     use { 'rcarriga/nvim-dap-ui', requires = { 'mfussenegger/nvim-dap' } }
+
+    use { 'voldikss/vim-floaterm',
+        config = function()
+            vim.g.floaterm_keymap_toggle = '<leader><cr>'
+        end
+    }
 
     if PACKER_BOOTSTRAP then
         require'packer'.sync()

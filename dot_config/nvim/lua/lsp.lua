@@ -1,4 +1,4 @@
-local lspconfig = require('lspconfig')
+local lspconfig = require'lspconfig'
 
 local on_attach = function(_, bufnr)
     -- Enable completion in buffers with LSP
@@ -22,14 +22,14 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
 
-    vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('v', '<leader>la', vim.lsp.buf.range_code_action, opts)
+    vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('v', '<leader>a', vim.lsp.buf.range_code_action, opts)
 
-    vim.keymap.set('n', '<leader>lf', vim.lsp.buf.formatting, opts)
-    vim.keymap.set('v', '<leader>lf', vim.lsp.buf.range_formatting, opts)
+    vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, opts)
+    vim.keymap.set('v', '<leader>f', vim.lsp.buf.range_formatting, opts)
 
-    vim.keymap.set({'n', 'v'}, '<leader>lr', vim.lsp.buf.references, opts)
-    vim.keymap.set({'n', 'v'}, '<leader>lR', vim.lsp.buf.rename, opts)
+    vim.keymap.set({'n', 'v'}, '<leader>R', vim.lsp.buf.references, opts)
+    vim.keymap.set({'n', 'v'}, '<leader>r', vim.lsp.buf.rename, opts)
 
     -- buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', { noremap=true, silent=true })
     -- buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', { noremap=true, silent=true })
@@ -45,7 +45,7 @@ lspconfig.clangd.setup {
         on_attach(_, bufnr)
         vim.keymap.set('n', '<leader>c<tab>', '<cmd>ClangdSwitchSourceHeader<cr>', { noremap = true, silent = true })
     end,
-    cmd = { "clangd", "--header-insertion=never" }
+    cmd = { 'clangd', '--header-insertion=iwyu', '--clang-tidy' }
 }
 
 -- lspconfig.ccls.setup {
@@ -88,6 +88,22 @@ lspconfig.sumneko_lua.setup {
     },
 }
 
+lspconfig.texlab.setup {
+    on_attach = on_attach,
+    settings = {
+        texlab = {
+            chktex = {
+                onEdit = true,
+                onOpenAndSave = true,
+            },
+            forwardSearch = {
+                executable = 'okular',
+                args = { '--unique', 'file:%p#src:%l%f' },
+            },
+        },
+    },
+}
+
 -- require'nlua.lsp.nvim'.setup(lspconfig, {
 --     on_attach = on_attach,
 --     settings = {
@@ -99,6 +115,29 @@ lspconfig.sumneko_lua.setup {
 --     }
 -- })
 
-require'lspconfig'.cmake.setup{
+lspconfig.cmake.setup {
     on_attach = on_attach
+}
+
+lspconfig.hls.setup {
+    on_attach = on_attach
+}
+
+local configs = require'lspconfig.configs'
+
+if not configs.qmlls then
+    configs.qmlls = {
+        default_config = {
+            cmd = { '/usr/lib/qt6/bin/qmlls' };
+            filetypes = { 'qml' };
+            root_dir = function(fname)
+                return lspconfig.util.find_git_ancestor(fname)
+            end;
+            settings = {};
+        };
+    }
+end
+
+lspconfig.qmlls.setup {
+    on_attach = on_attach,
 }

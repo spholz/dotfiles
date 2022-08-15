@@ -35,18 +35,31 @@ vim.keymap.set('n', '<M-l>', '<C-w>l', opts)
 
 -- BUFFERS
 
-local silent_ops = {
+local silent_opts = {
     silent = true,
     noremap = true,
 }
 
-vim.keymap.set('n', '<leader><Tab>', '<cmd>bnext<cr>', silent_ops)
-vim.keymap.set('n', '<leader><S-Tab>', '<cmd>bNext<cr>', silent_ops)
+vim.keymap.set('n', '<leader><Tab>', '<cmd>bnext<cr>', silent_opts)
+vim.keymap.set('n', '<leader><S-Tab>', '<cmd>bNext<cr>', silent_opts)
 
-vim.keymap.set('n', '<leader>bd', '<cmd>bprevious|bdelete #<cr>', silent_ops)
+vim.keymap.set('n', '<leader>bd', '<cmd>bprevious|bdelete #<cr>', silent_opts)
 
 
 -- TABS
 
-vim.keymap.set('n', '<leader>t<Tab>', '<cmd>tabnext<cr>', silent_ops)
-vim.keymap.set('n', '<leader>t<S-Tab>', '<cmd>tabprevious<cr>', silent_ops)
+vim.keymap.set('n', '<leader>1', '1gt', silent_opts)
+vim.keymap.set('n', '<leader>2', '2gt', silent_opts)
+vim.keymap.set('n', '<leader>3', '3gt', silent_opts)
+vim.keymap.set('n', '<leader>4', '4gt', silent_opts)
+vim.keymap.set('n', '<leader>5', '5gt', silent_opts)
+vim.keymap.set('n', '<leader>6', '6gt', silent_opts)
+vim.keymap.set('n', '<leader>7', '7gt', silent_opts)
+vim.keymap.set('n', '<leader>8', '8gt', silent_opts)
+vim.keymap.set('n', '<leader>9', '9gt', silent_opts)
+
+-- vim.keymap.set('n', '<leader><Tab>', '<cmd>tabnext<cr>', silent_opts)
+-- vim.keymap.set('n', '<leader><S-Tab>', '<cmd>tabprevios<cr>', silent_opts)
+vim.keymap.set('n', '<leader>td', '<cmd>tabclose<cr>', silent_opts)
+vim.keymap.set('n', '<leader>t<Tab>', '<cmd>tabnext<cr>', silent_opts)
+vim.keymap.set('n', '<leader>t<S-Tab>', '<cmd>tabprevious<cr>', silent_opts)
