@@ -34,7 +34,9 @@ packer.startup(function(use)
     -- use { 'tomasiser/vim-code-dark' }
     use { 'ayu-theme/ayu-vim' }
     use { 'NLKNguyen/papercolor-theme' }
-    use { 'nvim-lualine/lualine.nvim' }
+    use { 'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    }
     -- use { 'vim-airline/vim-airline',
     --     config = function()
     --         vim.g.airline_powerline_fonts = 1
@@ -49,6 +51,11 @@ packer.startup(function(use)
     use { 'nvim-lua/lsp-status.nvim' }
     use { 'onsails/lspkind-nvim' }
     use { 'folke/trouble.nvim' }
+    use { 'simrat39/symbols-outline.nvim',
+        config = function()
+            require'symbols-outline'.setup()
+        end
+    }
     -- use { 'glepnir/lspsaga.nvim',
     --     config = function()
     --         require'lspsaga'.init_lsp_saga()
@@ -125,24 +132,16 @@ packer.startup(function(use)
             end
         end,
         config = function()
-            -- local parser_config = require 'nvim-treesitter.parsers'.get_parser_configs()
-            -- parser_config.wgsl = {
-            --     install_info = {
-            --         url = 'https://github.com/szebniok/tree-sitter-wgsl',
-            --         files = {'src/parser.c'}
-            --     },
-            -- }
-
             if PACKER_BOOTSTRAP then
                 return
             end
+
             require'nvim-treesitter.configs'.setup {
                 -- ensure_installed = { 'c', 'cpp', 'python', 'rust', 'lua', 'haskell',
                 --                      'bash', 'toml', 'json', 'jsonc', 'yaml', 'html',
                 --                      'devicetree', 'verilog', 'gdscript', 'regex',
                 --                      'rst', 'latex', 'comment', 'query', 'wgsl' },
                 ensure_installed = 'all',
-                ignore_install = { 'phpdoc' },
                 highlight = {
                     enable = true,
                     disable = {}
@@ -156,9 +155,9 @@ packer.startup(function(use)
             }
 
 
-            vim.wo.foldmethod = 'expr'
-            vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
-            vim.o.foldlevelstart = 99
+            vim.opt.foldmethod = 'expr'
+            vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+            vim.opt.foldlevelstart = 99
         end
     }
     use { 'nvim-treesitter/playground' }
@@ -188,11 +187,24 @@ packer.startup(function(use)
 
     use { 'rcarriga/nvim-dap-ui', requires = { 'mfussenegger/nvim-dap' } }
 
-    use { 'voldikss/vim-floaterm',
+    use { 'akinsho/toggleterm.nvim',
         config = function()
-            vim.g.floaterm_keymap_toggle = '<leader><cr>'
+            -- setting open_mapping to '<leader><cr>' seems to be buggy (space is mapped in insert mode?)
+            require'toggleterm'.setup()
+
+            local Terminal = require'toggleterm.terminal'.Terminal
+            local term = Terminal:new {
+                direction = 'float',
+            }
+
+            vim.keymap.set('n', '<leader><cr>', function() term:toggle() end, { noremap = true })
         end
     }
+    -- use { 'voldikss/vim-floaterm',
+    --     config = function()
+    --         vim.g.floaterm_keymap_toggle = '<leader><cr>'
+    --     end
+    -- }
 
     if PACKER_BOOTSTRAP then
         require'packer'.sync()

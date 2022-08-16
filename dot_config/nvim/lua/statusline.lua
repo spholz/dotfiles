@@ -43,5 +43,5 @@ require'lualine'.setup {
   },
   winbar = {},
   inactive_winbar = {},
-  extensions = {}
+  extensions = {'quickfix', 'fzf', 'man', 'fugitive', 'nvim-dap-ui', 'symbols-outline', 'toggleterm'}
 }

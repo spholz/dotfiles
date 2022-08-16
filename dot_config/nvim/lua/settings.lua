@@ -1,43 +1,36 @@
-vim.o.hidden = true
-vim.wo.number = true
-vim.wo.relativenumber = true
+vim.opt.hidden = true
+vim.opt.number = true
+vim.opt.relativenumber = true
 
-vim.o.mouse = 'a'
-vim.o.clipboard = 'unnamedplus'
-vim.o.splitbelow = true
-vim.o.splitright = true
+vim.opt.mouse = 'n'
+vim.opt.clipboard = 'unnamedplus'
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
-vim.o.expandtab = true
-vim.o.smarttab = true
-vim.o.smartindent = true
-vim.o.list = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.smarttab = true
+vim.opt.smartindent = true
+vim.opt.list = true
 
-vim.o.ignorecase = true
-vim.o.smartcase = true
-vim.o.wildmenu = true
-vim.o.path = vim.o.path .. '**'
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.path:append('**')
 
--- vim.o.completeopt = 'menuone,noinsert,noselect'
 vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
-vim.o.shortmess = vim.o.shortmess .. 'c' -- .. 'I' -- 'c' don't show the "match x of y" message
+vim.opt.shortmess:append({ c = true }) -- 'c' don't show the "match x of y" message
 
-vim.o.undofile = true
+vim.opt.undofile = true
 
-vim.wo.wrap = false
+vim.opt.wrap = false
 
-vim.o.termguicolors = true
-vim.wo.cursorline = true
-vim.o.showmode = false
--- vim.o.showtabline = 1 -- 1: only if there are at least two tab pages -- doesn't work with lualine
+vim.opt.termguicolors = true
+vim.opt.cursorline = true
+vim.opt.showmode = false
+-- vim.opt.showtabline = 1 -- 1: only if there are at least two tab pages -- doesn't work with lualine
 
-vim.o.guifont = 'FiraCode Nerd Font:h24'
+vim.opt.guifont = 'FiraCode Nerd Font:h24'
 
-vim.cmd [[language en_US.UTF-8]] -- translations in nvim are broken
-
-vim.o.timeoutlen = 500
-vim.o.ttimeoutlen = 10
-
--- global status line
--- vim.o.laststatus = 3 -- now set in statusline.lua (`globalstatus = true`)
+vim.opt.timeoutlen = 500
+vim.opt.ttimeoutlen = 10

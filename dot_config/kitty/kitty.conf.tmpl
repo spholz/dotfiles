@@ -6,7 +6,7 @@
 #: individual font faces and even specify special fonts for particular
 #: characters.
 
-font_family      FiraCode Nerd Font
+font_family      Fira Mono
 bold_font        auto
 italic_font      auto
 bold_italic_font auto
@@ -1437,7 +1437,8 @@ macos_colorspace srgb
 #: configuration will change this value only for newly created OS
 #: windows.
 
-linux_display_server auto
+# maximize on wayland (at least on plasma) is broken
+linux_display_server x11
 
 #: Choose between Wayland and X11 backends. By default, an appropriate
 #: backend based on the system state is chosen automatically. Set it
