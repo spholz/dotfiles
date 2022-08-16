@@ -15,7 +15,13 @@ vim.api.nvim_create_autocmd('BufWritePost', {
     group = packer_user_config,
 })
 
-require'packer'.startup(function(use)
+local packer = require'packer'
+
+packer.init {
+    compile_path = vim.fn.stdpath('data') .. '/site/plugin/packer_compiled.lua',
+}
+
+packer.startup(function(use)
     use { 'wbthomason/packer.nvim' }
 
     -- Themes --------------------------------------------------------
@@ -29,7 +35,12 @@ require'packer'.startup(function(use)
     use { 'ayu-theme/ayu-vim' }
     use { 'NLKNguyen/papercolor-theme' }
     use { 'nvim-lualine/lualine.nvim' }
-    -- use { 'vim-airline/vim-airline' }
+    -- use { 'vim-airline/vim-airline',
+    --     config = function()
+    --         vim.g.airline_powerline_fonts = 1
+    --         vim.g['airline#extensions#tabline#enabled'] = 1
+    --     end
+    -- }
     -- use { 'vim-airline/vim-airline-themes' }
 
     -- LSP -----------------------------------------------------------
@@ -150,9 +161,7 @@ require'packer'.startup(function(use)
             vim.o.foldlevelstart = 99
         end
     }
-    use { 'nvim-treesitter/playground',
-        event = 'BufRead',
-    }
+    use { 'nvim-treesitter/playground' }
 
     -- Other Plugins -------------------------------------------------
     use { 'vimwiki/vimwiki',

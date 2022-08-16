@@ -28,11 +28,9 @@ vim.o.undofile = true
 vim.wo.wrap = false
 
 vim.o.termguicolors = true
-vim.g.airline_powerline_fonts = 1
-vim.g['airline#extensions#tabline#enabled'] = 1
 vim.wo.cursorline = true
 vim.o.showmode = false
-vim.o.showtabline = 2 -- 2: always show
+-- vim.o.showtabline = 1 -- 1: only if there are at least two tab pages -- doesn't work with lualine
 
 vim.o.guifont = 'FiraCode Nerd Font:h24'
 
