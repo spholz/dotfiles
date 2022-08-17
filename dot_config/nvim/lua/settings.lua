@@ -2,7 +2,7 @@ vim.opt.hidden = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 
-vim.opt.mouse = 'n'
+vim.opt.mouse = 'a'
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.splitbelow = true
 vim.opt.splitright = true
