@@ -1,5 +1,5 @@
 -- automatically run :PackerCompile whenever plugins.lua is updated
-local packer_user_config = vim.api.nvim_create_augroup('packer_user_config', { clear = true })
+local packer_user_config = vim.api.nvim_create_augroup('PackerUserConfig', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', {
     pattern = 'plugins.lua',
     -- command = 'source <afile> | PackerUpdate',

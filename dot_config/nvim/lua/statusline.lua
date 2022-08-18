@@ -60,5 +60,5 @@ vim.api.nvim_create_autocmd('ColorScheme', {
             vim.api.nvim_err_writeln(string.format('unknown theme combo: colorscheme: "%s", lualine theme: "%s"', colorscheme, lualine_theme))
         end
     end,
-    group = vim.api.nvim_create_augroup('colorscheme_fix', { clear = true }),
+    group = vim.api.nvim_create_augroup('ColorSchemeFix', { clear = true }),
 })
