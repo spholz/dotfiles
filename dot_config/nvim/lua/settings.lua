@@ -30,7 +30,7 @@ vim.opt.cursorline = true
 vim.opt.showmode = false
 -- vim.opt.showtabline = 1 -- 1: only if there are at least two tab pages -- doesn't work with lualine
 
-vim.opt.guifont = 'FiraCode Nerd Font:h24'
+vim.opt.guifont = 'FiraCode Nerd Font:h18'
 
 vim.opt.timeoutlen = 500
 vim.opt.ttimeoutlen = 10

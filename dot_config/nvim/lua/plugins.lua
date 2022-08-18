@@ -224,10 +224,3 @@ end
 
 -- auto install missing plugins
 require'packer'.install()
-
-
--- fix theme for global status line
-vim.api.nvim_set_hl(0, 'WinSeparator', {
-    fg = vim.api.nvim_get_hl_by_name('VertSplit', true).foreground,
-    -- bg = 'None', None is default
-})

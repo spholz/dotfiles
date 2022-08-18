@@ -1,4 +1,6 @@
-require'lualine'.setup {
+local lualine = require'lualine'
+
+lualine.setup {
   options = {
     icons_enabled = true,
     theme = 'auto',
@@ -45,3 +47,18 @@ require'lualine'.setup {
   inactive_winbar = {},
   extensions = {'quickfix', 'fzf', 'man', 'fugitive', 'nvim-dap-ui', 'symbols-outline', 'toggleterm'}
 }
+
+-- fix theme for global status line
+vim.api.nvim_create_autocmd('ColorScheme', {
+    callback = function()
+        local colorscheme = vim.fn.expand('<amatch>')
+        local lualine_theme = lualine.get_config().options.theme
+
+        if colorscheme == 'molokai' and lualine_theme == 'auto' then
+            vim.cmd [[highlight link WinSeparator lualine_c_normal]]
+        else
+            vim.api.nvim_err_writeln(string.format('unknown theme combo: colorscheme: "%s", lualine theme: "%s"', colorscheme, lualine_theme))
+        end
+    end,
+    group = vim.api.nvim_create_augroup('colorscheme_fix', { clear = true }),
+})
