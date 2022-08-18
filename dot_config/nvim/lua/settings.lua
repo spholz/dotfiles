@@ -26,7 +26,32 @@ vim.opt.undofile = true
 vim.opt.wrap = false
 
 vim.opt.termguicolors = true
+
 vim.opt.cursorline = true
+
+-- show cursorline only in active buffer
+local cursorline_group = vim.api.nvim_create_augroup('CursorLine', { clear = true})
+vim.api.nvim_create_autocmd('WinEnter', {
+    callback = function()
+        vim.opt_local.cursorline = true
+    end,
+    group = cursorline_group,
+})
+vim.api.nvim_create_autocmd('WinLeave', {
+    callback = function()
+        vim.opt_local.cursorline = false
+    end,
+    group = cursorline_group,
+})
+-- don't show cursorline in Telescope
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'TelescopePrompt',
+    callback = function()
+        vim.opt_local.cursorline = false
+    end,
+    group = cursorline_group,
+})
+
 vim.opt.showmode = false
 -- vim.opt.showtabline = 1 -- 1: only if there are at least two tab pages -- doesn't work with lualine
 
