@@ -26,14 +26,15 @@ cmp.setup {
             end,
         }
     }),
-    sources = {
+    sources = cmp.config.sources({
         { name = 'nvim_lua' },
         { name = 'nvim_lsp' },
         { name = 'path' },
         { name = 'luasnip' },
-        { name = 'buffer', keyword_length = 5 },
         { name = 'nvim_lsp_signature_help' },
-    },
+    }, {
+        { name = 'buffer', keyword_length = 5 },
+    }),
 
     formatting = {
         format = require'lspkind'.cmp_format {
