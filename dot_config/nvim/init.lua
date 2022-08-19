@@ -18,7 +18,7 @@ if vim.fn.empty(vim.fn.glob(packer_install_path)) > 0 then
     return
 end
 
-require'settings'
+require'options'
 require'plugins'(false)
 require'keybindings'
 require'lsp'
