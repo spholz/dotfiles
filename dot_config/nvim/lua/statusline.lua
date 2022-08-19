@@ -55,7 +55,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
         local lualine_theme = lualine.get_config().options.theme
 
         if colorscheme == 'molokai' and lualine_theme == 'auto' then
-            vim.cmd [[highlight link WinSeparator lualine_c_normal]]
+            vim.api.nvim_set_hl(0, 'WinSeparator', { link = 'lualine_c_normal' })
         else
             vim.api.nvim_err_writeln(
                 string.format('unknown theme combo: colorscheme: "%s", lualine theme: "%s"', colorscheme, lualine_theme)
