@@ -20,7 +20,7 @@ vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.opt.foldlevelstart = 99
 
--- don't make 'Special' italic
+-- don't make 'Special' italic and remove bg
 vim.api.nvim_create_autocmd('ColorScheme', {
     callback = function()
         local colorscheme = vim.fn.expand '<amatch>'
@@ -29,7 +29,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
             local old_hl = vim.api.nvim_get_hl_by_name('Special', true)
             vim.api.nvim_set_hl(0, 'Special', {
                 fg = old_hl.foreground,
-                bg = old_hl.background,
+                -- no background color
                 -- no italic
             })
         end
