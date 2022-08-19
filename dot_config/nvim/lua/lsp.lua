@@ -1,8 +1,6 @@
 local lspconfig = require'lspconfig'
 
 local on_attach = function(_, bufnr)
-    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
     -- Needed if completion is only enabled for LSP buffers
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -34,102 +32,7 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', '<leader>wl', function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, opts)
-
-    -- buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', { noremap=true, silent=true })
-    -- buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', { noremap=true, silent=true })
-    -- buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', { noremap=true, silent=true })
 end
-
-lspconfig.pyright.setup {
-    on_attach = on_attach
-}
-
--- lspconfig.pylsp.setup {
---     on_attach = on_attach
--- }
-
-lspconfig.clangd.setup {
-    on_attach = function(_, bufnr)
-        on_attach(_, bufnr)
-        vim.keymap.set('n', '<leader>c<tab>', '<cmd>ClangdSwitchSourceHeader<cr>', { noremap = true, silent = true })
-    end,
-    cmd = { 'clangd', '--header-insertion=iwyu', '--clang-tidy' }
-}
-
--- lspconfig.ccls.setup {
---     on_attach = on_attach
--- }
-
-lspconfig.rust_analyzer.setup {
-    on_attach = on_attach,
-    settings = {
-        ["rust-analyzer"] = {
-            checkOnSave = {
-                command = "clippy",
-                allTargets = false,
-            }
-	    }
-    }
-}
-
-lspconfig.denols.setup {
-    on_attach = on_attach
-}
-
-lspconfig.java_language_server.setup {
-    on_attch = on_attach,
-    cmd = { '/usr/bin/java-language-server' },
-}
-
-lspconfig.perlls.setup{
-    on_attach = on_attach
-}
-
-lspconfig.sumneko_lua.setup {
-    on_attach = on_attach,
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' },
-            },
-        },
-    },
-}
-
-lspconfig.texlab.setup {
-    on_attach = on_attach,
-    settings = {
-        texlab = {
-            chktex = {
-                onEdit = true,
-                onOpenAndSave = true,
-            },
-            forwardSearch = {
-                executable = 'okular',
-                args = { '--unique', 'file:%p#src:%l%f' },
-            },
-        },
-    },
-}
-
--- require'nlua.lsp.nvim'.setup(lspconfig, {
---     on_attach = on_attach,
---     settings = {
---         Lua = {
---             telemetry = {
---                 enable = false
---             }
---         }
---     }
--- })
-
-lspconfig.cmake.setup {
-    on_attach = on_attach
-}
-
-lspconfig.hls.setup {
-    on_attach = on_attach
-}
 
 local configs = require'lspconfig.configs'
 
@@ -146,6 +49,64 @@ if not configs.qmlls then
     }
 end
 
-lspconfig.qmlls.setup {
-    on_attach = on_attach,
+local servers = {
+    pyright = {},
+    -- pylsp = {},
+    clangd = {
+        on_attach = function(_, bufnr)
+            on_attach(_, bufnr)
+            vim.keymap.set('n', '<leader>c<tab>', '<cmd>ClangdSwitchSourceHeader<cr>', { noremap = true, silent = true })
+        end,
+        cmd = { 'clangd', '--header-insertion=iwyu', '--clang-tidy' }
+    },
+    -- ccls = {},
+    rust_analyzer = {
+        settings = {
+            ["rust-analyzer"] = {
+                checkOnSave = {
+                    command = "clippy",
+                    allTargets = false,
+                }
+            }
+        }
+    },
+    denols = {},
+    java_language_server = {
+        cmd = { '/usr/bin/java-language-server' },
+    },
+    perlls = {},
+    sumneko_lua = {
+        settings = {
+            Lua = {
+                diagnostics = {
+                    globals = { 'vim' },
+                },
+            },
+        },
+    },
+    texlab = {
+        settings = {
+            texlab = {
+                chktex = {
+                    onEdit = true,
+                    onOpenAndSave = true,
+                },
+                forwardSearch = {
+                    executable = 'okular',
+                    args = { '--unique', 'file:%p#src:%l%f' },
+                },
+            },
+        },
+    },
+    cmake = {},
+    hls = {},
+    qmlls = {},
 }
+
+for server, config in pairs(servers) do
+    config = vim.tbl_deep_extend('keep', config, {
+        on_attach = on_attach,
+    })
+
+    lspconfig[server].setup(config)
+end
