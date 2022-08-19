@@ -4,24 +4,24 @@ return function(bootstrap)
         pattern = 'plugins.lua',
         -- command = 'source <afile> | PackerUpdate',
         callback = function()
-            local file, err = loadfile(vim.fn.expand('<afile>'))
+            local file, err = loadfile(vim.fn.expand '<afile>')
             if file then
                 file()
             else
                 vim.api.nvim_err_writeln(err)
             end
-            require'packer'.compile()
+            require('packer').compile()
         end,
         group = vim.api.nvim_create_augroup('PackerUserConfig', { clear = true }),
     })
 
-    local packer = require'packer'
+    local packer = require 'packer'
 
     if bootstrap then
         vim.api.nvim_create_autocmd('User', {
             pattern = 'PackerComplete',
             callback = function()
-                print('Restart Neovim to complete installation')
+                print 'Restart Neovim to complete installation'
             end,
             once = true,
         })
@@ -31,32 +31,36 @@ return function(bootstrap)
         use { 'wbthomason/packer.nvim' }
 
         -- Themes --------------------------------------------------------
-        use { 'tomasr/molokai',
+        use {
+            'tomasr/molokai',
             config = function()
                 vim.cmd [[colorscheme molokai]]
-            end
+            end,
         }
         -- use { 'joshdick/onedark.vim' }
         -- use { 'tomasiser/vim-code-dark' }
         -- use { 'ayu-theme/ayu-vim' }
         -- use { 'NLKNguyen/papercolor-theme' }
-        use { 'nvim-lualine/lualine.nvim',
-            requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+        use {
+            'nvim-lualine/lualine.nvim',
+            requires = { 'kyazdani42/nvim-web-devicons', opt = true },
         }
 
         -- LSP -----------------------------------------------------------
         use { 'neovim/nvim-lspconfig' }
         use { 'onsails/lspkind-nvim' }
-        use { 'folke/trouble.nvim',
+        use {
+            'folke/trouble.nvim',
             requires = { 'kyazdani42/nvim-web-devicons', opt = true },
             config = function()
-                vim.keymap.set('n', '<leader>q', require'trouble'.toggle, { noremap = true })
+                vim.keymap.set('n', '<leader>q', require('trouble').toggle, { noremap = true })
             end,
         }
-        use { 'simrat39/symbols-outline.nvim',
+        use {
+            'simrat39/symbols-outline.nvim',
             config = function()
-                require'symbols-outline'.setup()
-            end
+                require('symbols-outline').setup()
+            end,
         }
 
         -- Completion ----------------------------------------------------
@@ -74,39 +78,42 @@ return function(bootstrap)
         use { 'saadparwaiz1/cmp_luasnip' }
 
         -- Telescope -----------------------------------------------------
-        use { 'nvim-telescope/telescope.nvim',
-              requires = { 'nvim-lua/popup.nvim', { 'nvim-lua/plenary.nvim' } },
-              config = function()
-                  require'telescope'.setup {
-                      extensions = {
-                          fzf = {
-                              fuzzy = true,
-                              override_generic_sorter = true,
-                              override_file_sorter = true,
-                              case_mode = 'smart_case',
-                          },
-                          ['ui-select'] = {
-                              require'telescope.themes'.get_dropdown {
-                              }
-                          },
-                      }
-                  }
-              end
+        use {
+            'nvim-telescope/telescope.nvim',
+            requires = { 'nvim-lua/popup.nvim', { 'nvim-lua/plenary.nvim' } },
+            config = function()
+                require('telescope').setup {
+                    extensions = {
+                        fzf = {
+                            fuzzy = true,
+                            override_generic_sorter = true,
+                            override_file_sorter = true,
+                            case_mode = 'smart_case',
+                        },
+                        ['ui-select'] = {
+                            require('telescope.themes').get_dropdown {},
+                        },
+                    },
+                }
+            end,
         }
-        use { 'nvim-telescope/telescope-fzf-native.nvim',
+        use {
+            'nvim-telescope/telescope-fzf-native.nvim',
             run = 'make',
             config = function()
-                require'telescope'.load_extension('fzf')
-            end
+                require('telescope').load_extension 'fzf'
+            end,
         }
-        use { 'nvim-telescope/telescope-ui-select.nvim',
-            config = function ()
-                require'telescope'.load_extension('ui-select')
-            end
+        use {
+            'nvim-telescope/telescope-ui-select.nvim',
+            config = function()
+                require('telescope').load_extension 'ui-select'
+            end,
         }
 
         -- Treesitter ----------------------------------------------------
-        use { 'nvim-treesitter/nvim-treesitter',
+        use {
+            'nvim-treesitter/nvim-treesitter',
             run = function()
                 if not bootstrap then
                     vim.cmd [[TSUpdate]]
@@ -117,7 +124,7 @@ return function(bootstrap)
                     return
                 end
 
-                require'nvim-treesitter.configs'.setup {
+                require('nvim-treesitter.configs').setup {
                     -- ensure_installed = { 'c', 'cpp', 'python', 'rust', 'lua', 'haskell',
                     --                      'bash', 'toml', 'json', 'jsonc', 'yaml', 'html',
                     --                      'devicetree', 'verilog', 'gdscript', 'regex',
@@ -125,7 +132,7 @@ return function(bootstrap)
                     ensure_installed = 'all',
                     highlight = {
                         enable = true,
-                        disable = {}
+                        disable = {},
                     },
                     incremental_selection = {
                         enable = true,
@@ -135,11 +142,10 @@ return function(bootstrap)
                     -- },
                 }
 
-
                 vim.opt.foldmethod = 'expr'
                 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
                 vim.opt.foldlevelstart = 99
-            end
+            end,
         }
         use { 'nvim-treesitter/playground' }
 
@@ -147,10 +153,11 @@ return function(bootstrap)
 
         -- use { 'editorconfig/editorconfig-vim' }
 
-        use { 'norcalli/nvim-colorizer.lua',
+        use {
+            'norcalli/nvim-colorizer.lua',
             config = function()
-                require'colorizer'.setup({
-                    '*'
+                require('colorizer').setup({
+                    '*',
                 }, {
                     RGB = true,
                     RRGGBB = true,
@@ -160,10 +167,11 @@ return function(bootstrap)
                     hsl_fn = true,
                     mode = 'background',
                 })
-            end
+            end,
         }
 
-        use { 'vimwiki/vimwiki',
+        use {
+            'vimwiki/vimwiki',
             setup = function()
                 vim.g.vimwiki_list = {
                     {
@@ -172,40 +180,43 @@ return function(bootstrap)
                         ext = '.md',
                     },
                 }
-            end
+            end,
         }
         use { 'tpope/vim-fugitive' }
 
         use {
             'numToStr/Comment.nvim',
             config = function()
-                require'Comment'.setup()
-            end
+                require('Comment').setup()
+            end,
         }
 
         use { 'rcarriga/nvim-dap-ui', requires = { 'mfussenegger/nvim-dap' } }
 
-        use { 'akinsho/toggleterm.nvim',
+        use {
+            'akinsho/toggleterm.nvim',
             config = function()
                 -- setting open_mapping to '<leader><cr>' seems to be buggy (space is mapped in insert mode?)
-                require'toggleterm'.setup()
+                require('toggleterm').setup()
 
-                local Terminal = require'toggleterm.terminal'.Terminal
+                local Terminal = require('toggleterm.terminal').Terminal
                 local term = Terminal:new {
                     direction = 'float',
                 }
 
-                vim.keymap.set('n', '<leader><cr>', function() term:toggle() end, { noremap = true })
-            end
+                vim.keymap.set('n', '<leader><cr>', function()
+                    term:toggle()
+                end, { noremap = true })
+            end,
         }
 
         if bootstrap then
-            require'packer'.sync()
+            require('packer').sync()
         end
     end)
 
     if not bootstrap then
         -- auto install missing plugins
-        require'packer'.install()
+        require('packer').install()
     end
 end

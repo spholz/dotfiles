@@ -17,16 +17,16 @@ vim.opt.list = true
 -- set by ftplugins, so use an autocommand
 vim.api.nvim_create_autocmd('FileType', {
     callback = function()
-        vim.opt_local.formatoptions:remove('o')
+        vim.opt_local.formatoptions:remove 'o'
     end,
     group = vim.api.nvim_create_augroup('FormatOptions', { clear = true }),
 })
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.path:append('**')
+vim.opt.path:append '**'
 
-vim.opt.shortmess:append('c') -- 'c' don't show the "match x of y" message
+vim.opt.shortmess:append 'c' -- 'c' don't show the "match x of y" message
 
 vim.opt.undofile = true
 
@@ -37,7 +37,7 @@ vim.opt.termguicolors = true
 vim.opt.cursorline = true
 
 -- show cursorline only in active buffer
-local cursorline_group = vim.api.nvim_create_augroup('CursorLine', { clear = true})
+local cursorline_group = vim.api.nvim_create_augroup('CursorLine', { clear = true })
 vim.api.nvim_create_autocmd('WinEnter', {
     callback = function()
         vim.opt_local.cursorline = true

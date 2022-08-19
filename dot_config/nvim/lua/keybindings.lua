@@ -18,7 +18,6 @@ vim.keymap.set('n', '<M-j>', '<C-w>j', opts)
 vim.keymap.set('n', '<M-k>', '<C-w>k', opts)
 vim.keymap.set('n', '<M-l>', '<C-w>l', opts)
 
-
 -- LEADER KEY SHORTCUTS
 
 -- BUFFERS
@@ -27,7 +26,6 @@ vim.keymap.set('n', '<leader><Tab>', '<cmd>bnext<cr>', opts)
 vim.keymap.set('n', '<leader><S-Tab>', '<cmd>bNext<cr>', opts)
 
 vim.keymap.set('n', '<leader>bd', '<cmd>bprevious|bdelete #<cr>', opts)
-
 
 -- TABS
 

@@ -1,17 +1,16 @@
-local cmp = require'cmp'
+local cmp = require 'cmp'
 
 cmp.setup {
     snippet = {
         expand = function(args)
-            require'luasnip'.lsp_expand(args.body)
+            require('luasnip').lsp_expand(args.body)
         end,
     },
-    mapping = cmp.mapping.preset.insert({
-        ['<C-y>'] =
-            cmp.mapping.confirm {
-                behavior = cmp.ConfirmBehavior.Insert,
-                select = true,
-            },
+    mapping = cmp.mapping.preset.insert {
+        ['<C-y>'] = cmp.mapping.confirm {
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = true,
+        },
 
         ['<C-space>'] = cmp.mapping {
             i = cmp.mapping.complete(),
@@ -24,8 +23,8 @@ cmp.setup {
                     cmp.complete()
                 end
             end,
-        }
-    }),
+        },
+    },
     sources = cmp.config.sources({
         { name = 'nvim_lua' },
         { name = 'nvim_lsp' },
@@ -37,7 +36,7 @@ cmp.setup {
     }),
 
     formatting = {
-        format = require'lspkind'.cmp_format {
+        format = require('lspkind').cmp_format {
             with_text = true,
             menu = {
                 buffer = '[buf]',

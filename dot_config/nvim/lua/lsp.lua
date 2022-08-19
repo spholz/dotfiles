@@ -1,4 +1,4 @@
-local lspconfig = require'lspconfig'
+local lspconfig = require 'lspconfig'
 
 local on_attach = function(_, bufnr)
     -- Needed if completion is only enabled for LSP buffers
@@ -25,8 +25,6 @@ local on_attach = function(_, bufnr)
 
     vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, opts)
 
-    -- vim.keymap.set({'n', 'i'}, '<C-k>', vim.lsp.buf.signature_help, opts) -- replaced with cmp-nvim-lsp-signature-help
-
     vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
     vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
     vim.keymap.set('n', '<leader>wl', function()
@@ -34,18 +32,18 @@ local on_attach = function(_, bufnr)
     end, opts)
 end
 
-local configs = require'lspconfig.configs'
+local configs = require 'lspconfig.configs'
 
 if not configs.qmlls then
     configs.qmlls = {
         default_config = {
-            cmd = { '/usr/lib/qt6/bin/qmlls' };
-            filetypes = { 'qml' };
+            cmd = { '/usr/lib/qt6/bin/qmlls' },
+            filetypes = { 'qml' },
             root_dir = function(fname)
                 return lspconfig.util.find_git_ancestor(fname)
-            end;
-            settings = {};
-        };
+            end,
+            settings = {},
+        },
     }
 end
 
@@ -55,20 +53,25 @@ local servers = {
     clangd = {
         on_attach = function(_, bufnr)
             on_attach(_, bufnr)
-            vim.keymap.set('n', '<leader>c<tab>', '<cmd>ClangdSwitchSourceHeader<cr>', { noremap = true, silent = true })
+            vim.keymap.set(
+                'n',
+                '<leader>c<tab>',
+                '<cmd>ClangdSwitchSourceHeader<cr>',
+                { noremap = true, silent = true }
+            )
         end,
-        cmd = { 'clangd', '--header-insertion=iwyu', '--clang-tidy' }
+        cmd = { 'clangd', '--header-insertion=iwyu', '--clang-tidy' },
     },
     -- ccls = {},
     rust_analyzer = {
         settings = {
-            ["rust-analyzer"] = {
+            ['rust-analyzer'] = {
                 checkOnSave = {
-                    command = "clippy",
+                    command = 'clippy',
                     allTargets = false,
-                }
-            }
-        }
+                },
+            },
+        },
     },
     denols = {},
     java_language_server = {
