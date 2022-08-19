@@ -25,7 +25,7 @@ local on_attach = function(_, bufnr)
 
     vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, opts)
 
-    vim.keymap.set({'n', 'i'}, '<C-k>', vim.lsp.buf.signature_help, opts)
+    -- vim.keymap.set({'n', 'i'}, '<C-k>', vim.lsp.buf.signature_help, opts) -- replaced with cmp-nvim-lsp-signature-help
 
     vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
     vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)

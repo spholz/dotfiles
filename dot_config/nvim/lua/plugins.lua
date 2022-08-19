@@ -50,7 +50,6 @@ return function(bootstrap)
 
         -- LSP -----------------------------------------------------------
         use { 'neovim/nvim-lspconfig' }
-        use { 'nvim-lua/lsp-status.nvim' }
         use { 'onsails/lspkind-nvim' }
         use { 'folke/trouble.nvim',
             requires = { 'kyazdani42/nvim-web-devicons', opt = true },
@@ -71,6 +70,7 @@ return function(bootstrap)
         use { 'hrsh7th/cmp-buffer' }
         use { 'hrsh7th/cmp-path' }
         use { 'hrsh7th/cmp-cmdline' }
+        use { 'hrsh7th/cmp-nvim-lsp-signature-help' }
 
         -- Snippets ------------------------------------------------------
         -- use { 'hrsh7th/vim-vsnip', event = 'InsertEnter' }

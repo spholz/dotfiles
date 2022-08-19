@@ -15,7 +15,7 @@ cmp.setup {
 
         ['<C-space>'] = cmp.mapping {
             i = cmp.mapping.complete(),
-            c = function(_ --[[fallback]])
+            c = function(_)
                 if cmp.visible() then
                     if not cmp.confirm { select = true } then
                         return
@@ -32,6 +32,7 @@ cmp.setup {
         { name = 'path' },
         { name = 'luasnip' },
         { name = 'buffer', keyword_length = 5 },
+        { name = 'nvim_lsp_signature_help' },
     },
 
     formatting = {
