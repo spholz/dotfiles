@@ -1,25 +1,22 @@
 local lspconfig = require'lspconfig'
 
 local on_attach = function(_, bufnr)
-    -- Enable completion in buffers with LSP
-    -- require'completion'.on_attach()
-
-
-    -- local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
     -- Needed if completion is only enabled for LSP buffers
-    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     local opts = {
         noremap = true,
-        buffer = true,
+        buffer = bufnr,
         silent = true,
     }
 
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, opts)
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
 
     vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, opts)
@@ -28,8 +25,15 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, opts)
     vim.keymap.set('v', '<leader>f', vim.lsp.buf.range_formatting, opts)
 
-    vim.keymap.set({'n', 'v'}, '<leader>R', vim.lsp.buf.references, opts)
-    vim.keymap.set({'n', 'v'}, '<leader>r', vim.lsp.buf.rename, opts)
+    vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, opts)
+
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+
+    vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
+    vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
+    vim.keymap.set('n', '<leader>wl', function()
+        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, opts)
 
     -- buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', { noremap=true, silent=true })
     -- buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', { noremap=true, silent=true })
@@ -39,6 +43,10 @@ end
 lspconfig.pyright.setup {
     on_attach = on_attach
 }
+
+-- lspconfig.pylsp.setup {
+--     on_attach = on_attach
+-- }
 
 lspconfig.clangd.setup {
     on_attach = function(_, bufnr)

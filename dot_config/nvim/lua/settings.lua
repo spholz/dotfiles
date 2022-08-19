@@ -1,4 +1,3 @@
-vim.opt.hidden = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 
@@ -14,12 +13,20 @@ vim.opt.smarttab = true
 vim.opt.smartindent = true
 vim.opt.list = true
 
+-- don't insert comment symbols on o/O
+-- set by ftplugins, so use an autocommand
+vim.api.nvim_create_autocmd('FileType', {
+    callback = function()
+        vim.opt_local.formatoptions:remove('o')
+    end,
+    group = vim.api.nvim_create_augroup('FormatOptions', { clear = true }),
+})
+
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.path:append('**')
 
-vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
-vim.opt.shortmess:append({ c = true }) -- 'c' don't show the "match x of y" message
+vim.opt.shortmess:append('c') -- 'c' don't show the "match x of y" message
 
 vim.opt.undofile = true
 
