@@ -15,7 +15,7 @@ if vim.fn.empty(vim.fn.glob(packer_install_path)) > 0 then
     print(output)
 
     -- only this setting is required while bootstrapping (for treesitter)
-    vim.o.termguicolors = true
+    vim.opt.termguicolors = true
 
     -- only install plugins, don't load any other config files
     require 'plugins'(true)
