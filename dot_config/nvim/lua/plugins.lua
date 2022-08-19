@@ -17,10 +17,6 @@ return function(bootstrap)
 
     local packer = require'packer'
 
-    packer.init {
-        compile_path = vim.fn.stdpath('data') .. '/site/plugin/packer_compiled.lua',
-    }
-
     if bootstrap then
         vim.api.nvim_create_autocmd('User', {
             pattern = 'PackerComplete',
