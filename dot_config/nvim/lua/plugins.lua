@@ -44,10 +44,11 @@ return function(bootstrap)
         use {
             'nvim-lualine/lualine.nvim',
             requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+            config = [[require 'config.plugin.lualine']],
         }
 
         -- LSP -----------------------------------------------------------
-        use { 'neovim/nvim-lspconfig' }
+        use { 'neovim/nvim-lspconfig', config = [[require 'config.plugin.lspconfig']] }
         use { 'onsails/lspkind-nvim' }
         use {
             'folke/trouble.nvim',
@@ -64,18 +65,22 @@ return function(bootstrap)
         }
 
         -- Completion ----------------------------------------------------
-        use { 'hrsh7th/nvim-cmp' }
-        use { 'hrsh7th/cmp-nvim-lsp' }
-        use { 'hrsh7th/cmp-nvim-lua' }
-        use { 'hrsh7th/cmp-buffer' }
-        use { 'hrsh7th/cmp-path' }
-        use { 'hrsh7th/cmp-cmdline' }
-        use { 'hrsh7th/cmp-nvim-lsp-signature-help' }
+        use {
+            'hrsh7th/nvim-cmp',
+            config = [[require 'config.plugin.cmp']],
+            requires = {
+                { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
+                { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
+                { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
+                { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+                { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
+                { 'hrsh7th/cmp-nvim-lsp-signature-help', after = 'nvim-cmp' },
+                { 'L3MON4D3/LuaSnip', after = 'nvim-cmp' },
+                { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
+            },
+        }
 
         -- Snippets ------------------------------------------------------
-        -- use { 'hrsh7th/vim-vsnip', event = 'InsertEnter' }
-        use { 'L3MON4D3/LuaSnip' }
-        use { 'saadparwaiz1/cmp_luasnip' }
 
         -- Telescope -----------------------------------------------------
         use {
@@ -119,6 +124,7 @@ return function(bootstrap)
                     vim.cmd [[TSUpdate]]
                 end
             end,
+            config = [[require 'config.plugin.treesitter']],
         }
         use { 'nvim-treesitter/playground' }
 
