@@ -17,16 +17,6 @@ return function(bootstrap)
 
     local packer = require 'packer'
 
-    if bootstrap then
-        vim.api.nvim_create_autocmd('User', {
-            pattern = 'PackerComplete',
-            callback = function()
-                print 'Restart Neovim to complete installation'
-            end,
-            once = true,
-        })
-    end
-
     packer.startup(function(use)
         use { 'wbthomason/packer.nvim' }
 
