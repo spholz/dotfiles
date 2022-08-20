@@ -28,7 +28,6 @@ if vim.fn.empty(vim.fn.glob(packer_install_path)) > 0 then
         return
     end
 
-    -- only install plugins, don't load any other config files
     require 'plugins'(true)
 else
     require 'plugins'(false)
