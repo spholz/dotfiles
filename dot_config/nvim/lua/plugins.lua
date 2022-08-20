@@ -110,9 +110,7 @@ return function(bootstrap)
         use {
             'nvim-treesitter/nvim-treesitter',
             run = function()
-                if not bootstrap then
-                    vim.cmd [[TSUpdate]]
-                end
+                require('nvim-treesitter.install').update({ with_sync = true})
             end,
             config = [[require 'config.plugin.treesitter']],
         }
