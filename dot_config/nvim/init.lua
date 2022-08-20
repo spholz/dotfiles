@@ -29,8 +29,6 @@ if vim.fn.empty(vim.fn.glob(packer_install_path)) > 0 then
 
     -- only install plugins, don't load any other config files
     require 'plugins'(true)
-
-    print 'Restart Neovim to complete installation'
 else
     require 'plugins'(false)
 end
