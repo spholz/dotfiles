@@ -100,7 +100,6 @@ return function(bootstrap)
                 config = function()
                     require('telescope').load_extension 'fzf'
                 end,
-                after = 'telescope.nvim'
             }
         else
             vim.api.nvim_err_writeln('"make" not found (needed for telescope-fzf-native.nvim')
