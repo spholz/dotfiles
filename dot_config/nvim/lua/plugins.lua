@@ -25,6 +25,8 @@ return function(bootstrap)
             'tomasr/molokai',
             config = [[require 'config.colorscheme']],
         }
+        -- use { 'sainnhe/sonokai' }
+        -- use { 'EdenEast/nightfox.nvim' }
         -- use { 'joshdick/onedark.vim' }
         -- use { 'tomasiser/vim-code-dark' }
         -- use { 'ayu-theme/ayu-vim' }
@@ -73,7 +75,7 @@ return function(bootstrap)
         -- Telescope -----------------------------------------------------
         use {
             'nvim-telescope/telescope.nvim',
-            requires = { 'nvim-lua/popup.nvim', { 'nvim-lua/plenary.nvim' } },
+            requires = 'nvim-lua/plenary.nvim',
             config = function()
                 require('telescope').setup {
                     extensions = {
@@ -90,18 +92,26 @@ return function(bootstrap)
                 }
             end,
         }
-        use {
-            'nvim-telescope/telescope-fzf-native.nvim',
-            run = 'make',
-            config = function()
-                require('telescope').load_extension 'fzf'
-            end,
-        }
+
+        if vim.fn.executable('make') then
+            use {
+                'nvim-telescope/telescope-fzf-native.nvim',
+                run = 'make',
+                config = function()
+                    require('telescope').load_extension 'fzf'
+                end,
+                after = 'telescope.nvim'
+            }
+        else
+            vim.api.nvim_err_writeln('"make" not found (needed for telescope-fzf-native.nvim')
+        end
+
         use {
             'nvim-telescope/telescope-ui-select.nvim',
             config = function()
                 require('telescope').load_extension 'ui-select'
             end,
+            after = 'telescope.nvim'
         }
 
         -- Treesitter ----------------------------------------------------
@@ -112,7 +122,7 @@ return function(bootstrap)
             end,
             config = [[require 'config.plugin.treesitter']],
         }
-        use { 'nvim-treesitter/playground' }
+        use { 'nvim-treesitter/playground', after = 'nvim-treesitter' }
 
         -- Other Plugins -------------------------------------------------
 
