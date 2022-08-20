@@ -1,3 +1,7 @@
+require 'config.options'
+require 'config.keybindings'
+require 'config.diagnostic'
+
 -- Bootstrap packer.nvim
 local packer_install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(packer_install_path)) > 0 then
@@ -17,13 +21,10 @@ if vim.fn.empty(vim.fn.glob(packer_install_path)) > 0 then
 
     print(output)
 
-    -- only this setting is required while bootstrapping (for treesitter)
-    vim.opt.termguicolors = true
-
     vim.cmd [[packad packer.nvim]]
 
     if not pcall(require, 'packer') then
-        vim.api.nvim_err_writeln('Failed to load packer.nvim!')
+        vim.api.nvim_err_writeln 'Failed to load packer.nvim!'
         return
     end
 
@@ -32,7 +33,3 @@ if vim.fn.empty(vim.fn.glob(packer_install_path)) > 0 then
 else
     require 'plugins'(false)
 end
-
-require 'config.options'
-require 'config.keybindings'
-require 'config.diagnostic'

@@ -23,9 +23,7 @@ return function(bootstrap)
         -- Themes --------------------------------------------------------
         use {
             'tomasr/molokai',
-            config = function()
-                vim.cmd [[colorscheme molokai]]
-            end,
+            config = [[require 'config.colorscheme']],
         }
         -- use { 'joshdick/onedark.vim' }
         -- use { 'tomasiser/vim-code-dark' }
@@ -110,7 +108,7 @@ return function(bootstrap)
         use {
             'nvim-treesitter/nvim-treesitter',
             run = function()
-                require('nvim-treesitter.install').update({ with_sync = true})
+                require('nvim-treesitter.install').update { with_sync = true }
             end,
             config = [[require 'config.plugin.treesitter']],
         }

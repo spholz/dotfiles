@@ -19,22 +19,3 @@ require('nvim-treesitter.configs').setup {
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.opt.foldlevelstart = 99
-
--- don't make 'Special' italic and remove bg
-vim.api.nvim_create_autocmd('ColorScheme', {
-    callback = function()
-        local colorscheme = vim.fn.expand '<amatch>'
-
-        if colorscheme == 'molokai' then
-            local old_hl = vim.api.nvim_get_hl_by_name('Special', true)
-            vim.api.nvim_set_hl(0, 'Special', {
-                fg = old_hl.foreground,
-                -- no background color
-                -- no italic
-            })
-        end
-    end,
-    group = vim.api.nvim_create_augroup('ColorSchemeFixSpecial', { clear = true }),
-})
-
-vim.cmd [[colorscheme molokai]]
