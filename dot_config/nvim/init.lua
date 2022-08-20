@@ -21,7 +21,7 @@ if vim.fn.empty(vim.fn.glob(packer_install_path)) > 0 then
 
     print(output)
 
-    vim.cmd [[packad packer.nvim]]
+    vim.cmd [[packadd packer.nvim]]
 
     if not pcall(require, 'packer') then
         vim.api.nvim_err_writeln 'Failed to load packer.nvim!'
