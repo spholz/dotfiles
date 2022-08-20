@@ -111,7 +111,6 @@ return function(bootstrap)
             config = function()
                 require('telescope').load_extension 'ui-select'
             end,
-            after = 'telescope.nvim'
         }
 
         -- Treesitter ----------------------------------------------------
