@@ -1,12 +1,18 @@
 [user]
     email = {{ .email }}
     name = {{ .name }}
+
 [init]
     defaultBranch = main
+
 [pull]
     ff = only
+
+[mergetool "nvim-fugitive"]
+    cmd = nvim -c \"Gvdiffsplit!\" \"$MERGED\"
 [merge]
-    tool = nvimdiff2
+    # tool = nvimdiff2 # doesn't support dp (:diffput)
+    tool = nvim-fugitive
     guitool = kdiff3   pushInsteadOf = kde:
 
 [url "https://github.com/"]
