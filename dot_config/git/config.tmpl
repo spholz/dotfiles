@@ -2,6 +2,13 @@
     email = {{ .email }}
     name = {{ .name }}
 
+[core]
+    pager = diff-so-fancy | less --tabs=4 -RFXS --pattern '^(Date|added|deleted|modified): '
+[interactive]
+    diffFilter = diff-so-fancy --patch
+[alias]
+    patch = !git --no-pager diff --no-color
+
 [init]
     defaultBranch = main
 
