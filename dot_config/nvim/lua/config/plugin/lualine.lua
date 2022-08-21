@@ -27,6 +27,7 @@ lualine.setup {
                 'filename',
                 path = 1, -- relative path
             },
+            -- { [[require('lsp-status').status_progress()]] },
         },
         lualine_x = { 'diagnostics', 'encoding', 'fileformat', 'filetype' },
         lualine_y = { 'progress' },

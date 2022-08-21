@@ -1,6 +1,6 @@
 local lspconfig = require 'lspconfig'
 
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
     -- Needed if completion is only enabled for LSP buffers
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -30,6 +30,36 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', '<leader>wl', function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, opts)
+
+    local lsp_augroup = vim.api.nvim_create_augroup('LspCodeLens', { clear = true })
+
+    if client.resolved_capabilities.code_lens then
+        vim.lsp.codelens.refresh()
+        vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
+            buffer = bufnr,
+            callback = vim.lsp.codelens.refresh,
+            group = lsp_augroup,
+        })
+    end
+
+    if client.resolved_capabilities.document_highlight then
+        vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+            buffer = bufnr,
+            callback = vim.lsp.buf.document_highlight,
+            group = lsp_augroup,
+        })
+
+        vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
+            buffer = bufnr,
+            callback = vim.lsp.buf.clear_references,
+            group = lsp_augroup,
+        })
+    end
+end
+
+local lsp_status_ok, lsp_status = pcall(require, 'lsp-status')
+if lsp_status_ok then
+    lsp_status.register_progress() -- for lualine lsp progress indicator
 end
 
 local configs = require 'lspconfig.configs'
@@ -104,12 +134,42 @@ local servers = {
     cmake = {},
     hls = {},
     qmlls = {},
+    taplo = {},
 }
 
 for server, config in pairs(servers) do
     config = vim.tbl_deep_extend('keep', config, {
         on_attach = on_attach,
+        capabilities = vim.tbl_deep_extend('keep', vim.lsp.protocol.make_client_capabilities(), {
+            workspace = {
+                codeLens = {
+                    refreshSupport = true,
+                },
+            },
+        }),
     })
 
     lspconfig[server].setup(config)
 end
+
+-- add workspace/codeLens/refresh handler
+if not HANDLER_ADDED then
+    if not vim.lsp.handlers['workspace/codeLens/refresh'] then
+        vim.lsp.handlers['workspace/codeLens/refresh'] = function(err, _, ctx, _)
+            if not err then
+                for _, bufnr in ipairs(vim.lsp.get_buffers_by_client_id(ctx.client_id)) do
+                    vim.lsp.buf_request(bufnr, 'textDocument/codeLens', {
+                        textDocument = vim.lsp.util.make_text_document_params(bufnr),
+                    }, vim.lsp.codelens.on_codelens)
+                end
+            end
+
+            return vim.NIL
+        end
+    else
+        vim.api.nvim_err_writeln 'workspace/codeLens/refresh already implemented! remove implementation in lspconfig.lua!'
+    end
+end
+
+-- prevent from running the above code multiple times (e.g. by sourcing it again)
+HANDLER_ADDED = true

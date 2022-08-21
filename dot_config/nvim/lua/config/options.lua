@@ -66,3 +66,4 @@ vim.opt.guifont = 'FiraCode Nerd Font:h18'
 
 vim.opt.timeoutlen = 500
 vim.opt.ttimeoutlen = 10
+vim.opt.updatetime = 800 -- for CursorHold (e.g. for document highlights) and swap file

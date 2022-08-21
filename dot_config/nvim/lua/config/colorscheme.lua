@@ -4,9 +4,12 @@ vim.api.nvim_create_autocmd('ColorScheme', {
         local colorscheme = vim.fn.expand '<amatch>'
 
         if colorscheme == 'molokai' then
-            local lualine_theme = require('lualine').get_config().options.theme
-            if lualine_theme == 'auto' or lualine_theme == 'molokai' then
-                vim.api.nvim_set_hl(0, 'WinSeparator', { link = 'lualine_c_normal' })
+            local lualine_ok, lualine = pcall(require, 'lualine')
+            if lualine_ok then
+                local lualine_theme = lualine.get_config().options.theme
+                if lualine_theme == 'auto' or lualine_theme == 'molokai' then
+                    vim.api.nvim_set_hl(0, 'WinSeparator', { link = 'lualine_c_normal' })
+                end
             end
 
             local old_hl = vim.api.nvim_get_hl_by_name('Special', true)
@@ -15,6 +18,11 @@ vim.api.nvim_create_autocmd('ColorScheme', {
                 -- no background color
                 -- no italic
             })
+
+            -- for document highlights
+            vim.api.nvim_set_hl(0, 'LspReferenceText', { link = 'Visual' })
+            vim.api.nvim_set_hl(0, 'LspReferenceRead', { link = 'Visual' })
+            vim.api.nvim_set_hl(0, 'LspReferenceWrite', { link = 'Visual' })
         end
     end,
     group = vim.api.nvim_create_augroup('ColorSchemeFix', { clear = true }),

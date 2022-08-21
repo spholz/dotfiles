@@ -1,9 +1,13 @@
 return function(bootstrap)
-    -- automatically run :PackerCompile whenever plugins.lua is updated
+    -- automatically run :PackerCompile whenever a lua file in the neovim config dir is updated
     vim.api.nvim_create_autocmd('BufWritePost', {
-        pattern = 'plugins.lua',
-        -- command = 'source <afile> | PackerUpdate',
+        pattern = '*.lua',
         callback = function()
+            local abs_path = vim.fn.expand '<afile>:p'
+            if not string.match(abs_path, '^' .. vim.fn.stdpath 'config' .. '/.*%.lua$') then
+                return
+            end
+
             local file, err = loadfile(vim.fn.expand '<afile>')
             if file then
                 file()
@@ -24,6 +28,7 @@ return function(bootstrap)
         use {
             'tomasr/molokai',
             config = [[require 'config.colorscheme']],
+            after = 'lualine.nvim',
         }
         use { 'sainnhe/sonokai' }
         use { 'EdenEast/nightfox.nvim' }
@@ -38,8 +43,12 @@ return function(bootstrap)
 
         use {
             'nvim-lualine/lualine.nvim',
-            requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+            requires = {
+                'nvim-lua/lsp-status.nvim',
+                'kyazdani42/nvim-web-devicons',
+            },
             config = [[require 'config.plugin.lualine']],
+            after = 'nvim-lspconfig', -- for lsp-status register_progress()
         }
 
         -- LSP -----------------------------------------------------------
@@ -47,7 +56,7 @@ return function(bootstrap)
         use { 'onsails/lspkind-nvim' }
         use {
             'folke/trouble.nvim',
-            requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+            requires = 'kyazdani42/nvim-web-devicons',
             config = function()
                 vim.keymap.set('n', '<leader>q', require('trouble').toggle, { noremap = true })
             end,
