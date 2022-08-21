@@ -22,7 +22,12 @@ lualine.setup {
     sections = {
         lualine_a = { 'mode' },
         lualine_b = { 'branch', 'diff' },
-        lualine_c = { 'filename' },
+        lualine_c = {
+            {
+                'filename',
+                path = 1, -- relative path
+            },
+        },
         lualine_x = { 'diagnostics', 'encoding', 'fileformat', 'filetype' },
         lualine_y = { 'progress' },
         lualine_z = { 'location' },
@@ -41,7 +46,12 @@ lualine.setup {
         lualine_c = {},
         lualine_x = {},
         lualine_y = {},
-        lualine_z = { 'tabs' },
+        lualine_z = {
+            {
+                'tabs',
+                mode = 2, -- tab_nr + tab_name
+            },
+        },
     },
     winbar = {},
     inactive_winbar = {},

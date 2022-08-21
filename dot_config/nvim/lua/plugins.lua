@@ -25,12 +25,17 @@ return function(bootstrap)
             'tomasr/molokai',
             config = [[require 'config.colorscheme']],
         }
-        -- use { 'sainnhe/sonokai' }
-        -- use { 'EdenEast/nightfox.nvim' }
-        -- use { 'joshdick/onedark.vim' }
-        -- use { 'tomasiser/vim-code-dark' }
-        -- use { 'ayu-theme/ayu-vim' }
-        -- use { 'NLKNguyen/papercolor-theme' }
+        use { 'sainnhe/sonokai' }
+        use { 'EdenEast/nightfox.nvim' }
+        use { 'joshdick/onedark.vim' }
+        use { 'tomasiser/vim-code-dark' }
+        use { 'ayu-theme/ayu-vim' }
+        use { 'NLKNguyen/papercolor-theme' }
+        use { 'drewtempelmeyer/palenight.vim' }
+        use { 'sonph/onehalf', rtp = 'vim' }
+        use { 'kyoz/purify', rtp = 'vim' }
+        use { 'dracula/vim', as = 'dracula' }
+
         use {
             'nvim-lualine/lualine.nvim',
             requires = { 'kyazdani42/nvim-web-devicons', opt = true },
@@ -93,7 +98,7 @@ return function(bootstrap)
             end,
         }
 
-        if vim.fn.executable('make') then
+        if vim.fn.executable 'make' then
             use {
                 'nvim-telescope/telescope-fzf-native.nvim',
                 run = 'make',
@@ -102,7 +107,7 @@ return function(bootstrap)
                 end,
             }
         else
-            vim.api.nvim_err_writeln('"make" not found (needed for telescope-fzf-native.nvim')
+            vim.api.nvim_err_writeln '"make" not found (needed for telescope-fzf-native.nvim'
         end
 
         use {
