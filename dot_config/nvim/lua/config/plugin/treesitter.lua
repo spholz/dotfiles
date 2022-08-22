@@ -60,7 +60,6 @@ if vim.fn.executable 'tree-sitter' == 0 then
 
     for _, parser in ipairs(parsers) do
         if parser_defs[parser].install_info.requires_generate_from_grammar then
-            print(parser, vim.inspect(parser_defs[parser]))
             parsers[parser] = nil
         end
     end
