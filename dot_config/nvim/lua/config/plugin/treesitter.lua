@@ -58,9 +58,9 @@ vim.list_extend(parsers, {
 if vim.fn.executable 'tree-sitter' == 0 then
     local parser_defs = require('nvim-treesitter.parsers').list
 
-    for _, parser in ipairs(parsers) do
+    for i, parser in ipairs(parsers) do
         if parser_defs[parser].install_info.requires_generate_from_grammar then
-            parsers[parser] = nil
+            parsers[i] = nil
         end
     end
 end
