@@ -24,6 +24,11 @@ vim.api.nvim_create_autocmd('ColorScheme', {
             vim.api.nvim_set_hl(0, 'LspReferenceRead', { link = 'Visual' })
             vim.api.nvim_set_hl(0, 'LspReferenceWrite', { link = 'Visual' })
         end
+
+        -- nvim-cmp
+        if packer_plugins['nvim-cmp'] then
+            vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { link = 'CmpItemAbbr' })
+        end
     end,
     group = vim.api.nvim_create_augroup('ColorSchemeFix', { clear = true }),
 })
