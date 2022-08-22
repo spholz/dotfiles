@@ -40,6 +40,7 @@ return function(bootstrap)
         use { 'sonph/onehalf', rtp = 'vim' }
         use { 'kyoz/purify', rtp = 'vim' }
         use { 'dracula/vim', as = 'dracula' }
+        use { 'rebelot/kanagawa.nvim' }
 
         use {
             'nvim-lualine/lualine.nvim',
