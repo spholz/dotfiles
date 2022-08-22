@@ -7,23 +7,10 @@ cmp.setup {
         end,
     },
     mapping = cmp.mapping.preset.insert {
-        ['<C-y>'] = cmp.mapping.confirm {
-            behavior = cmp.ConfirmBehavior.Insert,
-            select = true,
-        },
-
-        ['<C-space>'] = cmp.mapping {
-            i = cmp.mapping.complete(),
-            c = function(_)
-                if cmp.visible() then
-                    if not cmp.confirm { select = true } then
-                        return
-                    end
-                else
-                    cmp.complete()
-                end
-            end,
-        },
+        ['<C-y>'] = cmp.mapping.confirm { select = true }, -- default is select = false
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-d>'] = cmp.mapping.scroll_docs(4),
+        ['<C-u>'] = cmp.mapping.scroll_docs(-4),
     },
     sources = cmp.config.sources({
         { name = 'nvim_lua' },
@@ -37,7 +24,8 @@ cmp.setup {
 
     formatting = {
         format = require('lspkind').cmp_format {
-            with_text = true,
+            mode = 'symbol-text',
+            maxwidth = 50,
             menu = {
                 buffer = '[buf]',
                 nvim_lsp = '[LSP]',
@@ -48,8 +36,40 @@ cmp.setup {
         },
     },
 
-    experimental = {
-        native_menu = false,
-        ghost_text = false,
-    },
+    -- view = {
+    --     entries = 'native',
+    -- },
+
+    -- experimental = {
+    --     ghost_text = true,
+    -- },
 }
+
+cmp.setup.cmdline(':', {
+    completion = {
+        autocomplete = false,
+    },
+    mapping = cmp.mapping.preset.cmdline(),
+    formatting = {
+        fields = { 'abbr' },
+    },
+    sources = cmp.config.sources({
+        { name = 'path' },
+    }, {
+        { name = 'cmdline' },
+    }),
+})
+
+cmp.setup.cmdline('/', {
+    mapping = cmp.mapping.preset.cmdline(),
+    formatting = {
+        fields = { 'abbr', 'kind' },
+        format = function(entry, vim_item)
+            vim_item.kind = '[' .. entry.source.name .. ']'
+            return vim_item
+        end,
+    },
+    sources = {
+        { name = 'buffer' },
+    },
+})

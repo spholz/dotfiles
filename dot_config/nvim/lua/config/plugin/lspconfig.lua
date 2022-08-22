@@ -31,30 +31,30 @@ local on_attach = function(client, bufnr)
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, opts)
 
-    local lsp_augroup = vim.api.nvim_create_augroup('LspCodeLens', { clear = true })
+    -- local lsp_augroup = vim.api.nvim_create_augroup('LspCodeLens', { clear = true })
 
     if client.resolved_capabilities.code_lens then
         vim.lsp.codelens.refresh()
-        vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
-            buffer = bufnr,
-            callback = vim.lsp.codelens.refresh,
-            group = lsp_augroup,
-        })
+        -- vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
+        --     buffer = bufnr,
+        --     callback = vim.lsp.codelens.refresh,
+        --     group = lsp_augroup,
+        -- })
     end
 
-    if client.resolved_capabilities.document_highlight then
-        vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-            buffer = bufnr,
-            callback = vim.lsp.buf.document_highlight,
-            group = lsp_augroup,
-        })
+    -- if client.resolved_capabilities.document_highlight then
+    --     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+    --         buffer = bufnr,
+    --         callback = vim.lsp.buf.document_highlight,
+    --         group = lsp_augroup,
+    --     })
 
-        vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
-            buffer = bufnr,
-            callback = vim.lsp.buf.clear_references,
-            group = lsp_augroup,
-        })
-    end
+    --     vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
+    --         buffer = bufnr,
+    --         callback = vim.lsp.buf.clear_references,
+    --         group = lsp_augroup,
+    --     })
+    -- end
 end
 
 local lsp_status_ok, lsp_status = pcall(require, 'lsp-status')
@@ -140,20 +140,22 @@ local servers = {
 for server, config in pairs(servers) do
     config = vim.tbl_deep_extend('keep', config, {
         on_attach = on_attach,
-        capabilities = vim.tbl_deep_extend('keep', vim.lsp.protocol.make_client_capabilities(), {
-            workspace = {
-                codeLens = {
-                    refreshSupport = true,
+        capabilities = require('cmp_nvim_lsp').update_capabilities(
+            vim.tbl_deep_extend('keep', vim.lsp.protocol.make_client_capabilities(), {
+                workspace = {
+                    codeLens = {
+                        refreshSupport = true,
+                    },
                 },
-            },
-        }),
+            })
+        ),
     })
 
     lspconfig[server].setup(config)
 end
 
 -- add workspace/codeLens/refresh handler
-if not HANDLER_ADDED then
+if not _G.HANDLER_ADDED then
     if not vim.lsp.handlers['workspace/codeLens/refresh'] then
         vim.lsp.handlers['workspace/codeLens/refresh'] = function(err, _, ctx, _)
             if not err then
@@ -167,9 +169,9 @@ if not HANDLER_ADDED then
             return vim.NIL
         end
     else
-        vim.api.nvim_err_writeln 'workspace/codeLens/refresh already implemented! remove implementation in lspconfig.lua!'
+        vim.api.nvim_err_writeln 'workspace/codeLens/refresh already implemented! remove it from lspconfig.lua!'
     end
 end
 
 -- prevent from running the above code multiple times (e.g. by sourcing it again)
-HANDLER_ADDED = true
+_G.HANDLER_ADDED = true

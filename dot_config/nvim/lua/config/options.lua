@@ -62,6 +62,61 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.opt.showmode = false
 -- vim.opt.showtabline = 1 -- 1: only if there are at least two tab pages -- doesn't work with lualine
 
+function _G.quickfixtextfunc(info)
+    local items
+    if info.quickfix > 0 then
+        items = vim.fn.getqflist({ id = info.id, items = 0 }).items
+    else
+        items = vim.fn.getloclist(info.winid, { id = info.id, items = 0 }).items
+    end
+
+    local list = {}
+
+    for i = info.start_idx, info.end_idx do
+        local item = items[i]
+
+        local line = ''
+
+        local file_name = ''
+        if item.bufnr > 0 then
+            file_name = vim.api.nvim_buf_get_name(item.bufnr)
+            if file_name == '' then
+                file_name = '[No Name]'
+            end
+        end
+
+        if file_name ~= '' then
+            line = line .. file_name
+
+            if item.lnum > 0 then
+                line = line .. ':' .. tostring(item.lnum)
+
+                if item.end_lnum > 0 and item.end_lnum ~= item.lnum then
+                    line = line .. '-' .. tostring(item.end_lnum)
+                end
+
+                if item.col > 0 then
+                    line = line .. ':' .. tostring(item.col)
+
+                    if item.end_col > 0 and item.end_col ~= item.col then
+                        line = line .. '-' .. tostring(item.end_col)
+                    end
+                end
+            end
+        end
+
+        if line ~= '' then
+            line = line .. ': '
+        end
+
+        table.insert(list, line .. item.text)
+    end
+
+    return list
+end
+
+vim.opt.quickfixtextfunc = '{info -> v:lua.quickfixtextfunc(info)}'
+
 vim.opt.guifont = 'FiraCode Nerd Font:h18'
 
 vim.opt.timeoutlen = 500

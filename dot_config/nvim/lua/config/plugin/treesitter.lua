@@ -54,6 +54,18 @@ vim.list_extend(parsers, {
     'yaml',
 })
 
+-- remove all parsers that require tree-sitter CLI if it isn't installed
+if vim.fn.executable 'tree-sitter' == 0 then
+    local parser_defs = require('nvim-treesitter.parsers').list
+
+    for _, parser in ipairs(parsers) do
+        if parser_defs[parser].install_info.requires_generate_from_grammar then
+            print(parser, vim.inspect(parser_defs[parser]))
+            parsers[parser] = nil
+        end
+    end
+end
+
 require('nvim-treesitter.configs').setup {
     ensure_installed = parsers,
     highlight = {
