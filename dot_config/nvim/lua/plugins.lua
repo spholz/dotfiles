@@ -218,7 +218,7 @@ return function(bootstrap)
 
         use {
             'jose-elias-alvarez/null-ls.nvim',
-            config = function ()
+            config = function()
                 local null_ls = require 'null-ls'
                 null_ls.setup {
                     sources = {
@@ -240,7 +240,7 @@ return function(bootstrap)
                         null_ls.builtins.diagnostics.zsh,
                     },
                 }
-            end
+            end,
         }
 
         if bootstrap then

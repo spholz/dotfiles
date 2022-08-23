@@ -10,7 +10,7 @@ cmp.setup {
     },
     mapping = cmp.mapping.preset.insert {
         ['<C-y>'] = cmp.mapping.confirm { select = true }, -- default is select = false
-        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-Space>'] = cmp.mapping.complete {},
         ['<C-d>'] = cmp.mapping.scroll_docs(4),
         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
     },

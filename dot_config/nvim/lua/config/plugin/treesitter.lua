@@ -85,10 +85,10 @@ require('nvim-treesitter.configs').setup {
         swap = {
             enable = true,
             swap_next = {
-                ["<A-n>"] = "@parameter.inner",
+                ['<A-n>'] = '@parameter.inner',
             },
             swap_previous = {
-                ["<A-p>"] = "@parameter.inner",
+                ['<A-p>'] = '@parameter.inner',
             },
         },
         select = {
@@ -98,10 +98,10 @@ require('nvim-treesitter.configs').setup {
             lookahead = true,
 
             keymaps = {
-                ["af"] = "@function.outer",
-                ["if"] = "@function.inner",
-                ["ac"] = "@class.outer",
-                ["ic"] = "@class.inner",
+                ['af'] = '@function.outer',
+                ['if'] = '@function.inner',
+                ['ac'] = '@class.outer',
+                ['ic'] = '@class.inner',
             },
             selection_modes = {
                 ['@parameter.outer'] = 'v', -- charwise
