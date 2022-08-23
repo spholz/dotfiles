@@ -10,26 +10,35 @@ local on_attach = function(client, bufnr)
         silent = true,
     }
 
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    ---@param mode string|table
+    ---@param lhs string
+    ---@param rhs string|function
+    ---@param opts_ table
+    ---@param description string
+    local function map_with_desc(mode, lhs, rhs, opts_, description)
+        vim.keymap.set(mode, lhs, rhs, vim.tbl_extend('error', opts_, { desc = description }))
+    end
 
-    vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('v', '<leader>a', vim.lsp.buf.range_code_action, opts)
+    map_with_desc('n', 'gd', vim.lsp.buf.definition, opts, 'Go to definition')
+    map_with_desc('n', 'gt', vim.lsp.buf.type_definition, opts, 'Go to type definition')
+    map_with_desc('n', 'gD', vim.lsp.buf.declaration, opts, 'Go to declaration')
+    map_with_desc('n', 'gi', vim.lsp.buf.implementation, opts, 'List all implementations in the quickfix window')
+    map_with_desc('n', 'gr', vim.lsp.buf.references, opts, 'List all references in the quickfix window')
+    map_with_desc('n', 'K', vim.lsp.buf.hover, opts, 'Display hover information')
 
-    vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, opts)
-    vim.keymap.set('v', '<leader>f', vim.lsp.buf.range_formatting, opts)
+    map_with_desc('n', '<leader>a', vim.lsp.buf.code_action, opts, 'Execute a code action')
+    map_with_desc('v', '<leader>a', vim.lsp.buf.range_code_action, opts, 'Execute a code action')
 
-    vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, opts)
+    map_with_desc('n', '<leader>f', vim.lsp.buf.formatting, opts, 'Format the current buffer')
+    map_with_desc('v', '<leader>f', vim.lsp.buf.range_formatting, opts, 'Format the current selection')
 
-    vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
-    vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
-    vim.keymap.set('n', '<leader>wl', function()
+    map_with_desc('n', '<leader>r', vim.lsp.buf.rename, opts, 'Rename symbol under cursor')
+
+    map_with_desc('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts, 'Add a folder to the workspace')
+    map_with_desc('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts, 'Remove a folder from the workspace')
+    map_with_desc('n', '<leader>wl', function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, opts)
+    end, opts, 'List workspace folders')
 
     -- local lsp_augroup = vim.api.nvim_create_augroup('LspCodeLens', { clear = true })
 
@@ -43,6 +52,7 @@ local on_attach = function(client, bufnr)
     end
 
     -- if client.resolved_capabilities.document_highlight then
+    --     vim.keymap.set('n', '<C-L>', '<Cmd>nohlsearch|diffupdate|call v:lua.vim.lsp.buf.clear_references()|normal! <C-L><CR>', opts)
     --     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
     --         buffer = bufnr,
     --         callback = vim.lsp.buf.document_highlight,
@@ -114,8 +124,22 @@ local servers = {
                 diagnostics = {
                     globals = { 'vim' },
                 },
+                workspace = {}, -- needed in on_init()
             },
         },
+        on_init = function(client)
+            -- set workspace.library to nvim runtime paths if in ~/.config/nvim
+            -- https://github.com/neovim/nvim-lspconfig/wiki/Project-local-settings
+            local workspace_path = client.workspace_folders[1].name
+
+            if workspace_path == vim.fn.stdpath 'config' then
+                client.config.settings.Lua.workspace.library = vim.api.nvim_get_runtime_file('', true)
+            end
+
+            client.notify('workspace/didChangeConfiguration', { settings = client.config.settings })
+
+            return true
+        end,
     },
     texlab = {
         settings = {

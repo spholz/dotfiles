@@ -163,18 +163,18 @@ return function(bootstrap)
             end,
         }
 
-        use {
-            'vimwiki/vimwiki',
-            setup = function()
-                vim.g.vimwiki_list = {
-                    {
-                        path = '~/notes',
-                        syntax = 'markdown',
-                        ext = '.md',
-                    },
-                }
-            end,
-        }
+        -- use {
+        --     'vimwiki/vimwiki',
+        --     setup = function()
+        --         vim.g.vimwiki_list = {
+        --             {
+        --                 path = '~/notes',
+        --                 syntax = 'markdown',
+        --                 ext = '.md',
+        --             },
+        --         }
+        --     end,
+        -- }
         use { 'tpope/vim-fugitive' }
 
         use {

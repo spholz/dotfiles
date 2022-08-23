@@ -1,3 +1,5 @@
+---@diagnostic disable: need-check-nil
+
 local cmp = require 'cmp'
 
 cmp.setup {
@@ -23,8 +25,9 @@ cmp.setup {
     }),
 
     formatting = {
+        fields = { 'kind', 'abbr', 'menu' }, -- show kind first: 'פּ utils'
         format = require('lspkind').cmp_format {
-            mode = 'symbol-text',
+            mode = 'symbol', -- symbol only ('פּ' instead of symbol_text: 'פּ Struct')
             maxwidth = 50,
             menu = {
                 buffer = '[buf]',
