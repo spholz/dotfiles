@@ -1,5 +1,3 @@
----@diagnostic disable: need-check-nil
-
 local cmp = require 'cmp'
 
 cmp.setup {
@@ -64,6 +62,9 @@ cmp.setup.cmdline(':', {
 })
 
 cmp.setup.cmdline('/', {
+    completion = {
+        autocomplete = false,
+    },
     mapping = cmp.mapping.preset.cmdline(),
     formatting = {
         fields = { 'abbr', 'kind' },

@@ -27,7 +27,12 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 
         -- nvim-cmp
         if packer_plugins['nvim-cmp'] then
-            vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { link = 'CmpItemAbbr' })
+            -- mark deprecated completions strikethrough
+            -- vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { link = 'CmpItemAbbr' })
+            vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', {
+                strikethrough = true,
+                -- fg = vim.api.nvim_get_hl_by_name('Comment', true).foreground,
+            })
         end
     end,
     group = vim.api.nvim_create_augroup('ColorSchemeFix', { clear = true }),
