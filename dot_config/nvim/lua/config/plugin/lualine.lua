@@ -21,7 +21,8 @@ lualine.setup {
     },
     sections = {
         lualine_a = { 'mode' },
-        lualine_b = { 'branch', 'diff' },
+        lualine_b = {},
+        -- lualine_b = { 'branch', 'diff' },
         lualine_c = {
             {
                 'filename',

@@ -52,7 +52,6 @@ local on_attach = function(client, bufnr)
     end
 
     -- if client.resolved_capabilities.document_highlight then
-    --     vim.keymap.set('n', '<C-L>', '<Cmd>nohlsearch|diffupdate|call v:lua.vim.lsp.buf.clear_references()|normal! <C-L><CR>', opts)
     --     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
     --         buffer = bufnr,
     --         callback = vim.lsp.buf.document_highlight,
@@ -88,8 +87,9 @@ if not configs.qmlls then
 end
 
 local servers = {
-    pyright = {},
-    -- pylsp = {},
+    -- asm_lsp = {},
+    -- bashls = {},
+    -- ccls = {},
     clangd = {
         on_attach = function(_, bufnr)
             on_attach(_, bufnr)
@@ -97,12 +97,58 @@ local servers = {
                 'n',
                 '<leader>c<tab>',
                 '<cmd>ClangdSwitchSourceHeader<cr>',
-                { noremap = true, silent = true }
+                { noremap = true, silent = true, buffer = bufnr }
             )
         end,
         cmd = { 'clangd', '--header-insertion=iwyu', '--clang-tidy' },
     },
-    -- ccls = {},
+    -- cmake = {},
+    -- csharp_ls = {},
+    cssls = {
+        cmd = { 'vscode-css-languageserver', '--stdio' },
+    },
+    denols = {},
+    -- diagnosticls = {},
+    -- dockerls = {},
+    -- dotls = {}, -- graphviz dot
+    -- esbonio = {}, -- sphinx (rst)
+    -- eslint = {},
+    gdscript = {}, -- server integrated into the editor
+    -- hls = {}, -- haskell
+    ghdl_ls = {}, -- part of pyghdl
+    -- glslls = {}, -- replaced with null-ls glslc
+    -- gradle_ls = {},
+    -- grammarly = {}, wtf?
+    -- hdl_checker = {}, -- for vhdl, verilog, systemverilog
+    html = {
+        cmd = { 'vscode-html-languageserver', '--stdio' },
+    },
+    -- java_language_server = {
+    --     cmd = { 'java-language-server' },
+    -- },
+    -- jedi_language_server = {}, -- python
+    jsonls = {
+        cmd = { 'vscode-json-languageserver', '--stdio' },
+    },
+    -- lemminx = {}, -- xml
+    -- ltex = {}, -- also for md, rst, org, bibtex, org
+    -- marksman = {}, -- markdown
+    -- metals = {}, -- scala
+    -- nil_ls = {}, -- nix expressions
+    -- omnisharp = {},
+    -- opencl_ls = {},
+    -- perlls = {},
+    -- perlpls = {},
+    -- powershell_es = {},
+    -- prosemd_lsp = {}, -- markdown
+    -- pylsp = {},
+    -- pyre = {},
+    pyright = {},
+    qmlls = {},
+    -- qml_lsp = {},
+    -- quick_lint_js = {},
+    -- racket_langserver = {},
+    -- rnix = {}, -- nix expressions
     rust_analyzer = {
         settings = {
             ['rust-analyzer'] = {
@@ -113,34 +159,43 @@ local servers = {
             },
         },
     },
-    denols = {},
-    java_language_server = {
-        cmd = { '/usr/bin/java-language-server' },
-    },
-    perlls = {},
+    -- sourcery = {}, -- python ai refactor thingy
+    -- sqlls = {},
+    -- sqls = {},
+    -- stylelint_lsp = {},
     sumneko_lua = {
         settings = {
             Lua = {
                 diagnostics = {
-                    globals = { 'vim' },
+                    globals = { 'vim', 'packer_plugins' },
                 },
+                runtime = {}, -- needed in on_init()
                 workspace = {}, -- needed in on_init()
             },
         },
         on_init = function(client)
             -- set workspace.library to nvim runtime paths if in ~/.config/nvim
+            -- slows down startup
             -- https://github.com/neovim/nvim-lspconfig/wiki/Project-local-settings
+
             local workspace_path = client.workspace_folders[1].name
 
             if workspace_path == vim.fn.stdpath 'config' then
-                client.config.settings.Lua.workspace.library = vim.api.nvim_get_runtime_file('', true)
-            end
+                local nvim_runtime_path = vim.split(package.path, ';')
+                table.insert(nvim_runtime_path, 'lua/?.lua')
+                table.insert(nvim_runtime_path, 'lua/?/init.lua')
 
-            client.notify('workspace/didChangeConfiguration', { settings = client.config.settings })
+                client.config.settings.Lua.runtime.path = nvim_runtime_path
+                client.config.settings.Lua.workspace.library = vim.api.nvim_get_runtime_file('', true)
+
+                client.notify('workspace/didChangeConfiguration', { settings = client.config.settings })
+            end
 
             return true
         end,
     },
+    -- svlangserver = {}, -- systemverilog
+    taplo = {}, -- toml
     texlab = {
         settings = {
             texlab = {
@@ -155,10 +210,12 @@ local servers = {
             },
         },
     },
-    cmake = {},
-    hls = {},
-    qmlls = {},
-    taplo = {},
+    -- tsserver = {}, -- typescript
+    -- verible = {}, -- linter for verilog, systemverilog
+    -- veridian = {}, -- systemveriloh
+    -- vimls = {},
+    -- wgsl_analyzer = {},
+    -- yamlls = {},
 }
 
 for server, config in pairs(servers) do
@@ -175,6 +232,9 @@ for server, config in pairs(servers) do
         ),
     })
 
+    -- TODO: maybe only setup servers not already setup
+    --       (BufWritePost is set to packer.compile() in all nvim config files)
+    --       as this causes sumneko_lua to reindex all files
     lspconfig[server].setup(config)
 end
 

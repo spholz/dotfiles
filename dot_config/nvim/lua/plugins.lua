@@ -45,7 +45,7 @@ return function(bootstrap)
         use {
             'nvim-lualine/lualine.nvim',
             requires = {
-                'nvim-lua/lsp-status.nvim',
+                -- 'nvim-lua/lsp-status.nvim', -- conflicts with fidget.nvim
                 'kyazdani42/nvim-web-devicons',
             },
             config = [[require 'config.plugin.lualine']],
@@ -70,6 +70,18 @@ return function(bootstrap)
             'simrat39/symbols-outline.nvim',
             config = function()
                 require('symbols-outline').setup()
+            end,
+        }
+
+        use {
+            'j-hui/fidget.nvim',
+            config = function()
+                require('fidget').setup {
+                    text = {
+                        spinner = 'dots_snake',
+                        done = '',
+                    },
+                }
             end,
         }
 
@@ -140,7 +152,8 @@ return function(bootstrap)
             end,
             config = [[require 'config.plugin.treesitter']],
         }
-        use { 'nvim-treesitter/playground', after = 'nvim-treesitter' }
+        use { 'nvim-treesitter/playground' }
+        use { 'nvim-treesitter/nvim-treesitter-textobjects' }
 
         -- Other Plugins -------------------------------------------------
 
@@ -201,6 +214,33 @@ return function(bootstrap)
                     term:toggle()
                 end, { noremap = true })
             end,
+        }
+
+        use {
+            'jose-elias-alvarez/null-ls.nvim',
+            config = function ()
+                local null_ls = require 'null-ls'
+                null_ls.setup {
+                    sources = {
+                        null_ls.builtins.formatting.stylua,
+                        -- null_ls.builtins.diagnostics.eslint,
+                        -- null_ls.builtins.completion.spell,
+                        null_ls.builtins.diagnostics.cppcheck,
+                        null_ls.builtins.diagnostics.fish,
+                        null_ls.builtins.diagnostics.gitlint,
+                        null_ls.builtins.diagnostics.glslc,
+                        -- null_ls.builtins.diagnostics.luacheck,
+                        null_ls.builtins.diagnostics.markdownlint,
+                        null_ls.builtins.diagnostics.mypy,
+                        null_ls.builtins.diagnostics.pylint,
+                        null_ls.builtins.diagnostics.qmllint,
+                        null_ls.builtins.diagnostics.rstcheck,
+                        null_ls.builtins.diagnostics.shellcheck,
+                        null_ls.builtins.diagnostics.trail_space,
+                        null_ls.builtins.diagnostics.zsh,
+                    },
+                }
+            end
         }
 
         if bootstrap then
