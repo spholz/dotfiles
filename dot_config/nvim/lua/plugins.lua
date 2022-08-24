@@ -1,13 +1,8 @@
 return function(bootstrap)
     -- automatically run :PackerCompile whenever a lua file in the neovim config dir is updated
     vim.api.nvim_create_autocmd('BufWritePost', {
-        pattern = '*.lua',
+        pattern = vim.fn.stdpath 'config' .. '/*.lua', -- note: '*' matches '/' as well
         callback = function()
-            local abs_path = vim.fn.expand '<afile>:p'
-            if not string.match(abs_path, '^' .. vim.fn.stdpath 'config' .. '/.*%.lua$') then
-                return
-            end
-
             local file, err = loadfile(vim.fn.expand '<afile>')
             if file then
                 file()
