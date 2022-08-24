@@ -125,17 +125,16 @@ return function(bootstrap)
             end,
         }
 
-        if vim.fn.executable 'make' then
-            use {
-                'nvim-telescope/telescope-fzf-native.nvim',
-                run = 'make',
-                config = function()
-                    require('telescope').load_extension 'fzf'
-                end,
-            }
-        else
-            vim.api.nvim_err_writeln '"make" not found (needed for telescope-fzf-native.nvim'
-        end
+        use {
+            'nvim-telescope/telescope-fzf-native.nvim',
+            run = 'make',
+            config = function()
+                require('telescope').load_extension 'fzf'
+            end,
+            cond = function()
+                vim.fn.executable 'make'
+            end,
+        }
 
         use {
             'nvim-telescope/telescope-ui-select.nvim',

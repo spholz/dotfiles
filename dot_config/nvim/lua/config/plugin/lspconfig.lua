@@ -102,7 +102,7 @@ local servers = {
         end,
         cmd = { 'clangd', '--header-insertion=iwyu', '--clang-tidy' },
     },
-    -- cmake = {},
+    cmake = {},
     -- csharp_ls = {},
     cssls = {
         cmd = { 'vscode-css-languageserver', '--stdio' },
