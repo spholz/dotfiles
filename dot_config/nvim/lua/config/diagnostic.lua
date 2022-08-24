@@ -1,3 +1,5 @@
+local map_with_desc = require('util.keymap').map_with_desc
+
 vim.diagnostic.config {
     underline = true,
     virtual_text = {
@@ -13,7 +15,9 @@ local opts = {
     silent = true,
 }
 
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
--- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts) -- replaced with trouble.nvim (plugins.lua)
+map_with_desc('n', '<leader>e', vim.diagnostic.open_float, opts, 'Show diagnostics in a floating window')
+map_with_desc('n', '[d', vim.diagnostic.goto_prev, opts, 'Move to previous diagnostic')
+map_with_desc('n', ']d', vim.diagnostic.goto_next, opts, 'Move to next diagnostic')
+
+-- replaced with trouble.nvim (plugins.lua)
+-- map_with_desc('n', '<leader>q', vim.diagnostic.setloclist, opts, 'Add buffer diagnostics to the location list')

@@ -63,7 +63,15 @@ return function(bootstrap)
             'folke/trouble.nvim',
             requires = 'kyazdani42/nvim-web-devicons',
             config = function()
-                vim.keymap.set('n', '<leader>q', require('trouble').toggle, { noremap = true })
+                local map_with_desc = require('util.keymap').map_with_desc
+
+                map_with_desc(
+                    'n',
+                    '<leader>q',
+                    require('trouble').toggle,
+                    { noremap = true },
+                    'Toggle trouble.nvim list'
+                )
             end,
         }
         use {
@@ -209,9 +217,11 @@ return function(bootstrap)
                     direction = 'float',
                 }
 
-                vim.keymap.set('n', '<leader><cr>', function()
+                local map_with_desc = require('util.keymap').map_with_desc
+
+                map_with_desc('n', '<leader><cr>', function()
                     term:toggle()
-                end, { noremap = true })
+                end, { noremap = true }, 'Toggle floating terminal')
             end,
         }
 

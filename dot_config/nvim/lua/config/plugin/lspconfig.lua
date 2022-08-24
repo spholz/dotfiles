@@ -1,5 +1,7 @@
 local lspconfig = require 'lspconfig'
 
+local map_with_desc = require('util.keymap').map_with_desc
+
 local on_attach = function(client, bufnr)
     -- Needed if completion is only enabled for LSP buffers
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -9,15 +11,6 @@ local on_attach = function(client, bufnr)
         buffer = bufnr,
         silent = true,
     }
-
-    ---@param mode string|table
-    ---@param lhs string
-    ---@param rhs string|function
-    ---@param opts_ table
-    ---@param description string
-    local function map_with_desc(mode, lhs, rhs, opts_, description)
-        vim.keymap.set(mode, lhs, rhs, vim.tbl_extend('error', opts_, { desc = description }))
-    end
 
     map_with_desc('n', 'gd', vim.lsp.buf.definition, opts, 'Go to definition')
     map_with_desc('n', 'gt', vim.lsp.buf.type_definition, opts, 'Go to type definition')
@@ -93,11 +86,12 @@ local servers = {
     clangd = {
         on_attach = function(_, bufnr)
             on_attach(_, bufnr)
-            vim.keymap.set(
+            map_with_desc(
                 'n',
                 '<leader>c<tab>',
                 '<cmd>ClangdSwitchSourceHeader<cr>',
-                { noremap = true, silent = true, buffer = bufnr }
+                { noremap = true, silent = true, buffer = bufnr },
+                'Switch between source/header'
             )
         end,
         cmd = { 'clangd', '--header-insertion=iwyu', '--clang-tidy' },
