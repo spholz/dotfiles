@@ -131,9 +131,7 @@ return function(bootstrap)
             config = function()
                 require('telescope').load_extension 'fzf'
             end,
-            cond = function()
-                vim.fn.executable 'make'
-            end,
+            cond = vim.fn.executable 'make' == 1,
         }
 
         use {
