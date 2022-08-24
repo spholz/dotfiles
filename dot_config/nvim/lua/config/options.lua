@@ -122,3 +122,13 @@ vim.opt.guifont = 'FiraCode Nerd Font:h18'
 vim.opt.timeoutlen = 500
 vim.opt.ttimeoutlen = 10
 vim.opt.updatetime = 800 -- for CursorHold (e.g. for document highlights) and swap file
+
+-- highlight yanked text
+vim.api.nvim_create_autocmd('TextYankPost', {
+    callback = function()
+        vim.highlight.on_yank {
+            timeout = 250,
+        }
+    end,
+    group = vim.api.nvim_create_augroup('HighlightYank', { clear = true }),
+})

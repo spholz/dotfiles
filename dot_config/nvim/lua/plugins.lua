@@ -185,7 +185,9 @@ return function(bootstrap)
         --         }
         --     end,
         -- }
-        use { 'tpope/vim-fugitive' }
+        use { 'tpope/vim-fugitive', requires = 'tpope/vim-rhubarb' }
+
+        use { 'tpope/vim-sleuth' }
 
         use {
             'numToStr/Comment.nvim',
