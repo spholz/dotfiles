@@ -25,7 +25,7 @@ vim.keymap.set('n', '<M-l>', '<C-w>l', opts)
 vim.keymap.set('n', '<leader><Tab>', '<cmd>bnext<cr>', opts)
 vim.keymap.set('n', '<leader><S-Tab>', '<cmd>bNext<cr>', opts)
 
-vim.keymap.set('n', '<leader>bd', '<cmd>bprevious|bdelete #<cr>', opts)
+vim.keymap.set('n', '<leader>bd', '<cmd>bdelete<cr>', opts)
 
 -- TABS
 
@@ -40,5 +40,3 @@ vim.keymap.set('n', '<leader>8', '8gt', opts)
 vim.keymap.set('n', '<leader>9', '9gt', opts)
 
 vim.keymap.set('n', '<leader>td', '<cmd>tabclose<cr>', opts)
-vim.keymap.set('n', '<leader>t<Tab>', '<cmd>tabnext<cr>', opts)
-vim.keymap.set('n', '<leader>t<S-Tab>', '<cmd>tabprevious<cr>', opts)
