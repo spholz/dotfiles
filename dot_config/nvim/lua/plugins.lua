@@ -236,7 +236,7 @@ return function(bootstrap)
                         null_ls.builtins.diagnostics.glslc,
                         -- null_ls.builtins.diagnostics.luacheck,
                         null_ls.builtins.diagnostics.markdownlint,
-                        null_ls.builtins.diagnostics.mypy,
+                        -- null_ls.builtins.diagnostics.mypy,
                         -- null_ls.builtins.diagnostics.pylint,
                         null_ls.builtins.diagnostics.qmllint,
                         null_ls.builtins.diagnostics.rstcheck,
