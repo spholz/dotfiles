@@ -14,6 +14,7 @@ local parsers = {
     'latex',
     'lua',
     'make',
+    'meson',
     'markdown',
     'python',
     'regex',
