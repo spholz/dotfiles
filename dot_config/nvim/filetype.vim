@@ -11,5 +11,5 @@ augroup filetypedetect
     au! BufRead,BufNewFile *.wgsl setfiletype wgsl
 
     " qml (Qt Quick)
-    au! BufRead,BufNewFile *.qml setfiletype qml
+    au! BufRead,BufNewFile *.qml setfiletype qmljs
 augroup END
