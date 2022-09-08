@@ -34,6 +34,34 @@ cmp.setup {
                 path = '[path]',
                 luasnip = '[snip]',
             },
+            -- codicons with extra space character (render them in 2 cells in kitty)
+            symbol_map = {
+                Text = " ",
+                Method = " ",
+                Function = " ", -- 
+                Constructor = " ",
+                Field = " ",
+                Variable = " ",
+                Class = " ",
+                Interface = " ",
+                Module = " ",
+                Property = " ",
+                Unit = " ",
+                Value = " ",
+                Enum = " ",
+                Keyword = " ",
+                Snippet = " ",
+                Color = " ",
+                File = " ",
+                Reference = " ",
+                Folder = " ",
+                EnumMember = " ",
+                Constant = " ",
+                Struct = " ",
+                Event = " ",
+                Operator = " ",
+                TypeParameter = " "
+            }
         },
     },
 
