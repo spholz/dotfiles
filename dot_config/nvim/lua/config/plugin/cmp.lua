@@ -28,40 +28,13 @@ cmp.setup {
             mode = 'symbol', -- symbol only ('פּ' instead of symbol_text: 'פּ Struct')
             maxwidth = 50,
             menu = {
-                buffer = '[buf]',
-                nvim_lsp = '[LSP]',
-                nvim_lua = '[nvim]',
-                path = '[path]',
-                luasnip = '[snip]',
+                buffer = ' ',
+                nvim_lsp = '',
+                nvim_lua = ' ',
+                path = ' ',
+                luasnip = ' ',
             },
-            -- codicons with extra space character (render them in 2 cells in kitty)
-            symbol_map = {
-                Text = " ",
-                Method = " ",
-                Function = " ", -- 
-                Constructor = " ",
-                Field = " ",
-                Variable = " ",
-                Class = " ",
-                Interface = " ",
-                Module = " ",
-                Property = " ",
-                Unit = " ",
-                Value = " ",
-                Enum = " ",
-                Keyword = " ",
-                Snippet = " ",
-                Color = " ",
-                File = " ",
-                Reference = " ",
-                Folder = " ",
-                EnumMember = " ",
-                Constant = " ",
-                Struct = " ",
-                Event = " ",
-                Operator = " ",
-                TypeParameter = " "
-            }
+            symbol_map = require('lspkind').presets.codicons,
         },
     },
 
