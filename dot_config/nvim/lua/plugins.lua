@@ -248,6 +248,8 @@ return function(bootstrap)
             end,
         }
 
+        use { 'wsdjeg/vim-fetch' } -- for filename:line:column
+
         if bootstrap then
             require('packer').sync()
         end
