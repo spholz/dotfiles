@@ -18,16 +18,16 @@ vim.keymap.set('n', '<M-j>', '<C-w>j', opts)
 vim.keymap.set('n', '<M-k>', '<C-w>k', opts)
 vim.keymap.set('n', '<M-l>', '<C-w>l', opts)
 
--- LEADER KEY SHORTCUTS
+-- Leader key shortcuts {{{
 
--- BUFFERS
+-- Buffers
 
 vim.keymap.set('n', '<leader><Tab>', '<cmd>bnext<cr>', opts)
 vim.keymap.set('n', '<leader><S-Tab>', '<cmd>bNext<cr>', opts)
 
 vim.keymap.set('n', '<leader>bd', '<cmd>bdelete<cr>', opts)
 
--- TABS
+-- Tabs
 
 vim.keymap.set('n', '<leader>1', '1gt', opts)
 vim.keymap.set('n', '<leader>2', '2gt', opts)
@@ -40,6 +40,8 @@ vim.keymap.set('n', '<leader>8', '8gt', opts)
 vim.keymap.set('n', '<leader>9', '9gt', opts)
 
 vim.keymap.set('n', '<leader>td', '<cmd>tabclose<cr>', opts)
+
+-- Telescope
 
 local map_with_desc = require('util.keymap').map_with_desc
 
@@ -68,3 +70,11 @@ map_with_desc('n', '<leader>th', telescope_builtin.help_tags, opts, 'Telescope: 
 map_with_desc('n', '<leader>tg', telescope_builtin.live_grep, opts, 'Telescope: live grep (respecting .gitignore)')
 map_with_desc('n', '<leader>ts', telescope_builtin.grep_string, opts, 'Telescope: grep string under cursor')
 map_with_desc('n', '<leader>td', telescope_builtin.diagnostics, opts, 'Telescope: list diagnostics')
+
+-- Put in visual mode without yanking old text
+
+vim.keymap.set('x', '<leader>p', '"_dP', opts)
+
+-- }}}
+
+-- vim: foldmethod=marker
