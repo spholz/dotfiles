@@ -117,7 +117,7 @@ end
 
 vim.opt.quickfixtextfunc = '{info -> v:lua.quickfixtextfunc(info)}'
 
-vim.opt.guifont = 'FiraCode Nerd Font:h18'
+vim.opt.guifont = 'Fira Code:h14'
 
 vim.opt.timeoutlen = 500
 vim.opt.ttimeoutlen = 10
@@ -132,3 +132,5 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
     group = vim.api.nvim_create_augroup('HighlightYank', { clear = true }),
 })
+
+vim.opt.shell = 'fish'
