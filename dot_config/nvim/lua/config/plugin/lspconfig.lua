@@ -35,7 +35,7 @@ local on_attach = function(client, bufnr)
 
     -- local lsp_augroup = vim.api.nvim_create_augroup('LspCodeLens', { clear = true })
 
-    if client.resolved_capabilities.code_lens then
+    if client.server_capabilities.codeLensProvider then
         vim.lsp.codelens.refresh()
         -- vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
         --     buffer = bufnr,
@@ -44,7 +44,7 @@ local on_attach = function(client, bufnr)
         -- })
     end
 
-    -- if client.resolved_capabilities.document_highlight then
+    -- if client.server_capabilities.documentHighlightProvider then
     --     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
     --         buffer = bufnr,
     --         callback = vim.lsp.buf.document_highlight,

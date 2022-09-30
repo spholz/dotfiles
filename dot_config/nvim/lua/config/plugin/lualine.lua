@@ -55,7 +55,21 @@ lualine.setup {
             },
         },
     },
-    winbar = {},
-    inactive_winbar = {},
+    winbar = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {},
+    },
+    inactive_winbar = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {},
+    },
     extensions = { 'quickfix', 'fzf', 'man', 'fugitive', 'nvim-dap-ui', 'symbols-outline', 'toggleterm' },
 }

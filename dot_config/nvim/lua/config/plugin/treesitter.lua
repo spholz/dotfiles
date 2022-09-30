@@ -33,6 +33,7 @@ vim.list_extend(parsers, {
     'fish',
     'gdscript',
     'glsl',
+    'gitattributes',
     'godot_resource',
     'haskell',
     'hlsl',
