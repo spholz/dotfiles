@@ -6,13 +6,13 @@ local parsers = {
     'comment',
     'cpp',
     'gitignore',
-    -- 'help', -- broken
+    'help', -- broken (bundled since 0.8)
     'html',
     'java',
     'javascript',
     'json',
     'latex',
-    'lua',
+    'lua', -- (bundled since 0.8)
     'make',
     'meson',
     'markdown',
@@ -20,7 +20,7 @@ local parsers = {
     'regex',
     'rust',
     'toml',
-    'vim',
+    'vim', -- (bundled since 0.8)
 }
 
 -- more parsers!!
