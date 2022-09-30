@@ -22,8 +22,8 @@ local on_attach = function(client, bufnr)
     map_with_desc('n', '<leader>a', vim.lsp.buf.code_action, opts, 'Execute a code action')
     map_with_desc('v', '<leader>a', vim.lsp.buf.range_code_action, opts, 'Execute a code action')
 
-    map_with_desc('n', '<leader>f', vim.lsp.buf.formatting, opts, 'Format the current buffer')
-    map_with_desc('v', '<leader>f', vim.lsp.buf.range_formatting, opts, 'Format the current selection')
+    map_with_desc('n', '<leader>f', vim.lsp.buf.format, opts, 'Format the current buffer')
+    map_with_desc('x', '<leader>f', vim.lsp.buf.format, opts, 'Format the current selection')
 
     map_with_desc('n', '<leader>r', vim.lsp.buf.rename, opts, 'Rename symbol under cursor')
 
