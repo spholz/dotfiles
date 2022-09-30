@@ -33,7 +33,7 @@ local on_attach = function(client, bufnr)
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, opts, 'List workspace folders')
 
-    -- local lsp_augroup = vim.api.nvim_create_augroup('LspCodeLens', { clear = true })
+    -- local lsp_augroup = vim.api.nvim_create_augroup('lsp_code_lens', { clear = true })
 
     if client.server_capabilities.codeLensProvider then
         vim.lsp.codelens.refresh()

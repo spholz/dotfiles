@@ -35,7 +35,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
             })
         end
     end,
-    group = vim.api.nvim_create_augroup('ColorSchemeFix', { clear = true }),
+    group = vim.api.nvim_create_augroup('color_scheme_fix', { clear = true }),
 })
 
 vim.cmd [[colorscheme molokai]]

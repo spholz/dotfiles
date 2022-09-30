@@ -18,7 +18,7 @@ vim.api.nvim_create_autocmd('FileType', {
     callback = function()
         vim.opt_local.formatoptions:remove 'o'
     end,
-    group = vim.api.nvim_create_augroup('FormatOptions', { clear = true }),
+    group = vim.api.nvim_create_augroup('format_options', { clear = true }),
 })
 
 vim.opt.ignorecase = true
@@ -36,7 +36,7 @@ vim.opt.termguicolors = true
 vim.opt.cursorline = true
 
 -- show cursorline only in active buffer
-local cursorline_group = vim.api.nvim_create_augroup('CursorLine', { clear = true })
+local cursorline_group = vim.api.nvim_create_augroup('cursor_line', { clear = true })
 vim.api.nvim_create_autocmd('WinEnter', {
     callback = function()
         vim.opt_local.cursorline = true
@@ -129,7 +129,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
             timeout = 250,
         }
     end,
-    group = vim.api.nvim_create_augroup('HighlightYank', { clear = true }),
+    group = vim.api.nvim_create_augroup('highlight_yank', { clear = true }),
 })
 
 vim.opt.shell = 'fish'

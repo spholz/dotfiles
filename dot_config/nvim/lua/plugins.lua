@@ -11,7 +11,7 @@ return function(bootstrap)
             end
             require('packer').compile()
         end,
-        group = vim.api.nvim_create_augroup('PackerUserConfig', { clear = true }),
+        group = vim.api.nvim_create_augroup('auto_reload_config', { clear = true }),
     })
 
     local packer = require 'packer'
