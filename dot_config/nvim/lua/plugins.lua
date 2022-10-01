@@ -199,7 +199,7 @@ return function(bootstrap)
             end,
         }
 
-        use { 'rcarriga/nvim-dap-ui', requires = { 'mfussenegger/nvim-dap' } }
+        use { 'rcarriga/nvim-dap-ui', requires = 'mfussenegger/nvim-dap' }
 
         use {
             'akinsho/toggleterm.nvim',
