@@ -19,17 +19,17 @@ local on_attach = function(client, bufnr)
     map_with_desc('n', 'gr', vim.lsp.buf.references, opts, 'List all references in the quickfix window')
     map_with_desc('n', 'K', vim.lsp.buf.hover, opts, 'Display hover information')
 
-    map_with_desc('n', '<leader>a', vim.lsp.buf.code_action, opts, 'Execute a code action')
-    map_with_desc('v', '<leader>a', vim.lsp.buf.range_code_action, opts, 'Execute a code action')
+    map_with_desc('n', '<Leader>a', vim.lsp.buf.code_action, opts, 'Execute a code action')
+    map_with_desc('v', '<Leader>a', vim.lsp.buf.range_code_action, opts, 'Execute a code action')
 
-    map_with_desc('n', '<leader>f', vim.lsp.buf.format, opts, 'Format the current buffer')
-    map_with_desc('x', '<leader>f', vim.lsp.buf.format, opts, 'Format the current selection')
+    map_with_desc('n', '<Leader>f', vim.lsp.buf.format, opts, 'Format the current buffer')
+    map_with_desc('x', '<Leader>f', vim.lsp.buf.format, opts, 'Format the current selection')
 
-    map_with_desc('n', '<leader>r', vim.lsp.buf.rename, opts, 'Rename symbol under cursor')
+    map_with_desc('n', '<Leader>r', vim.lsp.buf.rename, opts, 'Rename symbol under cursor')
 
-    map_with_desc('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts, 'Add a folder to the workspace')
-    map_with_desc('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts, 'Remove a folder from the workspace')
-    map_with_desc('n', '<leader>wl', function()
+    map_with_desc('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder, opts, 'Add a folder to the workspace')
+    map_with_desc('n', '<Leader>wr', vim.lsp.buf.remove_workspace_folder, opts, 'Remove a folder from the workspace')
+    map_with_desc('n', '<Leader>wl', function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, opts, 'List workspace folders')
 
@@ -88,8 +88,8 @@ local servers = {
             on_attach(_, bufnr)
             map_with_desc(
                 'n',
-                '<leader>c<tab>',
-                '<cmd>ClangdSwitchSourceHeader<cr>',
+                '<Leader>c<Tab>',
+                '<Cmd>ClangdSwitchSourceHeader<CR>',
                 { noremap = true, silent = true, buffer = bufnr },
                 'Switch between source/header'
             )

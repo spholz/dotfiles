@@ -109,7 +109,7 @@ require('nvim-treesitter.configs').setup {
             selection_modes = {
                 ['@parameter.outer'] = 'v', -- charwise
                 ['@function.outer'] = 'V', -- linewise
-                ['@class.outer'] = '<c-v>', -- blockwise
+                ['@class.outer'] = '<C-v>', -- blockwise
             },
 
             -- If you set this to `true` (default is `false`) then any textobject is

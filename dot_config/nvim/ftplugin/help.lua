@@ -1,1 +1,1 @@
-vim.keymap.set('n', 'q', '<cmd>q<cr>', { noremap = true, buffer = true })
+vim.keymap.set('n', 'q', '<Cmd>q<CR>', { noremap = true, buffer = true })

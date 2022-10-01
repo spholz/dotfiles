@@ -62,7 +62,7 @@ return function(bootstrap)
 
                 map_with_desc(
                     'n',
-                    '<leader>q',
+                    '<Leader>q',
                     require('trouble').toggle,
                     { noremap = true },
                     'Toggle trouble.nvim list'
@@ -204,7 +204,7 @@ return function(bootstrap)
         use {
             'akinsho/toggleterm.nvim',
             config = function()
-                -- setting open_mapping to '<leader><cr>' seems to be buggy (space is mapped in insert mode?)
+                -- setting open_mapping to '<Leader><CR>' seems to be buggy (space is mapped in insert mode?)
                 require('toggleterm').setup()
 
                 local Terminal = require('toggleterm.terminal').Terminal
@@ -214,7 +214,7 @@ return function(bootstrap)
 
                 local map_with_desc = require('util.keymap').map_with_desc
 
-                map_with_desc('n', '<leader><cr>', function()
+                map_with_desc('n', '<Leader><CR>', function()
                     term:toggle()
                 end, { noremap = true }, 'Toggle floating terminal')
             end,
