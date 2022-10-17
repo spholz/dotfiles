@@ -215,15 +215,13 @@ local servers = {
 for server, config in pairs(servers) do
     config = vim.tbl_deep_extend('keep', config, {
         on_attach = on_attach,
-        capabilities = require('cmp_nvim_lsp').update_capabilities(
-            vim.tbl_deep_extend('keep', vim.lsp.protocol.make_client_capabilities(), {
-                workspace = {
-                    codeLens = {
-                        refreshSupport = true,
-                    },
+        capabilities = vim.tbl_deep_extend('keep', require('cmp_nvim_lsp').default_capabilities(), {
+            workspace = {
+                codeLens = {
+                    refreshSupport = true,
                 },
-            })
-        ),
+            },
+        }),
     })
 
     -- TODO: maybe only setup servers not already setup

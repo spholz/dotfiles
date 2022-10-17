@@ -154,6 +154,7 @@ return function(bootstrap)
         }
         use { 'nvim-treesitter/playground' }
         use { 'nvim-treesitter/nvim-treesitter-textobjects' }
+        use { 'nvim-treesitter/nvim-treesitter-context' }
 
         -- Other Plugins -------------------------------------------------
 
@@ -249,6 +250,14 @@ return function(bootstrap)
         }
 
         use { 'wsdjeg/vim-fetch' } -- for filename:line:column
+
+        use {
+            'rcarriga/nvim-notify',
+            config = function()
+                require('telescope').load_extension 'notify'
+                vim.notify = require 'notify'
+            end,
+        }
 
         if bootstrap then
             require('packer').sync()
