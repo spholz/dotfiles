@@ -1,5 +1,33 @@
 local cmp = require 'cmp'
 
+local lsp_icons = {
+    Class = '',
+    Color = '',
+    Constant = '',
+    Constructor = '',
+    Enum = '',
+    EnumMember = '',
+    Event = '',
+    Field = '',
+    File = '',
+    Folder = '',
+    Function = '', -- 
+    Interface = '',
+    Keyword = '',
+    Method = '',
+    Module = '',
+    Operator = '',
+    Property = '',
+    Reference = '',
+    Snippet = '',
+    Struct = '',
+    Text = '',
+    TypeParameter = '',
+    Unit = '',
+    Value = '',
+    Variable = '',
+}
+
 cmp.setup {
     snippet = {
         expand = function(args)
@@ -23,46 +51,23 @@ cmp.setup {
     }),
 
     formatting = {
-        fields = { 'kind', 'abbr', 'menu' }, -- show kind first: 'פּ utils'
-        format = require('lspkind').cmp_format {
-            mode = 'symbol', -- symbol only ('פּ' instead of symbol_text: 'פּ Struct')
-            maxwidth = 50,
-            menu = {
+        fields = { 'kind', 'abbr', 'menu' },
+
+        ---@param entry cmp.Entry
+        ---@param vim_item vim.CompletedItem
+        ---@return any
+        format = function(entry, vim_item)
+            vim_item.kind = lsp_icons[vim_item.kind] or vim_item.kind
+            vim_item.menu = ({
                 buffer = ' ',
                 nvim_lsp = '  ',
                 nvim_lua = ' ',
                 path = ' ',
                 luasnip = ' ',
-            },
-            -- these symbols will appear larger in kitty as they are always followed by a space character
-            symbol_map = {
-                Text = '',
-                Method = '',
-                Function = '', -- 
-                Constructor = '',
-                Field = '',
-                Variable = '',
-                Class = '',
-                Interface = '',
-                Module = '',
-                Property = '',
-                Unit = '',
-                Value = '',
-                Enum = '',
-                Keyword = '',
-                Snippet = '',
-                Color = '',
-                File = '',
-                Reference = '',
-                Folder = '',
-                EnumMember = '',
-                Constant = '',
-                Struct = '',
-                Event = '',
-                Operator = '',
-                TypeParameter = '',
-            },
-        },
+            })[entry.source.name]
+
+            return vim_item
+        end,
     },
 
     -- view = {

@@ -95,6 +95,7 @@ local servers = {
             )
         end,
         cmd = { 'clangd', '--header-insertion=iwyu', '--clang-tidy' },
+        capabilities = { offsetEncoding = 'utf-8' },
     },
     cmake = {},
     -- csharp_ls = {},

@@ -19,7 +19,7 @@ return function(bootstrap)
     packer.startup(function(use)
         use { 'wbthomason/packer.nvim' }
 
-        -- Themes --------------------------------------------------------
+        --- Themes --------------------------------------------------------
         use {
             'tomasr/molokai',
             config = [[require 'config.colorscheme']],
@@ -47,13 +47,12 @@ return function(bootstrap)
             after = 'nvim-lspconfig', -- for lsp-status register_progress()
         }
 
-        -- LSP -----------------------------------------------------------
+        --- LSP -----------------------------------------------------------
         use {
             'neovim/nvim-lspconfig',
             config = [[require 'config.plugin.lspconfig']],
             after = 'cmp-nvim-lsp', -- for update_capabilities()
         }
-        use { 'onsails/lspkind-nvim' }
         use {
             'folke/trouble.nvim',
             requires = 'kyazdani42/nvim-web-devicons',
@@ -88,7 +87,7 @@ return function(bootstrap)
             end,
         }
 
-        -- Completion ----------------------------------------------------
+        --- Completion ----------------------------------------------------
         use {
             'hrsh7th/nvim-cmp',
             config = [[require 'config.plugin.cmp']],
@@ -105,9 +104,9 @@ return function(bootstrap)
             },
         }
 
-        -- Snippets ------------------------------------------------------
+        --- Snippets ------------------------------------------------------
 
-        -- Telescope -----------------------------------------------------
+        --- Telescope -----------------------------------------------------
         use {
             'nvim-telescope/telescope.nvim',
             requires = 'nvim-lua/plenary.nvim',
@@ -144,7 +143,7 @@ return function(bootstrap)
             end,
         }
 
-        -- Treesitter ----------------------------------------------------
+        --- Treesitter ----------------------------------------------------
         use {
             'nvim-treesitter/nvim-treesitter',
             run = function()
@@ -156,7 +155,7 @@ return function(bootstrap)
         use { 'nvim-treesitter/nvim-treesitter-textobjects' }
         use { 'nvim-treesitter/nvim-treesitter-context' }
 
-        -- Other Plugins -------------------------------------------------
+        --- Other Plugins -------------------------------------------------
 
         -- use { 'editorconfig/editorconfig-vim' }
 

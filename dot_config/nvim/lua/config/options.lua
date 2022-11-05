@@ -12,6 +12,8 @@ vim.opt.smarttab = true
 vim.opt.smartindent = true
 vim.opt.list = true
 
+vim.g.netrw_banner = false
+
 -- don't insert comment symbols on o/O
 -- set by ftplugins, so use an autocommand
 vim.api.nvim_create_autocmd('FileType', {
