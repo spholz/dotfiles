@@ -75,6 +75,10 @@ map_with_desc('n', '<Leader>td', telescope_builtin.diagnostics, opts, 'Telescope
 
 vim.keymap.set('x', '<Leader>p', '"_dP', opts)
 
+map_with_desc('n', '<Leader>p', function()
+    require('nvim-pdf').open_doc '/home/s/src/pdfview/test.pdf'
+end, opts, 'Open Test PDF')
+
 -- }}}
 
 -- vim: foldmethod=marker

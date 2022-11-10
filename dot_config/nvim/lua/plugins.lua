@@ -258,6 +258,8 @@ return function(bootstrap)
             end,
         }
 
+        use { '~/src/pdfview' }
+
         if bootstrap then
             require('packer').sync()
         end

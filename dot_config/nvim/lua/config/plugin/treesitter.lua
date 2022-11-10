@@ -5,6 +5,7 @@ local parsers = {
     'cmake',
     'comment',
     'cpp',
+    'diff',
     'gitignore',
     'help', -- broken (bundled since 0.8)
     'html',
@@ -14,8 +15,8 @@ local parsers = {
     'latex',
     'lua', -- (bundled since 0.8)
     'make',
-    'meson',
     'markdown',
+    'meson',
     'python',
     'regex',
     'rust',
@@ -32,8 +33,9 @@ vim.list_extend(parsers, {
     'dockerfile',
     'fish',
     'gdscript',
-    'glsl',
+    'git_rebase',
     'gitattributes',
+    'glsl',
     'godot_resource',
     'haskell',
     'hlsl',

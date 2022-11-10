@@ -9,6 +9,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
                 local lualine_theme = lualine.get_config().options.theme
                 if lualine_theme == 'auto' or lualine_theme == 'molokai' then
                     vim.api.nvim_set_hl(0, 'WinSeparator', { link = 'lualine_c_normal' })
+                    vim.api.nvim_set_hl(0, 'Pmenu', { bg = '#272828' })
                 end
             end
 
