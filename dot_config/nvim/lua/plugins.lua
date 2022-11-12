@@ -87,6 +87,8 @@ return function(bootstrap)
             end,
         }
 
+        use { 'simrat39/rust-tools.nvim' }
+
         --- Completion ----------------------------------------------------
         use {
             'hrsh7th/nvim-cmp',

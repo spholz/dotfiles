@@ -144,16 +144,18 @@ local servers = {
     -- quick_lint_js = {},
     -- racket_langserver = {},
     -- rnix = {}, -- nix expressions
-    rust_analyzer = {
-        settings = {
-            ['rust-analyzer'] = {
-                checkOnSave = {
-                    command = 'clippy',
-                    allTargets = false,
-                },
-            },
-        },
-    },
+
+    -- conflicts with rust-tools.nvim
+    -- rust_analyzer = {
+    --     settings = {
+    --         ['rust-analyzer'] = {
+    --             checkOnSave = {
+    --                 command = 'clippy',
+    --                 allTargets = false,
+    --             },
+    --         },
+    --     },
+    -- },
     -- sourcery = {}, -- python ai refactor thingy
     -- sqlls = {},
     -- sqls = {},
