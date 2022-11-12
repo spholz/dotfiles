@@ -45,31 +45,34 @@ vim.keymap.set('n', '<Leader>td', '<Cmd>tabclose<CR>', opts)
 
 local map_with_desc = require('util.keymap').map_with_desc
 
-local telescope_builtin = require 'telescope.builtin'
+local telescope_builtin_ok, telescope_builtin = pcall(require, 'telescope.builtin')
+if telescope_builtin_ok then
+    local telescope_builtin = require 'telescope.builtin'
 
-map_with_desc('n', '<Leader>o', telescope_builtin.oldfiles, opts, 'Telescope: list previously opened files')
-map_with_desc('n', '<Leader><Leader>', telescope_builtin.buffers, opts, 'Telescope: list open buffers')
-map_with_desc(
-    'n',
-    '<Leader>/',
-    telescope_builtin.current_buffer_fuzzy_find,
-    opts,
-    'Telescope: fuzzy find in current buffer'
-)
+    map_with_desc('n', '<Leader>o', telescope_builtin.oldfiles, opts, 'Telescope: list previously opened files')
+    map_with_desc('n', '<Leader><Leader>', telescope_builtin.buffers, opts, 'Telescope: list open buffers')
+    map_with_desc(
+        'n',
+        '<Leader>/',
+        telescope_builtin.current_buffer_fuzzy_find,
+        opts,
+        'Telescope: fuzzy find in current buffer'
+    )
 
-map_with_desc('n', '<Leader>tt', telescope_builtin.builtin, opts, 'Telescope: list builtin pickers')
+    map_with_desc('n', '<Leader>tt', telescope_builtin.builtin, opts, 'Telescope: list builtin pickers')
 
-map_with_desc(
-    'n',
-    '<Leader>tf',
-    telescope_builtin.find_files,
-    opts,
-    'Telescope: search for files (respecting .gitignore)'
-)
-map_with_desc('n', '<Leader>th', telescope_builtin.help_tags, opts, 'Telescope: search help tags')
-map_with_desc('n', '<Leader>tg', telescope_builtin.live_grep, opts, 'Telescope: live grep (respecting .gitignore)')
-map_with_desc('n', '<Leader>ts', telescope_builtin.grep_string, opts, 'Telescope: grep string under cursor')
-map_with_desc('n', '<Leader>td', telescope_builtin.diagnostics, opts, 'Telescope: list diagnostics')
+    map_with_desc(
+        'n',
+        '<Leader>tf',
+        telescope_builtin.find_files,
+        opts,
+        'Telescope: search for files (respecting .gitignore)'
+    )
+    map_with_desc('n', '<Leader>th', telescope_builtin.help_tags, opts, 'Telescope: search help tags')
+    map_with_desc('n', '<Leader>tg', telescope_builtin.live_grep, opts, 'Telescope: live grep (respecting .gitignore)')
+    map_with_desc('n', '<Leader>ts', telescope_builtin.grep_string, opts, 'Telescope: grep string under cursor')
+    map_with_desc('n', '<Leader>td', telescope_builtin.diagnostics, opts, 'Telescope: list diagnostics')
+end
 
 -- Put in visual mode without yanking old text
 
