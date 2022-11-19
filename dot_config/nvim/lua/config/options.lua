@@ -14,6 +14,12 @@ vim.opt.list = true
 
 vim.g.netrw_banner = false
 
+-- disable some providers
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+
 -- don't insert comment symbols on o/O
 -- set by ftplugins, so use an autocommand
 vim.api.nvim_create_autocmd('FileType', {
