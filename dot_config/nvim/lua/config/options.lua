@@ -116,7 +116,7 @@ function _G.quickfixtextfunc(info)
     return list
 end
 
-vim.opt.quickfixtextfunc = '{info -> v:lua.quickfixtextfunc(info)}'
+vim.opt.quickfixtextfunc = [[{info -> v:lua.quickfixtextfunc(info)}]]
 
 vim.opt.guifont = 'Fira Code:h14'
 
@@ -133,5 +133,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
     group = vim.api.nvim_create_augroup('highlight_yank', { clear = true }),
 })
+
+if vim.fn.has 'nvim-0.9' == 1 then
+    vim.opt.diffopt:append 'linematch:50'
+end
 
 vim.opt.shell = 'fish'

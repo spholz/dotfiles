@@ -195,6 +195,11 @@ local servers = {
     texlab = {
         settings = {
             texlab = {
+                build = {
+                    -- args = { "-c", "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+                    onSave = true,
+                    -- forwardSearchAfter = true,
+                },
                 chktex = {
                     onEdit = true,
                     onOpenAndSave = true,
@@ -212,6 +217,7 @@ local servers = {
     -- vimls = {},
     -- wgsl_analyzer = {},
     -- yamlls = {},
+    zls = {},
 }
 
 for server, config in pairs(servers) do

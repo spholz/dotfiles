@@ -47,8 +47,6 @@ local map_with_desc = require('util.keymap').map_with_desc
 
 local telescope_builtin_ok, telescope_builtin = pcall(require, 'telescope.builtin')
 if telescope_builtin_ok then
-    local telescope_builtin = require 'telescope.builtin'
-
     map_with_desc('n', '<Leader>o', telescope_builtin.oldfiles, opts, 'Telescope: list previously opened files')
     map_with_desc('n', '<Leader><Leader>', telescope_builtin.buffers, opts, 'Telescope: list open buffers')
     map_with_desc(

@@ -57,6 +57,7 @@ vim.list_extend(parsers, {
     'verilog',
     'wgsl',
     'yaml',
+    'zig',
 })
 
 -- remove all parsers that require tree-sitter CLI if it isn't installed
