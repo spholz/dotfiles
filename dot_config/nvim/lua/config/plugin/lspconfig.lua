@@ -102,7 +102,9 @@ local servers = {
     cssls = {
         cmd = { 'vscode-css-languageserver', '--stdio' },
     },
-    denols = {},
+    denols = {
+        single_file_support = true,
+    },
     -- diagnosticls = {},
     -- dockerls = {},
     -- dotls = {}, -- graphviz dot
