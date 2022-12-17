@@ -12,7 +12,7 @@ vim.opt.smarttab = true
 vim.opt.smartindent = true
 vim.opt.list = true
 
-vim.opt.hlsearch = false -- don't highlight all matches
+-- vim.opt.hlsearch = false -- don't highlight all matches
 vim.opt.scrolloff = 8 -- keep at least 8 lines visible around the cursor
 
 vim.g.netrw_banner = false

@@ -46,10 +46,22 @@ return function(bootstrap)
             after = 'nvim-lspconfig', -- for lsp-status register_progress()
         }
 
+        use {
+            'williamboman/mason.nvim',
+            config = function()
+                require('mason').setup {}
+            end,
+        }
+        use {
+            'williamboman/mason-lspconfig.nvim',
+            config = [[require 'config.plugin.mason_lspconfig']],
+            after = 'nvim-lspconfig',
+        }
+
         --- LSP -----------------------------------------------------------
         use {
             'neovim/nvim-lspconfig',
-            config = [[require 'config.plugin.lspconfig']],
+            -- config = [[require 'config.plugin.lspconfig']], -- conflicts with mason-lspconfig config
             after = 'cmp-nvim-lsp', -- for update_capabilities()
         }
         use {
