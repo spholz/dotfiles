@@ -100,10 +100,9 @@ return function(bootstrap)
                 { 'hrsh7th/cmp-nvim-lsp-signature-help', after = 'nvim-cmp' },
                 { 'L3MON4D3/LuaSnip', after = 'nvim-cmp' },
                 { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
+                { 'rafamadriz/friendly-snippets', after = 'LuaSnip' },
             },
         }
-
-        --- Snippets ------------------------------------------------------
 
         --- Telescope -----------------------------------------------------
         use {
@@ -231,6 +230,8 @@ return function(bootstrap)
                 }
             end,
         }
+
+        use { 'mbbill/undotree' }
 
         use { 'wsdjeg/vim-fetch' } -- for filename:line:column
 
