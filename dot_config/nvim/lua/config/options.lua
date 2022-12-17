@@ -12,7 +12,11 @@ vim.opt.smarttab = true
 vim.opt.smartindent = true
 vim.opt.list = true
 
+vim.opt.hlsearch = false -- don't highlight all matches
+vim.opt.scrolloff = 8 -- keep at least 8 lines visible around the cursor
+
 vim.g.netrw_banner = false
+vim.g.netrw_winsize = 25
 
 -- disable some providers
 vim.g.loaded_python3_provider = 0
@@ -20,7 +24,7 @@ vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 
--- don't insert comment symbols on o/O
+-- don't insert comment characters on o/O
 -- set by ftplugins, so use an autocommand
 vim.api.nvim_create_autocmd('FileType', {
     callback = function()
@@ -128,7 +132,7 @@ vim.opt.guifont = 'Fira Code:h14'
 
 vim.opt.timeoutlen = 500
 vim.opt.ttimeoutlen = 10
-vim.opt.updatetime = 800 -- for CursorHold (e.g. for document highlights) and swap file
+vim.opt.updatetime = 100 -- for CursorHold (e.g. for document highlights) and swap file
 
 -- highlight yanked text
 vim.api.nvim_create_autocmd('TextYankPost', {

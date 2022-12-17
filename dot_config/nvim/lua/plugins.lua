@@ -40,7 +40,6 @@ return function(bootstrap)
         use {
             'nvim-lualine/lualine.nvim',
             requires = {
-                -- 'nvim-lua/lsp-status.nvim', -- conflicts with fidget.nvim
                 'kyazdani42/nvim-web-devicons',
             },
             config = [[require 'config.plugin.lualine']],
@@ -176,18 +175,6 @@ return function(bootstrap)
             end,
         }
 
-        -- use {
-        --     'vimwiki/vimwiki',
-        --     setup = function()
-        --         vim.g.vimwiki_list = {
-        --             {
-        --                 path = '~/notes',
-        --                 syntax = 'markdown',
-        --                 ext = '.md',
-        --             },
-        --         }
-        --     end,
-        -- }
         use { 'tpope/vim-fugitive', requires = 'tpope/vim-rhubarb' }
 
         use { 'tpope/vim-sleuth' }
@@ -228,13 +215,10 @@ return function(bootstrap)
                 null_ls.setup {
                     sources = {
                         null_ls.builtins.formatting.stylua,
-                        -- null_ls.builtins.diagnostics.eslint,
-                        -- null_ls.builtins.completion.spell,
                         null_ls.builtins.diagnostics.cppcheck,
                         null_ls.builtins.diagnostics.fish,
                         null_ls.builtins.diagnostics.gitlint,
                         null_ls.builtins.diagnostics.glslc,
-                        -- null_ls.builtins.diagnostics.luacheck,
                         null_ls.builtins.diagnostics.markdownlint,
                         -- null_ls.builtins.diagnostics.mypy,
                         -- null_ls.builtins.diagnostics.pylint,
@@ -249,16 +233,6 @@ return function(bootstrap)
         }
 
         use { 'wsdjeg/vim-fetch' } -- for filename:line:column
-
-        use {
-            'rcarriga/nvim-notify',
-            config = function()
-                require('telescope').load_extension 'notify'
-                vim.notify = require 'notify'
-            end,
-        }
-
-        use { '~/src/pdfview' }
 
         if bootstrap then
             require('packer').sync()

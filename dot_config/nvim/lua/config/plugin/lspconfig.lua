@@ -59,26 +59,6 @@ local on_attach = function(client, bufnr)
     -- end
 end
 
-local lsp_status_ok, lsp_status = pcall(require, 'lsp-status')
-if lsp_status_ok then
-    lsp_status.register_progress() -- for lualine lsp progress indicator
-end
-
-local configs = require 'lspconfig.configs'
-
-if not configs.qmlls then
-    configs.qmlls = {
-        default_config = {
-            cmd = { '/usr/lib/qt6/bin/qmlls' },
-            filetypes = { 'qmljs' },
-            root_dir = function(fname)
-                return lspconfig.util.find_git_ancestor(fname)
-            end,
-            settings = {},
-        },
-    }
-end
-
 local servers = {
     -- asm_lsp = {},
     -- bashls = {},
@@ -89,7 +69,7 @@ local servers = {
             map_with_desc(
                 'n',
                 '<Leader>c<Tab>',
-                '<Cmd>ClangdSwitchSourceHeader<CR>',
+                vim.cmd.ClangdSwitchSourceHeader,
                 { noremap = true, silent = true, buffer = bufnr },
                 'Switch between source/header'
             )
@@ -120,9 +100,9 @@ local servers = {
     html = {
         cmd = { 'vscode-html-languageserver', '--stdio' },
     },
-    -- java_language_server = {
-    --     cmd = { 'java-language-server' },
-    -- },
+    java_language_server = {
+        cmd = { 'java-language-server' },
+    },
     -- jedi_language_server = {}, -- python
     jsonls = {
         cmd = { 'vscode-json-languageserver', '--stdio' },

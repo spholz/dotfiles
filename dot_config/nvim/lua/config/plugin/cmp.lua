@@ -39,6 +39,10 @@ cmp.setup {
         ['<C-Space>'] = cmp.mapping.complete {},
         ['<C-d>'] = cmp.mapping.scroll_docs(4),
         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-h>'] = cmp.mapping.abort {},
+        ['<C-j>'] = cmp.mapping.select_next_item {},
+        ['<C-k>'] = cmp.mapping.select_prev_item {},
+        ['<C-l>'] = cmp.mapping.confirm { select = true },
     },
     sources = cmp.config.sources({
         { name = 'nvim_lua' },

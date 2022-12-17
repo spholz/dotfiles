@@ -7,4 +7,7 @@ vim.filetype.add {
 
         qml = 'qmljs',
     },
+    filename = {
+        ['dkms.conf'] = 'sh',
+    },
 }

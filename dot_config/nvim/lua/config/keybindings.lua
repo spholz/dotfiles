@@ -22,10 +22,8 @@ vim.keymap.set('n', '<M-l>', '<C-w>l', opts)
 
 -- Buffers
 
-vim.keymap.set('n', '<Leader><Tab>', '<Cmd>bnext<CR>', opts)
-vim.keymap.set('n', '<Leader><S-Tab>', '<Cmd>bNext<CR>', opts)
-
-vim.keymap.set('n', '<Leader>bd', '<Cmd>bdelete<CR>', opts)
+vim.keymap.set('n', '<Leader><Tab>', vim.cmd.bnext, opts)
+vim.keymap.set('n', '<Leader><S-Tab>', vim.cmd.bNext, opts)
 
 -- Tabs
 
@@ -38,8 +36,6 @@ vim.keymap.set('n', '<Leader>6', '6gt', opts)
 vim.keymap.set('n', '<Leader>7', '7gt', opts)
 vim.keymap.set('n', '<Leader>8', '8gt', opts)
 vim.keymap.set('n', '<Leader>9', '9gt', opts)
-
-vim.keymap.set('n', '<Leader>td', '<Cmd>tabclose<CR>', opts)
 
 -- Telescope
 
@@ -73,12 +69,7 @@ if telescope_builtin_ok then
 end
 
 -- Put in visual mode without yanking old text
-
 vim.keymap.set('x', '<Leader>p', '"_dP', opts)
-
-map_with_desc('n', '<Leader>p', function()
-    require('nvim-pdf').open_doc '/home/s/src/pdfview/test.pdf'
-end, opts, 'Open Test PDF')
 
 -- }}}
 
