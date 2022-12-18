@@ -22,8 +22,8 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 
             -- for document highlights
             vim.api.nvim_set_hl(0, 'LspReferenceText', { link = 'Visual' })
-            vim.api.nvim_set_hl(0, 'LspReferenceRead', { link = 'Visual' })
-            vim.api.nvim_set_hl(0, 'LspReferenceWrite', { link = 'Visual' })
+            vim.api.nvim_set_hl(0, 'LspReferenceRead', { bg = '#3a4c38' })
+            vim.api.nvim_set_hl(0, 'LspReferenceWrite', { bg = '#513838' })
         end
 
         -- nvim-cmp
