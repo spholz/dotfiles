@@ -43,7 +43,7 @@ local on_attach = function(client, bufnr)
     end
 
     if client.server_capabilities.documentHighlightProvider then
-        vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+        vim.api.nvim_create_autocmd({ 'CursorHold' }, {
             buffer = bufnr,
             callback = vim.lsp.buf.document_highlight,
             group = lsp_augroup,
