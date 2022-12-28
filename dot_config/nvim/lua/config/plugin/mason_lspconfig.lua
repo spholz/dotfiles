@@ -75,7 +75,9 @@ local servers = {
 local external_servers = {
     ghdl_ls = {}, -- part of pyghdl
     gdscript = {}, -- server integrated into the editor
-    qmlls = {},
+    qmlls = {
+        cmd = { '/usr/lib/qt6/bin/qmlls' },
+    },
 }
 
 local lspconfig = require 'lspconfig'
