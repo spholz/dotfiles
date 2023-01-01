@@ -11,9 +11,9 @@ local on_attach = function(client, bufnr)
     }
 
     map_with_desc('n', 'gd', vim.lsp.buf.definition, opts, 'Go to definition')
-    map_with_desc('n', 'gt', vim.lsp.buf.type_definition, opts, 'Go to type definition')
+    -- map_with_desc('n', '', vim.lsp.buf.type_definition, opts, 'Go to type definition')
     map_with_desc('n', 'gD', vim.lsp.buf.declaration, opts, 'Go to declaration')
-    map_with_desc('n', 'gi', vim.lsp.buf.implementation, opts, 'List all implementations in the quickfix window')
+    -- map_with_desc('n', '', vim.lsp.buf.implementation, opts, 'List all implementations in the quickfix window')
     map_with_desc('n', 'gr', vim.lsp.buf.references, opts, 'List all references in the quickfix window')
     map_with_desc('n', 'K', vim.lsp.buf.hover, opts, 'Display hover information')
 

@@ -236,8 +236,8 @@ return function(bootstrap)
                         null_ls.builtins.diagnostics.qmllint,
                         null_ls.builtins.diagnostics.rstcheck,
                         null_ls.builtins.diagnostics.shellcheck,
-                        null_ls.builtins.diagnostics.trail_space,
                         null_ls.builtins.diagnostics.zsh,
+                        -- null_ls.builtins.diagnostics.trail_space,
                     },
                 }
             end,
