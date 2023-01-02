@@ -31,7 +31,7 @@ local on_attach = function(client, bufnr)
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, opts, 'List workspace folders')
 
-    local lsp_augroup = vim.api.nvim_create_augroup('lsp_code_lens', { clear = true })
+    local lsp_augroup = vim.api.nvim_create_augroup('lsp', { clear = true })
 
     if client.server_capabilities.codeLensProvider then
         vim.lsp.codelens.refresh()
@@ -43,17 +43,19 @@ local on_attach = function(client, bufnr)
     end
 
     if client.server_capabilities.documentHighlightProvider then
-        vim.api.nvim_create_autocmd({ 'CursorHold' }, {
-            buffer = bufnr,
-            callback = vim.lsp.buf.document_highlight,
-            group = lsp_augroup,
-        })
+        vim.schedule(function()
+            vim.api.nvim_create_autocmd({ 'CursorHold' }, {
+                buffer = bufnr,
+                callback = vim.lsp.buf.document_highlight,
+                group = lsp_augroup,
+            })
 
-        vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
-            buffer = bufnr,
-            callback = vim.lsp.buf.clear_references,
-            group = lsp_augroup,
-        })
+            vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
+                buffer = bufnr,
+                callback = vim.lsp.buf.clear_references,
+                group = lsp_augroup,
+            })
+        end)
     end
 end
 
