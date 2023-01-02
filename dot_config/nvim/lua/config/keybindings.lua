@@ -18,6 +18,16 @@ vim.keymap.set('n', '<M-j>', '<C-w>j', opts)
 vim.keymap.set('n', '<M-k>', '<C-w>k', opts)
 vim.keymap.set('n', '<M-l>', '<C-w>l', opts)
 
+
+-- make <C-l> also clear document highlights
+-- default: `nnoremap <C-L> <Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>`
+vim.keymap.set('n', '<C-l>', function()
+    vim.cmd.nohlsearch()
+    vim.cmd.diffupdate()
+    vim.cmd.normal { '<C-l>', bang = true }
+    vim.lsp.buf.clear_references()
+end, opts)
+
 -- Leader key shortcuts {{{
 
 -- Buffers
@@ -39,10 +49,10 @@ vim.keymap.set('n', '<Leader>9', '9gt', opts)
 
 -- Telescope
 
-local map_with_desc = require('util.keymap').map_with_desc
-
 local telescope_builtin_ok, telescope_builtin = pcall(require, 'telescope.builtin')
 if telescope_builtin_ok then
+    local map_with_desc = require('util.keymap').map_with_desc
+
     map_with_desc('n', '<Leader>o', telescope_builtin.oldfiles, opts, 'Telescope: list previously opened files')
     map_with_desc('n', '<Leader><Leader>', telescope_builtin.buffers, opts, 'Telescope: list open buffers')
     map_with_desc(

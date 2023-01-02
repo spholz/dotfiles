@@ -41,20 +41,6 @@ local on_attach = function(client, bufnr)
         --     group = lsp_augroup,
         -- })
     end
-
-    if client.server_capabilities.documentHighlightProvider then
-        vim.api.nvim_create_autocmd({ 'CursorHold' }, {
-            buffer = bufnr,
-            callback = vim.lsp.buf.document_highlight,
-            group = lsp_augroup,
-        })
-
-        vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
-            buffer = bufnr,
-            callback = vim.lsp.buf.clear_references,
-            group = lsp_augroup,
-        })
-    end
 end
 
 local servers = {
@@ -242,3 +228,15 @@ end
 
 -- prevent from running the above code multiple times (e.g. by sourcing it again)
 _G.HANDLER_ADDED = true
+
+vim.api.nvim_create_autocmd({ 'CursorHold' }, {
+    buffer = bufnr,
+    callback = vim.lsp.buf.document_highlight,
+    group = lsp_augroup,
+})
+
+vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
+    buffer = bufnr,
+    callback = vim.lsp.buf.clear_references,
+    group = lsp_augroup,
+})
