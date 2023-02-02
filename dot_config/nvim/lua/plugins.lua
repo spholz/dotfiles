@@ -64,6 +64,7 @@ return function(bootstrap)
             -- config = [[require 'config.plugin.lspconfig']], -- conflicts with mason-lspconfig config
             after = 'cmp-nvim-lsp', -- for update_capabilities()
         }
+        -- use { 'scalameta/nvim-metals', requires = 'nvim-lua/plenary.nvim' }
         use {
             'folke/trouble.nvim',
             requires = 'kyazdani42/nvim-web-devicons',

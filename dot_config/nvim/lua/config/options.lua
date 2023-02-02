@@ -37,7 +37,8 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.path:append '**'
 
-vim.opt.shortmess:append 'c' -- 'c' don't show the "match x of y" message
+vim.opt.shortmess:append 'c' -- don't show the "match x of y" message
+vim.opt.shortmess:append 'I' -- don't show intro text on startup
 
 vim.opt.undofile = true
 

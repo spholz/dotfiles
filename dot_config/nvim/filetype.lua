@@ -6,6 +6,8 @@ vim.filetype.add {
         wgsl = 'wgsl',
 
         qml = 'qmljs',
+
+        gltf = 'json',
     },
     filename = {
         ['dkms.conf'] = 'sh',
