@@ -76,7 +76,10 @@ local servers = {
 
 local external_servers = {
     ghdl_ls = {}, -- part of pyghdl
-    gdscript = {}, -- server integrated into the editor
+    gdscript = {
+        -- server integrated into the editor
+        cmd = vim.lsp.rpc.connect('127.0.0.1', '6005') -- godot 4 has different port
+    },
     qmlls = {
         cmd = { '/usr/lib/qt6/bin/qmlls' },
     },
