@@ -68,7 +68,7 @@ local servers = {
     'jsonls',
     'pyright',
     'rust_analyzer',
-    'sumneko_lua',
+    'lua_ls',
     'taplo', -- toml
     'texlab',
     'zls',
@@ -150,8 +150,8 @@ mason_lspconfig.setup_handlers {
         }
     end,
 
-    sumneko_lua = function()
-        lspconfig.sumneko_lua.setup {
+    lua_ls = function()
+        lspconfig.lua_ls.setup {
             on_attach = on_attach,
             capabilities = capabilities,
             settings = {

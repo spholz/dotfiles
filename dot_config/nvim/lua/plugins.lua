@@ -231,7 +231,7 @@ return function(bootstrap)
                         null_ls.builtins.diagnostics.fish,
                         null_ls.builtins.diagnostics.gitlint,
                         null_ls.builtins.diagnostics.glslc,
-                        null_ls.builtins.diagnostics.markdownlint,
+                        -- null_ls.builtins.diagnostics.markdownlint,
                         -- null_ls.builtins.diagnostics.mypy,
                         -- null_ls.builtins.diagnostics.pylint,
                         null_ls.builtins.diagnostics.qmllint,
