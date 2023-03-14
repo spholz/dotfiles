@@ -18,7 +18,7 @@ local on_attach = function(client, bufnr)
     map_with_desc('n', 'K', vim.lsp.buf.hover, opts, 'Display hover information')
 
     map_with_desc('n', '<Leader>a', vim.lsp.buf.code_action, opts, 'Execute a code action')
-    map_with_desc('v', '<Leader>a', vim.lsp.buf.range_code_action, opts, 'Execute a code action')
+    map_with_desc('x', '<Leader>a', vim.lsp.buf.code_action, opts, 'Execute a code action')
 
     map_with_desc('n', '<Leader>f', vim.lsp.buf.format, opts, 'Format the current buffer')
     map_with_desc('x', '<Leader>f', vim.lsp.buf.format, opts, 'Format the current selection')
