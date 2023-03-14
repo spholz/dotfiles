@@ -36,6 +36,7 @@ return function(bootstrap)
         use { 'kyoz/purify', rtp = 'vim' }
         use { 'dracula/vim', as = 'dracula' }
         use { 'rebelot/kanagawa.nvim' }
+        use { 'ray-x/aurora' }
 
         use {
             'nvim-lualine/lualine.nvim',
@@ -227,6 +228,9 @@ return function(bootstrap)
                 null_ls.setup {
                     sources = {
                         null_ls.builtins.formatting.stylua,
+                        null_ls.builtins.formatting.autoflake,
+                        null_ls.builtins.formatting.blue,
+                        null_ls.builtins.formatting.reorder_python_imports,
                         null_ls.builtins.diagnostics.cppcheck,
                         null_ls.builtins.diagnostics.fish,
                         null_ls.builtins.diagnostics.gitlint,

@@ -150,3 +150,5 @@ if vim.fn.has 'nvim-0.9' == 1 then
 end
 
 vim.opt.shell = 'fish'
+
+vim.opt.spelllang = 'en_us,en,de'

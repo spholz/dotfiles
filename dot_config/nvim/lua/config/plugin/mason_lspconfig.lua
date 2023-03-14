@@ -69,6 +69,7 @@ local servers = {
     'pyright',
     'rust_analyzer',
     'lua_ls',
+    'nil_ls', -- nix
     'taplo', -- toml
     'texlab',
     'zls',

@@ -45,11 +45,11 @@ cmp.setup {
         ['<C-l>'] = cmp.mapping.confirm { select = true },
     },
     sources = cmp.config.sources({
+        { name = 'nvim_lsp_signature_help' },
         { name = 'nvim_lua' },
         { name = 'nvim_lsp' },
         { name = 'path' },
         { name = 'luasnip' },
-        { name = 'nvim_lsp_signature_help' },
     }, {
         { name = 'buffer', keyword_length = 5 },
     }),
