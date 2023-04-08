@@ -1,7 +1,13 @@
 vim.opt.number = true
 vim.opt.relativenumber = true
 
-vim.opt.clipboard = 'unnamedplus'
+-- vim.opt.clipboard = 'unnamedplus'
+-- share registers via shada
+vim.api.nvim_create_autocmd({'TextYankPost', 'FocusLost', 'FocusGained'}, {
+    command = 'rshada | wshada',
+    group = vim.api.nvim_create_augroup('shared_registers', { clear = true }),
+})
+
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
