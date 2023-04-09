@@ -83,34 +83,34 @@ cmp.setup {
     -- },
 }
 
-cmp.setup.cmdline(':', {
-    completion = {
-        autocomplete = false,
-    },
-    mapping = cmp.mapping.preset.cmdline(),
-    formatting = {
-        fields = { 'abbr' },
-    },
-    sources = cmp.config.sources({
-        { name = 'path' },
-    }, {
-        { name = 'cmdline' },
-    }),
-})
-
-cmp.setup.cmdline('/', {
-    completion = {
-        autocomplete = false,
-    },
-    mapping = cmp.mapping.preset.cmdline(),
-    formatting = {
-        fields = { 'abbr', 'kind' },
-        format = function(entry, vim_item)
-            vim_item.kind = '[' .. entry.source.name .. ']'
-            return vim_item
-        end,
-    },
-    sources = {
-        { name = 'buffer' },
-    },
-})
+-- cmp.setup.cmdline(':', {
+--     completion = {
+--         autocomplete = false,
+--     },
+--     mapping = cmp.mapping.preset.cmdline(),
+--     formatting = {
+--         fields = { 'abbr' },
+--     },
+--     sources = cmp.config.sources({
+--         { name = 'path' },
+--     }, {
+--         { name = 'cmdline' },
+--     }),
+-- })
+-- 
+-- cmp.setup.cmdline('/', {
+--     completion = {
+--         autocomplete = false,
+--     },
+--     mapping = cmp.mapping.preset.cmdline(),
+--     formatting = {
+--         fields = { 'abbr', 'kind' },
+--         format = function(entry, vim_item)
+--             vim_item.kind = '[' .. entry.source.name .. ']'
+--             return vim_item
+--         end,
+--     },
+--     sources = {
+--         { name = 'buffer' },
+--     },
+-- })

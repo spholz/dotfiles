@@ -7,7 +7,7 @@ local parsers = {
     'cpp',
     'diff',
     'gitignore',
-    'help', -- broken (bundled since 0.8)
+    'vimdoc', -- broken (bundled since 0.8)
     'html',
     'java',
     'javascript',
@@ -78,7 +78,7 @@ require('nvim-treesitter.configs').setup {
     highlight = {
         enable = true,
         disable = {
-            'help', -- highlighting of help files seems broken
+            'vimdoc', -- highlighting of help files seems broken
         },
     },
     incremental_selection = {
