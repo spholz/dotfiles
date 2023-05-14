@@ -84,6 +84,7 @@ local external_servers = {
     qmlls = {
         cmd = { '/usr/lib/qt6/bin/qmlls' },
     },
+    hls = {},
 }
 
 local lspconfig = require 'lspconfig'
