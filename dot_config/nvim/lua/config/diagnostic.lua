@@ -18,6 +18,3 @@ local opts = {
 map_with_desc('n', '<Leader>e', vim.diagnostic.open_float, opts, 'Show diagnostics in a floating window')
 map_with_desc('n', '[d', vim.diagnostic.goto_prev, opts, 'Move to previous diagnostic')
 map_with_desc('n', ']d', vim.diagnostic.goto_next, opts, 'Move to next diagnostic')
-
--- replaced with trouble.nvim (plugins.lua)
--- map_with_desc('n', '<Leader>q', vim.diagnostic.setloclist, opts, 'Add buffer diagnostics to the location list')

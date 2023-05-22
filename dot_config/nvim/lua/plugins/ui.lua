@@ -1,14 +1,5 @@
 return {
     {
-        'folke/trouble.nvim',
-        dependencies = 'kyazdani42/nvim-web-devicons',
-        config = function()
-            local map_with_desc = require('util.keymap').map_with_desc
-
-            map_with_desc('n', '<Leader>q', require('trouble').toggle, { noremap = true }, 'Toggle trouble.nvim list')
-        end,
-    },
-    {
         'simrat39/symbols-outline.nvim',
         config = function()
             require('symbols-outline').setup()

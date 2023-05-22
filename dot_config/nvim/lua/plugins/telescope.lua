@@ -52,7 +52,7 @@ return {
                 'Telescope: live grep (respecting .gitignore)'
             )
             map_with_desc('n', '<Leader>s', telescope_builtin.grep_string, opts, 'Telescope: grep string under cursor')
-            map_with_desc('n', '<Leader>d', telescope_builtin.diagnostics, opts, 'Telescope: list diagnostics')
+            map_with_desc('n', '<Leader>q', telescope_builtin.diagnostics, opts, 'Telescope: list diagnostics')
         end,
     },
 
