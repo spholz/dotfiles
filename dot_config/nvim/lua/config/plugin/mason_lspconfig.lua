@@ -11,7 +11,7 @@ local on_attach = function(client, bufnr)
     }
 
     map_with_desc('n', 'gd', vim.lsp.buf.definition, opts, 'Go to definition')
-    -- map_with_desc('n', '', vim.lsp.buf.type_definition, opts, 'Go to type definition')
+    map_with_desc('n', 'gT', vim.lsp.buf.type_definition, opts, 'Go to type definition')
     map_with_desc('n', 'gD', vim.lsp.buf.declaration, opts, 'Go to declaration')
     -- map_with_desc('n', '', vim.lsp.buf.implementation, opts, 'List all implementations in the quickfix window')
     map_with_desc('n', 'gr', vim.lsp.buf.references, opts, 'List all references in the quickfix window')
@@ -72,19 +72,18 @@ local servers = {
     'nil_ls', -- nix
     'taplo', -- toml
     'texlab',
-    'zls',
 }
 
 local external_servers = {
     ghdl_ls = {}, -- part of pyghdl
     gdscript = {
         -- server integrated into the editor
-        cmd = vim.lsp.rpc.connect('127.0.0.1', '6005') -- godot 4 has different port
+        cmd = vim.lsp.rpc.connect('127.0.0.1', '6005'), -- godot 4 has different port
     },
     qmlls = {
         cmd = { '/usr/lib/qt6/bin/qmlls' },
     },
-    hls = {},
+    zls = {},
 }
 
 local lspconfig = require 'lspconfig'
@@ -146,6 +145,10 @@ mason_lspconfig.setup_handlers {
                     checkOnSave = {
                         command = 'clippy',
                         allTargets = false,
+                    },
+                    assist = {
+                        emitMustUse = true,
+                        expressionFillDefault = "default",
                     },
                 },
             },

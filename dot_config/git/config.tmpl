@@ -2,12 +2,26 @@
     email = {{ .email }}
     name = {{ .name }}
 
-[core]
-    pager = diff-so-fancy | less --tabs=4 -RFXS
-[interactive]
-    diffFilter = diff-so-fancy --patch
-[alias]
-    patch = !git --no-pager diff --no-color
+# [diff]
+#     external = "difft"
+
+# diff-so-fancy
+# [core]
+#     pager = diff-so-fancy | less --tabs=4 -RFXS
+# [interactive]
+#     diffFilter = diff-so-fancy --patch
+# [alias]
+#     patch = !git --no-pager diff --no-color
+
+# difftastic
+# [diff]
+#     tool = difftastic
+# [difftool]
+#     prompt = false
+# [difftool "difftastic"]
+#     cmd = difft "$LOCAL" "$REMOTE"
+# [pager]
+#     difftool = true
 
 [init]
     defaultBranch = main
@@ -22,6 +36,10 @@
     tool = nvim-fugitive
     guitool = kdiff3   pushInsteadOf = kde:
     conflictstyle = diff3
+
+# git pull also updates submodules
+[submodule]
+    recurse = true
 
 [url "https://github.com/"]
     insteadOf = gh:

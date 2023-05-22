@@ -33,6 +33,7 @@ vim.list_extend(parsers, {
     'dockerfile',
     'fish',
     'gdscript',
+    'git_config',
     'git_rebase',
     'gitattributes',
     'glsl',
@@ -128,4 +129,3 @@ require('nvim-treesitter.configs').setup {
 
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
-vim.opt.foldlevelstart = 99
