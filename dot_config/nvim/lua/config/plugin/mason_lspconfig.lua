@@ -83,6 +83,7 @@ local external_servers = {
     qmlls = {
         cmd = { '/usr/lib/qt6/bin/qmlls' },
     },
+    hls = {},
     zls = {},
 }
 
