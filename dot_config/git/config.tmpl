@@ -2,26 +2,25 @@
     email = {{ .email }}
     name = {{ .name }}
 
-# [diff]
-#     external = "difft"
+[core]
+    # pager = diff-so-fancy | less --tabs=4 -RFXS
+    pager = delta
 
-# diff-so-fancy
-# [core]
-#     pager = diff-so-fancy | less --tabs=4 -RFXS
-# [interactive]
-#     diffFilter = diff-so-fancy --patch
-# [alias]
-#     patch = !git --no-pager diff --no-color
+[delta]
+    navigate = true # n/N keybinds
+    line-numbers = true
+    side-by-side = false
+    file-modified-label = modified:
 
-# difftastic
-# [diff]
-#     tool = difftastic
-# [difftool]
-#     prompt = false
-# [difftool "difftastic"]
-#     cmd = difft "$LOCAL" "$REMOTE"
-# [pager]
-#     difftool = true
+[interactive]
+    # diffFilter = diff-so-fancy --patch
+    diffFilter = delta --color-only
+
+[diff]
+    colorMoved = default
+
+[alias]
+    patch = !git --no-pager diff --no-color
 
 [init]
     defaultBranch = main
