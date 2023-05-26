@@ -10,11 +10,13 @@ local on_attach = function(client, bufnr)
         silent = true,
     }
 
-    map_with_desc('n', 'gd', vim.lsp.buf.definition, opts, 'Go to definition')
-    map_with_desc('n', 'gT', vim.lsp.buf.type_definition, opts, 'Go to type definition')
+    local telescope_builtin = require 'telescope.builtin'
+
+    map_with_desc('n', 'gd', telescope_builtin.lsp_definitions, opts, 'Lists LSP references for word under the cursor, jumps to reference on `<cr>`')
+    map_with_desc('n', 'gT', telescope_builtin.lsp_type_definitions, opts, "Goto the definition of the type of the word under the cursor, if there's only one, otherwise show all options in Telescope")
     map_with_desc('n', 'gD', vim.lsp.buf.declaration, opts, 'Go to declaration')
-    -- map_with_desc('n', '', vim.lsp.buf.implementation, opts, 'List all implementations in the quickfix window')
-    map_with_desc('n', 'gr', vim.lsp.buf.references, opts, 'List all references in the quickfix window')
+    map_with_desc('n', 'gI', telescope_builtin.lsp_implementations, opts, "Goto the implementation of the word under the cursor if there's only one, otherwise show all options in Telescope")
+    map_with_desc('n', 'gr', telescope_builtin.lsp_references, opts, 'List all references in Telescope')
     map_with_desc('n', 'K', vim.lsp.buf.hover, opts, 'Display hover information')
 
     map_with_desc('n', '<Leader>a', vim.lsp.buf.code_action, opts, 'Execute a code action')

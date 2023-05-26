@@ -37,22 +37,5 @@ return {
         end,
     },
 
-    {
-        'norcalli/nvim-colorizer.lua',
-        config = function()
-            require('colorizer').setup({
-                '*',
-            }, {
-                RGB = true,
-                RRGGBB = true,
-                names = false,
-                RRGGBBAA = false,
-                rgb_fn = true,
-                hsl_fn = true,
-                mode = 'background',
-            })
-        end,
-    },
-
     'mbbill/undotree',
 }
