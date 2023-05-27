@@ -42,7 +42,17 @@ vim.keymap.set('n', '<Leader>8', '8gt', opts)
 vim.keymap.set('n', '<Leader>9', '9gt', opts)
 
 -- Put in visual mode without yanking old text
-vim.keymap.set('x', '<Leader>p', '"_dP', opts)
+-- vim.keymap.set('x', '<Leader>p', '"_dP', opts)
+
+-- Change/Delete/Put without yanking old text
+vim.keymap.set({'n', 'x'}, '<M-c>', '"_c', opts)
+vim.keymap.set({'n', 'x'}, '<M-d>', '"_d', opts)
+vim.keymap.set({'n', 'x'}, '<M-d><M-d>', '"_dd', opts)
+vim.keymap.set({'n', 'x'}, '<M-p>', '"_dP', opts)
+
+-- System clipboard shortcuts
+vim.keymap.set('n', '<Leader>y', '"+y', opts)
+vim.keymap.set('n', '<Leader>p', '"+p', opts)
 
 -- }}}
 
