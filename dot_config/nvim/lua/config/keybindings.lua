@@ -51,8 +51,8 @@ vim.keymap.set({'n', 'x'}, '<M-d><M-d>', '"_dd', opts)
 vim.keymap.set({'n', 'x'}, '<M-p>', '"_dP', opts)
 
 -- System clipboard shortcuts
-vim.keymap.set('n', '<Leader>y', '"+y', opts)
-vim.keymap.set('n', '<Leader>p', '"+p', opts)
+vim.keymap.set({'n', 'x'}, '<Leader>y', '"+y', opts)
+vim.keymap.set({'n', 'x'}, '<Leader>p', '"+p', opts)
 
 -- }}}
 

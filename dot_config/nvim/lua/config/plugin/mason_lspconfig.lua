@@ -64,14 +64,12 @@ end
 local servers = {
     'clangd',
     'cmake',
-    'cssls',
     'html',
     'jdtls',
     'jsonls',
     'pyright',
     'rust_analyzer',
     'lua_ls',
-    'nil_ls', -- nix
     'taplo', -- toml
     'texlab',
 }
@@ -85,8 +83,6 @@ local external_servers = {
     qmlls = {
         cmd = { '/usr/lib/qt6/bin/qmlls' },
     },
-    hls = {},
-    zls = {},
 }
 
 local lspconfig = require 'lspconfig'

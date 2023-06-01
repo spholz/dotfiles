@@ -9,7 +9,5 @@ return {
     },
 
     'wsdjeg/vim-fetch', -- for filename:line:column
-    'tpope/vim-sleuth',
     { 'nvim-lua/plenary.nvim', lazy = true }, -- required by multiple plugins
-    { 'rcarriga/nvim-dap-ui', dependencies = 'mfussenegger/nvim-dap' },
 }

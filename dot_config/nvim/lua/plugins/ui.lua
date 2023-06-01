@@ -1,12 +1,5 @@
 return {
     {
-        'simrat39/symbols-outline.nvim',
-        config = function()
-            require('symbols-outline').setup()
-        end,
-    },
-
-    {
         'j-hui/fidget.nvim',
         config = function()
             require('fidget').setup {
@@ -15,25 +8,6 @@ return {
                     done = '',
                 },
             }
-        end,
-    },
-
-    {
-        'akinsho/toggleterm.nvim',
-        config = function()
-            -- setting open_mapping to '<Leader><CR>' seems to be buggy (space is mapped in insert mode?)
-            require('toggleterm').setup()
-
-            local Terminal = require('toggleterm.terminal').Terminal
-            local term = Terminal:new {
-                direction = 'float',
-            }
-
-            local map_with_desc = require('util.keymap').map_with_desc
-
-            map_with_desc('n', '<Leader><CR>', function()
-                term:toggle()
-            end, { noremap = true }, 'Toggle floating terminal')
         end,
     },
 
