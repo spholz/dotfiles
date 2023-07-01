@@ -1,6 +1,6 @@
 {{- $email := promptStringOnce . "email" "Email address" -}}
 {{- $name := promptStringOnce . "name" "Name" -}}
-{{- $kitty_font_size := promptStringOnce .kitty "font_size" "Kitty font size" "13.0" -}}
+{{- $kitty_font_size := promptStringOnce . "font_size" "Kitty font size" "13.0" -}}
 
 [git]
 autoCommit = true
@@ -10,9 +10,12 @@ command = "nvim"
 args = ["-d", "{{ "{{" }} .Destination {{ "}}" }}", "{{ "{{" }} .Target {{ "}}" }}", "{{ "{{" }} .Source {{ "}}" }}"]
 
 [diff]
-pager = "diff-so-fancy | less -x4 -RFXS --pattern '^(Date|added|deleted|modified): '"
+pager = delta
+# pager = "diff-so-fancy | less -x4 -RFXS --pattern '^(Date|added|deleted|modified): '"
 
 [data]
 email = {{ $email | quote }}
 name = {{ $name | quote }}
 kitty.font_size = {{ $kitty_font_size | quote }}
+
+# vim: ft=toml
