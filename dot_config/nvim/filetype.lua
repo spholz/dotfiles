@@ -6,6 +6,13 @@ vim.filetype.add {
         qml = 'qmljs',
         gltf = 'json',
         cppm = 'cpp',
+
+        ---@param path string
+        ---@return string?
+        tmpl = function(path, bufnr)
+            local root = vim.fn.fnamemodify(path, ':r')
+            return vim.filetype.match { buf = bufnr, filename = root }
+        end,
     },
     filename = {
         ['dkms.conf'] = 'sh',
