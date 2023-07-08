@@ -44,7 +44,6 @@ return {
                 'glsl',
                 'godot_resource',
                 'haskell',
-                'hlsl',
                 'jsdoc',
                 'jsonc',
                 'llvm',

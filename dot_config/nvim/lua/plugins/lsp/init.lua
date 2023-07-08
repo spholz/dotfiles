@@ -103,9 +103,6 @@ return {
             local servers = {
                 'clangd',
                 'cmake',
-                'html',
-                'jdtls',
-                'jsonls',
                 'pyright',
                 'rust_analyzer',
                 'lua_ls',
