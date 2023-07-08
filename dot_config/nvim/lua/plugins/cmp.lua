@@ -1,6 +1,8 @@
 return {
     'hrsh7th/nvim-cmp',
     config = function()
+        require('luasnip.loaders.from_vscode').lazy_load()
+
         local cmp = require 'cmp'
 
         local lsp_icons = {
@@ -59,6 +61,7 @@ return {
 
             formatting = {
                 fields = { 'kind', 'abbr', 'menu' },
+
                 ---@param entry cmp.Entry
                 ---@param vim_item vim.CompletedItem
                 ---@return any
@@ -69,7 +72,8 @@ return {
                         nvim_lsp = '  ',
                         nvim_lua = ' ',
                         path = ' ',
-                        luasnip = ' ',
+                        luasnip = '  ',
+                        -- luasnip = ' ',
                     })[entry.source.name]
 
                     return vim_item
@@ -85,6 +89,9 @@ return {
         'hrsh7th/cmp-cmdline',
         'hrsh7th/cmp-nvim-lsp-document-symbol',
         'hrsh7th/cmp-nvim-lsp-signature-help',
-        { 'rafamadriz/friendly-snippets', dependencies = 'L3MON4D3/LuaSnip' },
+        {
+            'saadparwaiz1/cmp_luasnip',
+            dependencies = { 'L3MON4D3/LuaSnip', dependencies = 'rafamadriz/friendly-snippets' },
+        },
     },
 }
