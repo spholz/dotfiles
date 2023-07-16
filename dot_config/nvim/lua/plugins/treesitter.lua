@@ -6,19 +6,16 @@ return {
             -- minimal config
             local parsers = {
                 'bash',
-                'c',
                 'cmake',
                 'comment',
                 'cpp',
                 'diff',
                 'gitignore',
-                'vimdoc', -- broken (bundled since 0.8)
                 'html',
                 'java',
                 'javascript',
                 'json',
                 'latex',
-                'lua', -- (bundled since 0.8)
                 'make',
                 'markdown',
                 'meson',
@@ -26,8 +23,9 @@ return {
                 'regex',
                 'rust',
                 'toml',
-                'vim', -- (bundled since 0.8)
             }
+
+            -- bundled parsers (0.8): c, lua, query, vim, vimdoc
 
             -- more parsers!!
             vim.list_extend(parsers, {
@@ -55,7 +53,6 @@ return {
                 'php',
                 'pioasm',
                 'qmljs',
-                'query',
                 'rst',
                 'scala',
                 'sql',
