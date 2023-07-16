@@ -7,71 +7,7 @@ return {
             'nvim-cmp',
         },
         config = function()
-            local map_with_desc = require('util.keymap').map_with_desc
-
             local on_attach = function(client, bufnr)
-                -- Needed if completion is only enabled for LSP buffers
-                vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-                local opts = {
-                    noremap = true,
-                    buffer = bufnr,
-                    silent = true,
-                }
-
-                local telescope_builtin = require 'telescope.builtin'
-
-                map_with_desc(
-                    'n',
-                    'gd',
-                    telescope_builtin.lsp_definitions,
-                    opts,
-                    'Lists LSP references for word under the cursor, jumps to reference on `<cr>`'
-                )
-                map_with_desc(
-                    'n',
-                    'gT',
-                    telescope_builtin.lsp_type_definitions,
-                    opts,
-                    "Goto the definition of the type of the word under the cursor, if there's only one, otherwise show all options in Telescope"
-                )
-                map_with_desc('n', 'gD', vim.lsp.buf.declaration, opts, 'Go to declaration')
-                map_with_desc(
-                    'n',
-                    'gI',
-                    telescope_builtin.lsp_implementations,
-                    opts,
-                    "Goto the implementation of the word under the cursor if there's only one, otherwise show all options in Telescope"
-                )
-                map_with_desc('n', 'gr', telescope_builtin.lsp_references, opts, 'List all references in Telescope')
-                map_with_desc('n', 'K', vim.lsp.buf.hover, opts, 'Display hover information')
-
-                map_with_desc('n', '<Leader>a', vim.lsp.buf.code_action, opts, 'Execute a code action')
-                map_with_desc('x', '<Leader>a', vim.lsp.buf.code_action, opts, 'Execute a code action')
-
-                map_with_desc('n', '<Leader>f', vim.lsp.buf.format, opts, 'Format the current buffer')
-                map_with_desc('x', '<Leader>f', vim.lsp.buf.format, opts, 'Format the current selection')
-
-                map_with_desc('n', '<Leader>r', vim.lsp.buf.rename, opts, 'Rename symbol under cursor')
-
-                map_with_desc(
-                    'n',
-                    '<Leader>wa',
-                    vim.lsp.buf.add_workspace_folder,
-                    opts,
-                    'Add a folder to the workspace'
-                )
-                map_with_desc(
-                    'n',
-                    '<Leader>wr',
-                    vim.lsp.buf.remove_workspace_folder,
-                    opts,
-                    'Remove a folder from the workspace'
-                )
-                map_with_desc('n', '<Leader>wl', function()
-                    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-                end, opts, 'List workspace folders')
-
                 local lsp_augroup = vim.api.nvim_create_augroup('lsp', { clear = true })
 
                 if client.server_capabilities.codeLensProvider then
@@ -151,6 +87,8 @@ return {
                     lspconfig.clangd.setup {
                         on_attach = function(_, bufnr)
                             on_attach(_, bufnr)
+
+                            local map_with_desc = require('util.keymap').map_with_desc
                             map_with_desc(
                                 'n',
                                 '<Leader>c<Tab>',
