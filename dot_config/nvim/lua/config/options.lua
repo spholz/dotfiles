@@ -159,3 +159,5 @@ end
 vim.opt.shell = 'fish'
 
 vim.opt.spelllang = 'en_us,en,de'
+
+vim.opt.exrc = true

@@ -25,10 +25,17 @@ return {
                 'toml',
             }
 
-            -- bundled parsers (0.8): c, lua, query, vim, vimdoc
+            local bundled_parsers = {
+                'c',
+                'lua',
+                'query',
+                'vim',
+                'vimdoc',
+            }
 
-            -- more parsers!!
-            vim.list_extend(parsers, {
+            vim.list_extend(parsers, bundled_parsers)
+
+            local more_parsers = {
                 'bibtex',
                 'c_sharp',
                 'css',
@@ -60,7 +67,10 @@ return {
                 'wgsl',
                 'yaml',
                 'zig',
-            })
+            }
+
+            -- more parsers!!
+            vim.list_extend(parsers, more_parsers)
 
             -- remove all parsers that require tree-sitter CLI if it isn't installed
             if vim.fn.executable 'tree-sitter' == 0 then
