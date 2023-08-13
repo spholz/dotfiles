@@ -6,6 +6,9 @@ vim.filetype.add {
         qml = 'qmljs',
         gltf = 'json',
         cppm = 'cpp',
+        inc = 'c',
+        lds = 'ld',
+        ldS = 'ld',
 
         ---@param path string
         ---@return string?
