@@ -45,6 +45,8 @@ return {
                 'lua_ls',
                 'taplo', -- toml
                 'texlab',
+                'svls',
+                'verible',
             }
 
             local external_servers = {

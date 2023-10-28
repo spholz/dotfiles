@@ -44,7 +44,8 @@ return {
                 'Telescope: search for files (respecting .gitignore)'
             )
             map('n', '<Leader>h', telescope_builtin.help_tags, opts, 'Telescope: search help tags')
-            map('n', '<Leader>j', telescope_builtin.lsp_dynamic_workspace_symbols, opts, 'Telescope: list workspace symbols')
+            map('n', '<Leader>j', telescope_builtin.lsp_dynamic_workspace_symbols, opts,
+                'Telescope: list workspace symbols')
             map(
                 'n',
                 '<Leader>g',

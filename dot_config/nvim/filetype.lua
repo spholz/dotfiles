@@ -7,6 +7,7 @@ vim.filetype.add {
         gltf = 'json',
         cppm = 'cpp',
         inc = 'c',
+        include = 'cpp',
         lds = 'ld',
         ldS = 'ld',
 
