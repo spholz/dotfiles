@@ -52,6 +52,7 @@ vim.opt.wrap = false
 vim.opt.foldlevelstart = 99
 
 vim.opt.termguicolors = true
+vim.opt.mousemoveevent = true
 
 vim.opt.cursorline = true
 

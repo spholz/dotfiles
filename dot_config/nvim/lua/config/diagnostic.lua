@@ -1,4 +1,4 @@
-local map_with_desc = require('util.keymap').map_with_desc
+local map = require('util.keymap').map_with_desc
 
 vim.diagnostic.config {
     underline = true,
@@ -15,6 +15,6 @@ local opts = {
     silent = true,
 }
 
-map_with_desc('n', '<Leader>e', vim.diagnostic.open_float, opts, 'Show diagnostics in a floating window')
-map_with_desc('n', '[d', vim.diagnostic.goto_prev, opts, 'Move to previous diagnostic')
-map_with_desc('n', ']d', vim.diagnostic.goto_next, opts, 'Move to next diagnostic')
+map('n', '<Leader>e', vim.diagnostic.open_float, opts, 'Show diagnostics in a floating window')
+map('n', '[d', vim.diagnostic.goto_prev, opts, 'Move to previous diagnostic')
+map('n', ']d', vim.diagnostic.goto_next, opts, 'Move to next diagnostic')

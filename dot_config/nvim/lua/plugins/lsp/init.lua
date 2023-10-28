@@ -37,6 +37,7 @@ return {
             end
 
             local servers = {
+                'bashls',
                 'clangd',
                 'cmake',
                 'pyright',
@@ -88,8 +89,8 @@ return {
                         on_attach = function(_, bufnr)
                             on_attach(_, bufnr)
 
-                            local map_with_desc = require('util.keymap').map_with_desc
-                            map_with_desc(
+                            local map = require('util.keymap').map_with_desc
+                            map(
                                 'n',
                                 '<Leader>c<Tab>',
                                 vim.cmd.ClangdSwitchSourceHeader,
