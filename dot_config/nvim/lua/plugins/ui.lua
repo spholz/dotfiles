@@ -19,7 +19,8 @@ return {
         dependencies = 'nvim-tree/nvim-web-devicons',
         opts = {
             options = {
-                tab_size = 12,
+                tab_size = 4,
+                max_name_length = 40,
                 hover = {
                     enabled = true,
                     delay = 10,
