@@ -4,6 +4,3 @@ set debuginfod enabled on
 set pagination off
 set history save on
 set print asm-demangle on
-
-# source /usr/share/pwndbg/gdbinit.py
-# set context-ghidra if-no-source
