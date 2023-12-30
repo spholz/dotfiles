@@ -9,7 +9,7 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost' }, {
             '--enable=all',
             '--project=compile_commands.json',
             '--template={line}ööö{column}ööö{severity}ööö{id}ööö{message}',
-            event.match
+            event.match,
         }
 
         local severities = {
@@ -56,13 +56,20 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost' }, {
             end,
             on_exit = function(_, exit_code)
                 if exit_code ~= 0 then
-                    vim.diagnostic.set(namespace, event.buf, { {
-                        lnum = 0,
-                        col = 0,
-                        severity = vim.diagnostic.severity.ERROR,
-                        message = stdout,
-                        source = 'cppcheck',
-                    } }, {})
+                    vim.diagnostic.set(
+                        namespace,
+                        event.buf,
+                        {
+                            {
+                                lnum = 0,
+                                col = 0,
+                                severity = vim.diagnostic.severity.ERROR,
+                                message = stdout,
+                                source = 'cppcheck',
+                            },
+                        },
+                        {}
+                    )
                 else
                     vim.diagnostic.set(namespace, event.buf, diagnostics, {})
                 end

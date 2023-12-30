@@ -44,15 +44,14 @@ return {
                 'Telescope: search for files (respecting .gitignore)'
             )
             map('n', '<Leader>h', telescope_builtin.help_tags, opts, 'Telescope: search help tags')
-            map('n', '<Leader>j', telescope_builtin.lsp_dynamic_workspace_symbols, opts,
-                'Telescope: list workspace symbols')
             map(
                 'n',
-                '<Leader>g',
-                telescope_builtin.live_grep,
+                '<Leader>j',
+                telescope_builtin.lsp_dynamic_workspace_symbols,
                 opts,
-                'Telescope: live grep (respecting .gitignore)'
+                'Telescope: list workspace symbols'
             )
+            map('n', '<Leader>g', telescope_builtin.live_grep, opts, 'Telescope: live grep (respecting .gitignore)')
             map('n', '<Leader>s', telescope_builtin.grep_string, opts, 'Telescope: grep string under cursor')
             map('n', '<Leader>q', telescope_builtin.diagnostics, opts, 'Telescope: list diagnostics')
             map('n', '<Leader>:', telescope_builtin.command_history, opts, 'Telescope: show command history')

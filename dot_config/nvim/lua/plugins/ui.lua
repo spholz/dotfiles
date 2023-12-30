@@ -6,7 +6,7 @@ return {
             require('fidget').setup {
                 text = {
                     -- spinner = 'dots_snake',
-                    spinner = { '⠂', '⠂', '⠒', '⠲', '⠴', '⠦', '⠆', },
+                    spinner = { '⠂', '⠂', '⠒', '⠲', '⠴', '⠦', '⠆' },
                     done = '✓',
                 },
             }
@@ -24,9 +24,9 @@ return {
                 hover = {
                     enabled = true,
                     delay = 10,
-                    reveal = { 'close' }
-                }
-            }
+                    reveal = { 'close' },
+                },
+            },
         },
     },
 
@@ -65,7 +65,16 @@ return {
                 lualine_y = { 'progress' },
                 lualine_z = { 'location' },
             },
-            extensions = { 'quickfix', 'fzf', 'man', 'fugitive', 'nvim-dap-ui', 'symbols-outline', 'toggleterm', 'lazy' },
+            extensions = {
+                'quickfix',
+                'fzf',
+                'man',
+                'fugitive',
+                'nvim-dap-ui',
+                'symbols-outline',
+                'toggleterm',
+                'lazy',
+            },
         },
     },
 

@@ -108,13 +108,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         map('n', '<Leader>r', vim.lsp.buf.rename, lsp_opts, 'Rename symbol under cursor')
 
         map('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder, lsp_opts, 'Add a folder to the workspace')
-        map(
-            'n',
-            '<Leader>wr',
-            vim.lsp.buf.remove_workspace_folder,
-            lsp_opts,
-            'Remove a folder from the workspace'
-        )
+        map('n', '<Leader>wr', vim.lsp.buf.remove_workspace_folder, lsp_opts, 'Remove a folder from the workspace')
         map('n', '<Leader>wl', function()
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
         end, lsp_opts, 'List workspace folders')
