@@ -48,6 +48,9 @@ vim.opt.shortmess:append 'I' -- don't show intro text on startup
 
 vim.opt.undofile = true
 
+vim.opt.backup = true
+vim.opt.backupdir = vim.fn.stdpath 'state' .. '/backup//' -- 2x '/' means save entire original file path
+
 vim.opt.wrap = false
 vim.opt.foldlevelstart = 99
 
