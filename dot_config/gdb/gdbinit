@@ -4,3 +4,8 @@ set debuginfod enabled on
 set pagination off
 set history save on
 set print asm-demangle on
+
+python
+if 'i386' in gdb.execute('show architecture', to_string=True):
+    gdb.execute('set disassembly-flavor intel')
+end
