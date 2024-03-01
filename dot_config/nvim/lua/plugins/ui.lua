@@ -7,7 +7,7 @@ return {
                 text = {
                     -- spinner = 'dots_snake',
                     spinner = { '⠂', '⠂', '⠒', '⠲', '⠴', '⠦', '⠆' },
-                    done = '✓',
+                    done = '✔',
                 },
             }
         end,
