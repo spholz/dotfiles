@@ -11,10 +11,9 @@ vim.api.nvim_create_autocmd({ 'TextYankPost', 'FocusLost', 'FocusGained' }, {
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
-vim.opt.tabstop = 4
+vim.opt.tabstop = 8
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
-vim.opt.smarttab = true
 vim.opt.smartindent = true
 vim.opt.list = true
 
