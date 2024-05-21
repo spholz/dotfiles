@@ -142,7 +142,6 @@ return {
             vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
         end,
         dependencies = {
-            'nvim-treesitter/playground',
             'nvim-treesitter/nvim-treesitter-textobjects',
             'nvim-treesitter/nvim-treesitter-context',
         },
