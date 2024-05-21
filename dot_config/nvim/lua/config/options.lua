@@ -1,7 +1,6 @@
 vim.opt.number = true
 vim.opt.relativenumber = true
 
--- vim.opt.clipboard = 'unnamedplus'
 -- share registers via shada
 vim.api.nvim_create_autocmd({ 'TextYankPost', 'FocusLost', 'FocusGained' }, {
     command = 'rshada | wshada',
@@ -53,10 +52,12 @@ vim.opt.backupdir = vim.fn.stdpath 'state' .. '/backup//' -- 2x '/' means save e
 vim.opt.wrap = false
 vim.opt.foldlevelstart = 99
 
-vim.opt.termguicolors = true
 vim.opt.mousemoveevent = true
 
 vim.opt.cursorline = true
+
+-- hide text with conceal attribute (for file types like markdown)
+vim.opt.conceallevel = 2
 
 -- show cursorline only in active buffer
 local cursorline_group = vim.api.nvim_create_augroup('cursor_line', { clear = true })

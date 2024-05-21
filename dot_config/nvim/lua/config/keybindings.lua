@@ -97,7 +97,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
             "Goto the implementation of the word under the cursor if there's only one, otherwise show all options in Telescope"
         )
         map('n', 'gr', telescope_builtin.lsp_references, lsp_opts, 'List all references in Telescope')
-        map('n', 'K', vim.lsp.buf.hover, lsp_opts, 'Display hover information')
 
         map('n', '<Leader>a', vim.lsp.buf.code_action, lsp_opts, 'Execute a code action')
         map('x', '<Leader>a', vim.lsp.buf.code_action, lsp_opts, 'Execute a code action')

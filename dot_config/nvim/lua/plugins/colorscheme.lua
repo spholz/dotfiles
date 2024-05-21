@@ -22,9 +22,9 @@ return {
                         end
                     end
 
-                    local old_hl = vim.api.nvim_get_hl_by_name('Special', true)
+                    local old_hl = vim.api.nvim_get_hl(0, { name = 'Special' })
                     vim.api.nvim_set_hl(0, 'Special', {
-                        fg = old_hl.foreground,
+                        fg = old_hl.fg,
                         -- no background color
                         -- no italic
                     })
@@ -41,6 +41,11 @@ return {
                         strikethrough = true,
                         -- fg = vim.api.nvim_get_hl_by_name('Comment', true).foreground,
                     })
+
+                    -- fixes for nvim 0.10
+                    vim.api.nvim_set_hl(0, '@variable', { link = 'Identifier' })
+                    vim.api.nvim_set_hl(0, 'NormalFloat', { link = 'Pmenu' })
+                    vim.api.nvim_set_hl(0, 'IncSearch', { link = 'Search' })
                 end,
                 group = vim.api.nvim_create_augroup('color_scheme_fix', { clear = true }),
             })
@@ -48,15 +53,15 @@ return {
             vim.cmd.colorscheme 'molokai'
         end,
     },
-    { 'sainnhe/sonokai', lazy = true },
-    { 'EdenEast/nightfox.nvim', lazy = true },
-    { 'joshdick/onedark.vim', lazy = true },
-    { 'tomasiser/vim-code-dark', lazy = true },
-    { 'ayu-theme/ayu-vim', lazy = true },
-    { 'NLKNguyen/papercolor-theme', lazy = true },
+    { 'sainnhe/sonokai',               lazy = true },
+    { 'EdenEast/nightfox.nvim',        lazy = true },
+    { 'joshdick/onedark.vim',          lazy = true },
+    { 'tomasiser/vim-code-dark',       lazy = true },
+    { 'ayu-theme/ayu-vim',             lazy = true },
+    { 'NLKNguyen/papercolor-theme',    lazy = true },
     { 'drewtempelmeyer/palenight.vim', lazy = true },
-    { 'rebelot/kanagawa.nvim', lazy = true },
-    { 'ray-x/aurora', lazy = true },
+    { 'rebelot/kanagawa.nvim',         lazy = true },
+    { 'ray-x/aurora',                  lazy = true },
     {
         'sonph/onehalf',
         lazy = true,

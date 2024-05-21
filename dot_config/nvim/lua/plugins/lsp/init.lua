@@ -59,6 +59,13 @@ return {
                     cmd = { '/usr/lib/qt6/bin/qmlls' },
                 },
                 hls = {},
+                zls = {
+                    settings = {
+                        zls = {
+                            zig_exe_path = vim.fn.exepath 'zig'
+                        },
+                    },
+                },
             }
 
             local lspconfig = require 'lspconfig'
@@ -105,14 +112,6 @@ return {
                     }
                 end,
 
-                denols = function()
-                    lspconfig.denols.setup {
-                        on_attach = on_attach,
-                        capabilities = capabilities,
-                        single_file_support = true,
-                    }
-                end,
-
                 rust_analyzer = function()
                     lspconfig.rust_analyzer.setup {
                         on_attach = on_attach,
@@ -141,7 +140,7 @@ return {
                                 diagnostics = {
                                     globals = { 'vim', 'packer_plugins' },
                                 },
-                                runtime = {}, -- needed in on_init()
+                                runtime = {},   -- needed in on_init()
                                 workspace = {}, -- needed in on_init()
                             },
                         },

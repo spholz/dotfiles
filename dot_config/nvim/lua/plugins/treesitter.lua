@@ -85,11 +85,13 @@ return {
                 ensure_installed = parsers,
                 auto_install = true,
 
+                modules = {},
+                ignore_install = {},
+                sync_install = false,
+
                 highlight = {
                     enable = true,
-                    disable = {
-                        'vimdoc', -- highlighting of help files seems broken
-                    },
+                    disable = {},
                 },
                 incremental_selection = {
                     enable = true,
@@ -123,7 +125,7 @@ return {
                         },
                         selection_modes = {
                             ['@parameter.outer'] = 'v', -- charwise
-                            ['@function.outer'] = 'V', -- linewise
+                            ['@function.outer'] = 'V',  -- linewise
                             ['@class.outer'] = '<C-v>', -- blockwise
                         },
 
