@@ -31,7 +31,6 @@
   "onehalf": { "branch": "master", "commit": "75eb2e97acd74660779fed8380989ee7891eec56" },
   "palenight.vim": { "branch": "master", "commit": "5552a6349bcd927df9f17db34f017b77b963e503" },
   "papercolor-theme": { "branch": "master", "commit": "0cfe64ffb24c21a6101b5f994ca342a74c977aef" },
-  "playground": { "branch": "master", "commit": "ba48c6a62a280eefb7c85725b0915e021a1a0749" },
   "plenary.nvim": { "branch": "master", "commit": "a3e3bc82a3f95c5ed0d7201546d5d2c19b20d683" },
   "purify": { "branch": "master", "commit": "70011ccc3225feb2e7bedda36d226adcf221f7ae" },
   "sonokai": { "branch": "master", "commit": "da5b10020b9ca960f5a0296ab59ccc44f0d7718e" },
