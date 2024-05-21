@@ -52,7 +52,7 @@ return {
             local external_servers = {
                 gdscript = {
                     -- server integrated into the editor
-                    cmd = vim.lsp.rpc.connect('127.0.0.1', '6005'), -- godot 4 has different port
+                    cmd = vim.lsp.rpc.connect('127.0.0.1', 6005), -- godot 4 has different port
                 },
                 qmlls = {
                     cmd = { '/usr/lib/qt6/bin/qmlls' },
