@@ -36,10 +36,8 @@ return {
 
                     -- nvim-cmp
                     -- mark deprecated completions strikethrough
-                    -- vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { link = 'CmpItemAbbr' })
                     vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', {
                         strikethrough = true,
-                        -- fg = vim.api.nvim_get_hl_by_name('Comment', true).foreground,
                     })
 
                     -- fixes for nvim 0.10
