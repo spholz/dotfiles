@@ -44,6 +44,7 @@ return {
                     vim.api.nvim_set_hl(0, '@variable', { link = 'Identifier' })
                     vim.api.nvim_set_hl(0, 'NormalFloat', { link = 'Pmenu' })
                     vim.api.nvim_set_hl(0, 'IncSearch', { link = 'Search' })
+                    -- vim.api.nvim_set_hl(0, 'DiagnosticError', { link = 'ErrorMsg' })
                 end,
                 group = vim.api.nvim_create_augroup('color_scheme_fix', { clear = true }),
             })
