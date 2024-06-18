@@ -1,7 +1,6 @@
 ---@param path string
 ---@return string?
 local function template_filetype(path, bufnr)
-    print('hello?')
     local root = vim.fn.fnamemodify(path, ':r')
     return vim.filetype.match { buf = bufnr, filename = root }
 end
