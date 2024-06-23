@@ -37,16 +37,12 @@ return {
             end
 
             local servers = {
-                'bashls',
                 'clangd',
-                'cmake',
                 'pyright',
                 'rust_analyzer',
                 'lua_ls',
                 'taplo', -- toml
                 'texlab',
-                'svls',
-                'verible',
             }
 
             local external_servers = {
