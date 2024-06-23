@@ -59,6 +59,9 @@ vim.opt.cursorline = true
 -- hide text with conceal attribute (for file types like markdown)
 vim.opt.conceallevel = 2
 
+-- shows command previews in a split as well
+vim.opt.inccommand = 'split'
+
 -- show cursorline only in active buffer
 local cursorline_group = vim.api.nvim_create_augroup('cursor_line', { clear = true })
 vim.api.nvim_create_autocmd('WinEnter', {
@@ -156,9 +159,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     group = vim.api.nvim_create_augroup('highlight_yank', { clear = true }),
 })
 
-if vim.fn.has 'nvim-0.9' == 1 then
-    vim.opt.diffopt:append 'linematch:50'
-end
+vim.opt.diffopt:append 'linematch:50'
 
 vim.opt.shell = 'fish'
 
