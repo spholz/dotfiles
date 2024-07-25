@@ -2,8 +2,13 @@ source ~/.config/gdb/auto-load-safe-path.gdb
 
 set debuginfod enabled on
 set pagination off
-set history save on
 set print asm-demangle on
+
+set history save on
+set history size unlimited
+
+!mkdir -p ~/.cache/gdb
+set history filename ~/.cache/gdb/history
 
 python
 if 'i386' in gdb.execute('show architecture', to_string=True):
