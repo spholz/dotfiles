@@ -98,6 +98,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
         )
         map('n', 'gr', telescope_builtin.lsp_references, lsp_opts, 'List all references in Telescope')
 
+        map('i', '<C-s>', vim.lsp.buf.signature_help, lsp_opts, 'Show signature help popup')
+
         map('n', '<Leader>a', vim.lsp.buf.code_action, lsp_opts, 'Execute a code action')
         map('x', '<Leader>a', vim.lsp.buf.code_action, lsp_opts, 'Execute a code action')
 
@@ -112,7 +114,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
         end, lsp_opts, 'List workspace folders')
     end,
-    group = vim.api.nvim_create_augroup('lsp_keybindings', { clear = true }),
+    group = vim.api.nvim_create_augroup('lsp_keybindings', {}),
 })
 
 -- vim: foldmethod=marker

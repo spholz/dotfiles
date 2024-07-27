@@ -4,7 +4,7 @@ return {
         priority = 1000,
         lazy = false,
         config = function()
-            -- fix theme for global status line
+            -- various colorscheme fixes for modern nvim
             vim.api.nvim_create_autocmd('ColorScheme', {
                 callback = function()
                     local colorscheme = vim.fn.expand '<amatch>'
@@ -46,21 +46,21 @@ return {
                     vim.api.nvim_set_hl(0, 'IncSearch', { link = 'Search' })
                     -- vim.api.nvim_set_hl(0, 'DiagnosticError', { link = 'ErrorMsg' })
                 end,
-                group = vim.api.nvim_create_augroup('color_scheme_fix', { clear = true }),
+                group = vim.api.nvim_create_augroup('color_scheme_fix', {}),
             })
 
             vim.cmd.colorscheme 'molokai'
         end,
     },
-    { 'sainnhe/sonokai',               lazy = true },
-    { 'EdenEast/nightfox.nvim',        lazy = true },
-    { 'joshdick/onedark.vim',          lazy = true },
-    { 'tomasiser/vim-code-dark',       lazy = true },
-    { 'ayu-theme/ayu-vim',             lazy = true },
-    { 'NLKNguyen/papercolor-theme',    lazy = true },
+    { 'sainnhe/sonokai', lazy = true },
+    { 'EdenEast/nightfox.nvim', lazy = true },
+    { 'joshdick/onedark.vim', lazy = true },
+    { 'tomasiser/vim-code-dark', lazy = true },
+    { 'ayu-theme/ayu-vim', lazy = true },
+    { 'NLKNguyen/papercolor-theme', lazy = true },
     { 'drewtempelmeyer/palenight.vim', lazy = true },
-    { 'rebelot/kanagawa.nvim',         lazy = true },
-    { 'ray-x/aurora',                  lazy = true },
+    { 'rebelot/kanagawa.nvim', lazy = true },
+    { 'ray-x/aurora', lazy = true },
     {
         'sonph/onehalf',
         lazy = true,

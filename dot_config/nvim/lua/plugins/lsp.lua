@@ -8,7 +8,7 @@ return {
         },
         config = function()
             local on_attach = function(client, bufnr)
-                local lsp_augroup = vim.api.nvim_create_augroup('lsp', { clear = true })
+                local lsp_augroup = vim.api.nvim_create_augroup('lsp', {})
 
                 if client.server_capabilities.codeLensProvider then
                     vim.lsp.codelens.refresh()
@@ -57,7 +57,7 @@ return {
                 zls = {
                     settings = {
                         zls = {
-                            zig_exe_path = vim.fn.exepath 'zig'
+                            zig_exe_path = vim.fn.exepath 'zig',
                         },
                     },
                 },
@@ -135,7 +135,7 @@ return {
                                 diagnostics = {
                                     globals = { 'vim', 'packer_plugins' },
                                 },
-                                runtime = {},   -- needed in on_init()
+                                runtime = {}, -- needed in on_init()
                                 workspace = {}, -- needed in on_init()
                             },
                         },

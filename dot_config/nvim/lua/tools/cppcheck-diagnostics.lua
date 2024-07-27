@@ -2,7 +2,7 @@ local namespace = vim.api.nvim_create_namespace 'cppcheck_diagnostics'
 
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost' }, {
     pattern = '*.cpp,*.hpp,*.c,*.h',
-    group = vim.api.nvim_create_augroup('cppcheck_diagnostics', { clear = true }),
+    group = vim.api.nvim_create_augroup('cppcheck_diagnostics', {}),
     callback = function(event)
         local command = {
             'cppcheck',
@@ -56,20 +56,15 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost' }, {
             end,
             on_exit = function(_, exit_code)
                 if exit_code ~= 0 then
-                    vim.diagnostic.set(
-                        namespace,
-                        event.buf,
+                    vim.diagnostic.set(namespace, event.buf, {
                         {
-                            {
-                                lnum = 0,
-                                col = 0,
-                                severity = vim.diagnostic.severity.ERROR,
-                                message = stdout,
-                                source = 'cppcheck',
-                            },
+                            lnum = 0,
+                            col = 0,
+                            severity = vim.diagnostic.severity.ERROR,
+                            message = stdout,
+                            source = 'cppcheck',
                         },
-                        {}
-                    )
+                    }, {})
                 else
                     vim.diagnostic.set(namespace, event.buf, diagnostics, {})
                 end

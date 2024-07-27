@@ -5,7 +5,6 @@ return {
         config = function()
             require('fidget').setup {
                 text = {
-                    -- spinner = 'dots_snake',
                     spinner = { '⠂', '⠂', '⠒', '⠲', '⠴', '⠦', '⠆' },
                     done = '✔',
                 },

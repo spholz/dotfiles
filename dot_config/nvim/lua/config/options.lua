@@ -4,7 +4,7 @@ vim.opt.relativenumber = true
 -- share registers via shada
 vim.api.nvim_create_autocmd({ 'TextYankPost', 'FocusLost', 'FocusGained' }, {
     command = 'rshada | wshada',
-    group = vim.api.nvim_create_augroup('shared_registers', { clear = true }),
+    group = vim.api.nvim_create_augroup('shared_registers', {}),
 })
 
 vim.opt.splitbelow = true
@@ -34,7 +34,7 @@ vim.api.nvim_create_autocmd('FileType', {
     callback = function()
         vim.opt_local.formatoptions:remove 'o'
     end,
-    group = vim.api.nvim_create_augroup('format_options', { clear = true }),
+    group = vim.api.nvim_create_augroup('format_options', {}),
 })
 
 vim.opt.ignorecase = true
@@ -63,7 +63,7 @@ vim.opt.conceallevel = 2
 vim.opt.inccommand = 'split'
 
 -- show cursorline only in active buffer
-local cursorline_group = vim.api.nvim_create_augroup('cursor_line', { clear = true })
+local cursorline_group = vim.api.nvim_create_augroup('cursor_line', {})
 vim.api.nvim_create_autocmd('WinEnter', {
     callback = function()
         vim.opt_local.cursorline = true
@@ -156,7 +156,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
             timeout = 250,
         }
     end,
-    group = vim.api.nvim_create_augroup('highlight_yank', { clear = true }),
+    group = vim.api.nvim_create_augroup('highlight_yank', {}),
 })
 
 vim.opt.diffopt:append 'linematch:50'
@@ -166,3 +166,12 @@ vim.opt.shell = 'fish'
 vim.opt.spelllang = 'en_us,en,de'
 
 vim.opt.exrc = true
+
+-- there is no filetype 'terminal' so no ftplugin :(
+vim.api.nvim_create_autocmd('TermOpen', {
+    callback = function()
+        vim.opt_local.number = false
+        vim.opt_local.relativenumber = false
+    end,
+    group = vim.api.nvim_create_augroup('terminal_options', {}),
+})

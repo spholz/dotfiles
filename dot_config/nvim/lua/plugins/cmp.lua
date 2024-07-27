@@ -40,18 +40,13 @@ return {
                 end,
             },
             mapping = cmp.mapping.preset.insert {
-                ['<C-y>'] = cmp.mapping.confirm { select = true },
                 ['<C-Space>'] = cmp.mapping.complete {},
                 ['<C-d>'] = cmp.mapping.scroll_docs(4),
                 ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-                ['<C-h>'] = cmp.mapping.abort {},
-                ['<C-j>'] = cmp.mapping.select_next_item {},
-                ['<C-k>'] = cmp.mapping.select_prev_item {},
-                ['<C-l>'] = cmp.mapping.confirm { select = true },
             },
             sources = cmp.config.sources({
                 { name = 'nvim_lsp_signature_help' },
-                { name = 'nvim_lua' },
+            }, {
                 { name = 'nvim_lsp' },
                 { name = 'path' },
                 { name = 'luasnip' },
@@ -64,7 +59,7 @@ return {
 
                 ---@param entry cmp.Entry
                 ---@param vim_item vim.CompletedItem
-                ---@return any
+                ---@return vim.CompletedItem
                 format = function(entry, vim_item)
                     vim_item.kind = lsp_icons[vim_item.kind] or vim_item.kind
                     vim_item.menu = ({
@@ -83,11 +78,8 @@ return {
     end,
     dependencies = {
         'hrsh7th/cmp-nvim-lsp',
-        'hrsh7th/cmp-nvim-lua',
         'hrsh7th/cmp-buffer',
         'hrsh7th/cmp-path',
-        'hrsh7th/cmp-cmdline',
-        'hrsh7th/cmp-nvim-lsp-document-symbol',
         'hrsh7th/cmp-nvim-lsp-signature-help',
         {
             'saadparwaiz1/cmp_luasnip',
