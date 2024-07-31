@@ -1,0 +1,16 @@
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias diff='diff --color=auto'
+alias fd='fd --no-ignore-vcs'
+alias fd='grep --color=auto'
+alias ip='ip --color=auto'
+alias ls='ls --color=auto'
+alias readelf='readelf --wide'
+
+PS1='[\u@\h \W]\$ '
+
+# exec fish if parent not fish and no -c '<cmd>' arg given
+if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" && -z ${BASH_EXECUTION_STRING} && $(command -v fish) ]]; then
+    exec fish
+fi
