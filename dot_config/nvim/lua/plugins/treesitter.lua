@@ -143,7 +143,20 @@ return {
         end,
         dependencies = {
             'nvim-treesitter/nvim-treesitter-textobjects',
-            'nvim-treesitter/nvim-treesitter-context',
+            {
+                'nvim-treesitter/nvim-treesitter-context',
+                --- @type TSContext.Config
+                opts = {
+                    enable = true,
+                    max_lines = 0, -- no limit
+                    min_window_height = 0,
+                    line_numbers = true,
+                    multiline_threshold = 10,
+                    trim_scope = 'outer',
+                    zindex = 20,
+                    mode = 'cursor',
+                },
+            },
         },
     },
 }
