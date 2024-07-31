@@ -1,58 +1,45 @@
 [user]
-    email = {{ .email }}
-    name = {{ .name }}
+	email = {{ .email }}
+	name = {{ .name }}
+
+[branch]
+	sort = -committerdate
 
 [core]
-    # pager = diff-so-fancy | less --tabs=4 -RFXS
-    pager = delta
+	pager = delta
 
 [delta]
-    navigate = true # n/N keybinds
-    line-numbers = true
-    side-by-side = true
-    file-modified-label = modified:
+	navigate = true # n/N keybinds
+	line-numbers = true
+	side-by-side = true
+	file-modified-label = modified:
 
 [interactive]
-    # diffFilter = diff-so-fancy --patch
-    diffFilter = delta --color-only
+	diffFilter = delta --color-only
 
 [diff]
-    colorMoved = default
-
-[alias]
-    patch = !git --no-pager diff --no-color
+	colorMoved = default
+	noprefix = true
 
 [init]
-    defaultBranch = main
+	defaultBranch = main
 
 [pull]
-    ff = only
+	ff = only
 
 [mergetool "nvim-fugitive"]
-    cmd = nvim -c \"Gvdiffsplit!\" \"$MERGED\"
+	cmd = nvim -c \"Gvdiffsplit!\" \"$MERGED\"
 [merge]
-    # tool = nvimdiff2 # doesn't support dp (:diffput)
-    tool = nvim-fugitive
-    guitool = kdiff3
-    conflictstyle = diff3
+	# tool = nvimdiff2 # doesn't support dp (:diffput)
+	tool = nvim-fugitive
+	guitool = kdiff3
+	conflictstyle = diff3
 
 # git pull also updates submodules
 [submodule]
-    recurse = true
+	recurse = true
 
-[url "https://github.com/"]
-    insteadOf = gh:
-[url "ssh://git@github.com:"]
-    pushInsteadOf = gh:
+[alias]
+	rbdiff = "!f() { git range-diff --creation-factor=90 $(git merge-base $1 $(git symbolic-ref refs/remotes/origin/HEAD --short))..$1 $(git merge-base $2 $(git symbolic-ref refs/remotes/origin/HEAD --short))..$2; }; f"
 
-[url "https://gitlab.com/"]
-    insteadOf = gl:
-[url "ssh://git@gitlab.com:"]
-    pushInsteadOf = gl:
-
-[url "https://invent.kde.org/"]
-    insteadOf = kde:
-[url "ssh://git@invent.kde.org:"]
-    pushInsteadOf = kde:
-
-# vim: ft=gitconfig
+# vim:ft=gitconfig:noet:sw=4:ts=4
