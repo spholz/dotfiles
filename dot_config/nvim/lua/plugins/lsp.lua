@@ -43,6 +43,7 @@ return {
                 'lua_ls',
                 'taplo', -- toml
                 'texlab',
+                'zls',
             }
 
             local external_servers = {
@@ -54,13 +55,6 @@ return {
                     cmd = { '/usr/lib/qt6/bin/qmlls' },
                 },
                 hls = {},
-                zls = {
-                    settings = {
-                        zls = {
-                            zig_exe_path = vim.fn.exepath 'zig',
-                        },
-                    },
-                },
             }
 
             local lspconfig = require 'lspconfig'
@@ -135,7 +129,7 @@ return {
                                 diagnostics = {
                                     globals = { 'vim', 'packer_plugins' },
                                 },
-                                runtime = {}, -- needed in on_init()
+                                runtime = {},   -- needed in on_init()
                                 workspace = {}, -- needed in on_init()
                             },
                         },
@@ -185,6 +179,16 @@ return {
                         },
                     }
                 end,
+
+                zls = function()
+                    lspconfig.zls.setup {
+                        settings = {
+                            zls = {
+                                zig_exe_path = vim.fn.exepath 'zig',
+                            },
+                        }
+                    }
+                end
             }
 
             for server, config in pairs(external_servers) do
