@@ -56,9 +56,6 @@ vim.opt.mousemoveevent = true
 
 vim.opt.cursorline = true
 
--- hide text with conceal attribute (for file types like markdown)
-vim.opt.conceallevel = 2
-
 -- shows command previews in a split as well
 vim.opt.inccommand = 'split'
 
