@@ -52,28 +52,4 @@ return {
             vim.cmd.colorscheme 'molokai'
         end,
     },
-    { 'sainnhe/sonokai', lazy = true },
-    { 'EdenEast/nightfox.nvim', lazy = true },
-    { 'joshdick/onedark.vim', lazy = true },
-    { 'tomasiser/vim-code-dark', lazy = true },
-    { 'ayu-theme/ayu-vim', lazy = true },
-    { 'NLKNguyen/papercolor-theme', lazy = true },
-    { 'drewtempelmeyer/palenight.vim', lazy = true },
-    { 'rebelot/kanagawa.nvim', lazy = true },
-    { 'ray-x/aurora', lazy = true },
-    {
-        'sonph/onehalf',
-        lazy = true,
-        config = function(plugin)
-            vim.opt.rtp:append(plugin.dir .. '/vim')
-        end,
-    },
-    {
-        'kyoz/purify',
-        lazy = true,
-        config = function(plugin)
-            vim.opt.rtp:append(plugin.dir .. '/vim')
-        end,
-    },
-    { 'dracula/vim', name = 'dracula', lazy = true },
 }
