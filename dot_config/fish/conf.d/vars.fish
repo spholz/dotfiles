@@ -3,7 +3,7 @@ set -g fish_greeting
 
 # tide
 set -g tide_context_hostname_parts 3
-set -g tide_left_prompt_items context nix_shell python pwd git newline character
+set -g tide_left_prompt_items context nix_shell pwd git newline character
 set -g tide_right_prompt_items status cmd_duration jobs
 set -g tide_prompt_add_newline_before true
 set -g tide_prompt_icon_connection ' '
