@@ -26,7 +26,7 @@ vim.keymap.set('n', '<C-Right>', '<Cmd>vertical resize +2<CR>', opts)
 
 -- make <C-l> also clear document highlights
 -- default: `nnoremap <C-L> <Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>`
-vim.cmd [[nnoremap <C-l> <Cmd>nohlsearch<Bar>diffupdate<Bar>call v:lua.vim.lsp.buf.clear_references()<Bar>normal! <C-l><CR>]]
+vim.cmd.nnoremap('<C-l>', '<Cmd>nohlsearch<Bar>diffupdate<Bar>call v:lua.vim.lsp.buf.clear_references()<Bar>normal! <C-l><CR>')
 
 -- Buffers
 
@@ -44,9 +44,6 @@ vim.keymap.set('n', '<Leader>6', '6gt', opts)
 vim.keymap.set('n', '<Leader>7', '7gt', opts)
 vim.keymap.set('n', '<Leader>8', '8gt', opts)
 vim.keymap.set('n', '<Leader>9', '9gt', opts)
-
--- Put in visual mode without yanking old text
--- vim.keymap.set('x', '<Leader>p', '"_dP', opts)
 
 -- Change/Delete/Put without yanking old text
 vim.keymap.set({ 'n', 'x' }, '<M-c>', '"_c', opts)
@@ -75,14 +72,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
             'gd',
             telescope_builtin.lsp_definitions,
             lsp_opts,
-            'Lists LSP references for word under the cursor, jumps to reference on `<cr>`'
+            'List LSP references for word under the cursor, jump to reference on `<cr>`'
         )
         map(
             'n',
             'gT',
             telescope_builtin.lsp_type_definitions,
             lsp_opts,
-            "Goto the definition of the type of the word under the cursor, if there's only one, otherwise show all options in Telescope"
+            "Go to the definition of the type of the word under the cursor, if there's only one, otherwise show all options in Telescope"
         )
         map('n', 'gD', vim.lsp.buf.declaration, lsp_opts, 'Go to declaration')
         map(
