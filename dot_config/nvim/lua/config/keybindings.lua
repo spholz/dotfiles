@@ -28,8 +28,6 @@ vim.keymap.set('n', '<C-Right>', '<Cmd>vertical resize +2<CR>', opts)
 -- default: `nnoremap <C-L> <Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>`
 vim.cmd [[nnoremap <C-l> <Cmd>nohlsearch<Bar>diffupdate<Bar>call v:lua.vim.lsp.buf.clear_references()<Bar>normal! <C-l><CR>]]
 
--- Leader key shortcuts {{{
-
 -- Buffers
 
 vim.keymap.set('n', '<Leader><Tab>', vim.cmd.bnext, opts)
@@ -59,8 +57,6 @@ vim.keymap.set({ 'n', 'x' }, '<M-p>', '"_dP', opts)
 -- System clipboard shortcuts
 vim.keymap.set({ 'n', 'x' }, '<Leader>y', '"+y', opts)
 vim.keymap.set({ 'n', 'x' }, '<Leader>p', '"+p', opts)
-
--- }}}
 
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
@@ -116,5 +112,3 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end,
     group = vim.api.nvim_create_augroup('lsp_keybindings', {}),
 })
-
--- vim: foldmethod=marker
