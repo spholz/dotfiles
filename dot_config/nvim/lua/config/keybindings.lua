@@ -87,7 +87,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
             'gI',
             telescope_builtin.lsp_implementations,
             lsp_opts,
-            "Goto the implementation of the word under the cursor if there's only one, otherwise show all options in Telescope"
+            "Go to the implementation of the word under the cursor if there's only one, otherwise show all options in Telescope"
         )
         map('n', 'gr', telescope_builtin.lsp_references, lsp_opts, 'List all references in Telescope')
 
