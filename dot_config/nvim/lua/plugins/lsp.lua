@@ -9,16 +9,27 @@ return {
         config = function()
             local lsp_augroup = vim.api.nvim_create_augroup('lsp', {})
 
-            vim.api.nvim_create_autocmd({ 'CursorHold' }, {
-                callback = vim.lsp.buf.document_highlight,
-                group = lsp_augroup,
-            })
+            vim.api.nvim_create_autocmd('LspAttach', {
+                callback = function(args)
+                    local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-            vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
-                callback = vim.lsp.buf.clear_references,
-                group = lsp_augroup,
-            })
+                    if client == nil or not client.server_capabilities.documentHighlightProvider then
+                        return
+                    end
 
+                    vim.api.nvim_create_autocmd('CursorHold', {
+                        buffer = args.buf,
+                        callback = vim.lsp.buf.document_highlight,
+                        group = lsp_augroup,
+                    })
+
+                    vim.api.nvim_create_autocmd('CursorMoved', {
+                        buffer = args.buf,
+                        callback = vim.lsp.buf.clear_references,
+                        group = lsp_augroup,
+                    })
+                end,
+            })
             local map = require('util.keymap').map_with_desc
             map(
                 'n',

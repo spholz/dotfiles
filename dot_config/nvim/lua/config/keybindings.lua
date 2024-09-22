@@ -26,7 +26,10 @@ vim.keymap.set('n', '<C-Right>', '<Cmd>vertical resize +2<CR>', opts)
 
 -- make <C-l> also clear document highlights
 -- default: `nnoremap <C-L> <Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>`
-vim.cmd.nnoremap('<C-l>', '<Cmd>nohlsearch<Bar>diffupdate<Bar>call v:lua.vim.lsp.buf.clear_references()<Bar>normal! <C-l><CR>')
+vim.cmd.nnoremap(
+    '<C-l>',
+    '<Cmd>nohlsearch<Bar>diffupdate<Bar>call v:lua.vim.lsp.buf.clear_references()<Bar>normal! <C-l><CR>'
+)
 
 -- Buffers
 
