@@ -29,6 +29,7 @@ return {
                         group = lsp_augroup,
                     })
                 end,
+                group = lsp_augroup,
             })
             local map = require('util.keymap').map_with_desc
             map(
