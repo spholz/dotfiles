@@ -120,6 +120,10 @@ return {
                             -- slows down startup
                             -- https://github.com/neovim/nvim-lspconfig/wiki/Project-local-settings
 
+                            if client.workspace_folders == nil then
+                                return
+                            end
+
                             local workspace_path = client.workspace_folders[1].name
 
                             if workspace_path == vim.fn.stdpath 'config' then
