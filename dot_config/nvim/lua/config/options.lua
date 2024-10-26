@@ -57,7 +57,7 @@ vim.opt.mousemoveevent = true
 vim.opt.cursorline = true
 
 -- shows command previews in a split as well
-vim.opt.inccommand = 'split'
+-- vim.opt.inccommand = 'split'
 
 -- show cursorline only in active buffer
 local cursorline_group = vim.api.nvim_create_augroup('cursor_line', {})

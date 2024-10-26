@@ -1,15 +1,14 @@
 return {
     {
         'j-hui/fidget.nvim',
-        branch = 'legacy',
-        config = function()
-            require('fidget').setup {
-                text = {
-                    spinner = { '⠂', '⠂', '⠒', '⠲', '⠴', '⠦', '⠆' },
-                    done = '✔',
+        opts = {
+            progress = {
+                display = {
+                    done_icon = '✔',
+                    progress_icon = { pattern = { '⠂', '⠂', '⠒', '⠲', '⠴', '⠦', '⠆' } },
                 },
-            }
-        end,
+            },
+        },
     },
 
     {
