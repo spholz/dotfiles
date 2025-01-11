@@ -9,6 +9,7 @@ vim.filetype.add {
     extension = {
         cppm = 'cpp',
         frag = 'glsl',
+        fs = 'glsl',
         gltf = 'json',
         inc = 'c',
         include = 'cpp',
@@ -17,6 +18,7 @@ vim.filetype.add {
         ll = 'llvm',
         qml = 'qmljs',
         vert = 'glsl',
+        vs = 'glsl',
         wgsl = 'wgsl',
 
         tmpl = template_filetype,
