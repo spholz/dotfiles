@@ -14,3 +14,4 @@ abbr -a v nvim
 abbr -a :q exit
 abbr -a rm 'rm -i'
 abbr -a sr 'cd ~/repos/serenity'
+abbr -a sb 'cd ~/repos/serenity/Build/x86_64'
