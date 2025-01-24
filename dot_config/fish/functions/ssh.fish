@@ -1,3 +1,7 @@
 function ssh --description 'alias ssh=kitten ssh'
-  command kitten ssh $argv;
+  if test $TERM = "xterm-kitty"
+    command kitten ssh $argv;
+  else
+    command ssh $argv;
+  end
 end

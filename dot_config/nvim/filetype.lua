@@ -23,6 +23,9 @@ vim.filetype.add {
 
         tmpl = template_filetype,
         ['in'] = template_filetype,
+
+        asl = 'asl',
+        dsl = 'asl',
     },
     filename = {
         ['dkms.conf'] = 'sh',
