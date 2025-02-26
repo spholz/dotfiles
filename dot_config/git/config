@@ -1,0 +1,82 @@
+[user]
+	email = sholz8530@gmail.com
+	name = Sönke Holz
+
+[includeIf "gitdir:~/Uni/**"]
+	path = ~/.config/git/uni.inc
+
+[column]
+	# show lists in columns
+	ui = auto
+
+[commit]
+	# commit -v by default
+	verbose = true
+
+[help]
+	autocorrect = prompt
+
+[tag]
+	# sort tags by version number
+	sort = version:refname
+
+[branch]
+	# sort branch list by last commit date
+	sort = -committerdate
+
+[core]
+	pager = delta
+
+[delta]
+	# n/N keybinds
+	navigate = true
+	line-numbers = true
+	side-by-side = true
+	file-modified-label = modified:
+
+[absorb]
+	maxStack = 50
+
+[rerere]
+	enabled = true
+	autoUpdate = true
+
+[interactive]
+	diffFilter = delta --color-only
+
+[diff]
+	# highlight moved lines differently
+	colorMoved = default
+	# better diff algorithm
+	algorithm = histogram
+	# use i/ (index) w/ (work tree) c/ (commit) instead of a/ and b/ as diff prefixes
+	mnemonicPrefix = true
+
+[init]
+	defaultBranch = main
+
+[pull]
+	ff = only
+
+[submodule]
+	recurse = true
+
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
+
+[merge]
+	# tool = nvimdiff2 # doesn't support dp (:diffput)
+	tool = nvim-fugitive
+	guitool = kdiff3
+	# show base during merge conflicts
+	conflictstyle = zdiff3
+
+[alias]
+	rbdiff = "!f() { git range-diff --creation-factor=90 $(git merge-base $1 $(git symbolic-ref refs/remotes/origin/HEAD --short))..$1 $(git merge-base $2 $(git symbolic-ref refs/remotes/origin/HEAD --short))..$2; }; f"
+
+[mergetool "nvim-fugitive"]
+	cmd = nvim -c \"Gvdiffsplit!\" \"$MERGED\"
+
+# vim:ft=gitconfig:noet:sw=4:ts=4
