@@ -18,4 +18,5 @@ if 'i386' in gdb.execute('show architecture', to_string=True):
 
 end
 
-source ~/.config/gdb/automap.py
+source ~/.config/gdb/tools/automap.py
+source ~/.config/gdb/tools/riscv_gdb_utils.py
