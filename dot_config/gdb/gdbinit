@@ -17,3 +17,5 @@ if 'i386' in gdb.execute('show architecture', to_string=True):
 # os.path.join(subprocess.check_output(['rustc', '--print=sysroot'], encoding='utf-8').strip(), 'lib/rustlib/etc/gdb_load_rust_pretty_printers.py')
 
 end
+
+source ~/.config/gdb/automap.py
