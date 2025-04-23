@@ -31,7 +31,7 @@ return {
             map(
                 'n',
                 '<Leader>c',
-                vim.cmd.ClangdSwitchSourceHeader,
+                vim.cmd.LspClangdSwitchSourceHeader,
                 { noremap = true, silent = true },
                 'Switch between source/header'
             )
