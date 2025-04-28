@@ -1,29 +1,40 @@
 return {
     {
         'neovim/nvim-lspconfig',
-        dependencies = { 'nvim-cmp' },
         config = function()
             local lsp_augroup = vim.api.nvim_create_augroup('lsp', {})
 
             vim.api.nvim_create_autocmd('LspAttach', {
                 callback = function(args)
-                    local client = vim.lsp.get_client_by_id(args.data.client_id)
+                    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
-                    if client == nil or not client.server_capabilities.documentHighlightProvider then
-                        return
+                    if client.server_capabilities.documentHighlightProvider then
+                        vim.api.nvim_create_autocmd('CursorHold', {
+                            buffer = args.buf,
+                            callback = vim.lsp.buf.document_highlight,
+                            group = lsp_augroup,
+                        })
+
+                        vim.api.nvim_create_autocmd('CursorMoved', {
+                            buffer = args.buf,
+                            callback = vim.lsp.buf.clear_references,
+                            group = lsp_augroup,
+                        })
                     end
 
-                    vim.api.nvim_create_autocmd('CursorHold', {
-                        buffer = args.buf,
-                        callback = vim.lsp.buf.document_highlight,
-                        group = lsp_augroup,
-                    })
+                    if client:supports_method('textDocument/completion') then
+                        vim.keymap.set('i', '<c-space>', function()
+                            vim.lsp.completion.get()
+                        end)
 
-                    vim.api.nvim_create_autocmd('CursorMoved', {
-                        buffer = args.buf,
-                        callback = vim.lsp.buf.clear_references,
-                        group = lsp_augroup,
-                    })
+                        -- trigger autocompletion on EVERY keypress
+                        local chars = {}; for i = 32, 126 do table.insert(chars, string.char(i)) end
+                        client.server_capabilities.completionProvider.triggerCharacters = chars
+
+                        vim.lsp.completion.enable(true, client.id, args.buf, {
+                            autotrigger = true,
+                        })
+                    end
                 end,
                 group = lsp_augroup,
             })
@@ -36,7 +47,7 @@ return {
                 'Switch between source/header'
             )
 
-            local capabilities = require('cmp_nvim_lsp').default_capabilities()
+            local capabilities = {}
 
             local servers = {
                 clangd = {
