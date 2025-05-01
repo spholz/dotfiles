@@ -2,10 +2,10 @@ vim.opt.number = true
 -- vim.opt.relativenumber = true
 
 -- share registers via shada
-vim.api.nvim_create_autocmd({ 'TextYankPost', 'FocusLost', 'FocusGained' }, {
-    command = 'rshada | wshada',
-    group = vim.api.nvim_create_augroup('shared_registers', {}),
-})
+-- vim.api.nvim_create_autocmd({ 'TextYankPost', 'FocusLost', 'FocusGained' }, {
+--     command = 'rshada | wshada',
+--     group = vim.api.nvim_create_augroup('shared_registers', {}),
+-- })
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true

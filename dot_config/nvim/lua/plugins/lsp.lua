@@ -135,7 +135,6 @@ return {
                 qmlls = {
                     cmd = { '/usr/lib/qt6/bin/qmlls' },
                 },
-                hls = {},
             }
 
             for server, config in pairs(servers) do
