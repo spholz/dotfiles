@@ -1,4 +1,5 @@
 require 'config.diagnostic'
 require 'config.keybindings'
+require 'config.lsp'
 require 'config.options'
 require 'config.terminal'
