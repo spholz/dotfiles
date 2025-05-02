@@ -35,13 +35,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
     group = lsp_augroup,
 })
 
-local map = require('util.keymap').map_with_desc
-map(
+vim.keymap.set(
     'n',
     '<Leader>c',
     vim.cmd.LspClangdSwitchSourceHeader,
-    { noremap = true, silent = true },
-    'Switch between source/header'
+    { desc = 'Switch between source/header' }
 )
 
 local capabilities = {}

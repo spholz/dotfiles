@@ -74,6 +74,7 @@ vim.api.nvim_create_autocmd('WinLeave', {
     end,
     group = cursorline_group,
 })
+
 -- don't show cursorline in Telescope
 vim.api.nvim_create_autocmd('FileType', {
     pattern = 'TelescopePrompt',
@@ -95,9 +96,7 @@ vim.opt.updatetime = 100 -- for CursorHold (e.g. for document highlights) and sw
 -- highlight yanked text
 vim.api.nvim_create_autocmd('TextYankPost', {
     callback = function()
-        vim.highlight.on_yank {
-            timeout = 250,
-        }
+        vim.hl.on_yank()
     end,
     group = vim.api.nvim_create_augroup('highlight_yank', {}),
 })

@@ -60,55 +60,61 @@ vim.keymap.set({ 'n', 'x' }, '<Leader>p', '"+p', opts)
 
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
-        local map = require('util.keymap').map_with_desc
-
-        local lsp_opts = {
-            noremap = true,
-            buffer = args.buf,
-            silent = true,
-        }
-
         local telescope_builtin = require 'telescope.builtin'
 
-        map(
+        local function map_local(mode, lhs, rhs, desc)
+            vim.keymap.set(mode, lhs, rhs, { buffer = args.buf, desc = desc })
+        end
+
+        map_local(
             'n',
             'gd',
             telescope_builtin.lsp_definitions,
-            lsp_opts,
             'List LSP references for word under the cursor, jump to reference on `<cr>`'
         )
-        map(
+
+        map_local(
             'n',
             'gT',
             telescope_builtin.lsp_type_definitions,
-            lsp_opts,
             "Go to the definition of the type of the word under the cursor, if there's only one, otherwise show all options in Telescope"
         )
-        map('n', 'gD', vim.lsp.buf.declaration, lsp_opts, 'Go to declaration')
-        map(
+
+        map_local(
+            'n',
+            'gD',
+            vim.lsp.buf.declaration,
+            'Go to declaration'
+        )
+
+        map_local(
             'n',
             'gI',
             telescope_builtin.lsp_implementations,
-            lsp_opts,
             "Go to the implementation of the word under the cursor if there's only one, otherwise show all options in Telescope"
         )
-        map('n', 'gr', telescope_builtin.lsp_references, lsp_opts, 'List all references in Telescope')
 
-        map('i', '<C-s>', vim.lsp.buf.signature_help, lsp_opts, 'Show signature help popup')
+        map_local(
+            'n',
+            'gr',
+            telescope_builtin.lsp_references,
+            'List all references in Telescope'
+        )
 
-        map('n', '<Leader>a', vim.lsp.buf.code_action, lsp_opts, 'Execute a code action')
-        map('x', '<Leader>a', vim.lsp.buf.code_action, lsp_opts, 'Execute a code action')
+        map_local('n', '<Leader>a', vim.lsp.buf.code_action, 'Execute a code action')
+        map_local('x', '<Leader>a', vim.lsp.buf.code_action, 'Execute a code action')
 
-        map('n', '<Leader>f', vim.lsp.buf.format, lsp_opts, 'Format the current buffer')
-        map('x', '<Leader>f', vim.lsp.buf.format, lsp_opts, 'Format the current selection')
+        map_local('n', '<Leader>f', vim.lsp.buf.format, 'Format the current buffer')
+        map_local('x', '<Leader>f', vim.lsp.buf.format, 'Format the current selection')
 
-        map('n', '<Leader>r', vim.lsp.buf.rename, lsp_opts, 'Rename symbol under cursor')
+        map_local('n', '<Leader>r', vim.lsp.buf.rename, 'Rename symbol under cursor')
 
-        map('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder, lsp_opts, 'Add a folder to the workspace')
-        map('n', '<Leader>wr', vim.lsp.buf.remove_workspace_folder, lsp_opts, 'Remove a folder from the workspace')
-        map('n', '<Leader>wl', function()
+        map_local('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder, 'Add a folder to the workspace')
+        map_local('n', '<Leader>wr', vim.lsp.buf.remove_workspace_folder, 'Remove a folder from the workspace')
+
+        map_local('n', '<Leader>wl', function()
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-        end, lsp_opts, 'List workspace folders')
+        end, 'List workspace folders')
     end,
     group = vim.api.nvim_create_augroup('lsp_keybindings', {}),
 })
