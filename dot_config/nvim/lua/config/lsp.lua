@@ -69,8 +69,8 @@ local servers = {
                 diagnostics = {
                     globals = { 'vim', 'packer_plugins' },
                 },
-                runtime = {},               -- needed in on_init()
-                workspace = {},             -- needed in on_init()
+                runtime = {},   -- needed in on_init()
+                workspace = {}, -- needed in on_init()
             },
         },
         on_init = function(client)
@@ -98,7 +98,7 @@ local servers = {
             return true
         end,
     },
-    taplo = {},             -- toml
+    taplo = {}, -- toml
     texlab = {
         settings = {
             texlab = {

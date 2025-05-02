@@ -1,28 +1,23 @@
 -- set the leader key
 vim.g.mapleader = ' '
 
-local opts = {
-    noremap = true,
-    silent = true,
-}
-
 -- map <Leader> to no action
-vim.keymap.set('n', '<Leader>', '', opts)
+vim.keymap.set('n', '<Leader>', '')
 
 -- use ESC to exit insert mode in terminals
-vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', opts)
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
 
 -- window navigation
-vim.keymap.set('n', '<M-h>', '<C-w>h', opts)
-vim.keymap.set('n', '<M-j>', '<C-w>j', opts)
-vim.keymap.set('n', '<M-k>', '<C-w>k', opts)
-vim.keymap.set('n', '<M-l>', '<C-w>l', opts)
+vim.keymap.set('n', '<M-h>', '<C-w>h')
+vim.keymap.set('n', '<M-j>', '<C-w>j')
+vim.keymap.set('n', '<M-k>', '<C-w>k')
+vim.keymap.set('n', '<M-l>', '<C-w>l')
 
 -- window resizing
-vim.keymap.set('n', '<C-Left>', '<Cmd>vertical resize -2<CR>', opts)
-vim.keymap.set('n', '<C-Down>', '<Cmd>resize -2<CR>', opts)
-vim.keymap.set('n', '<C-Up>', '<Cmd>resize +2<CR>', opts)
-vim.keymap.set('n', '<C-Right>', '<Cmd>vertical resize +2<CR>', opts)
+vim.keymap.set('n', '<C-Left>', '<Cmd>vertical resize -2<CR>')
+vim.keymap.set('n', '<C-Down>', '<Cmd>resize -2<CR>')
+vim.keymap.set('n', '<C-Up>', '<Cmd>resize +2<CR>')
+vim.keymap.set('n', '<C-Right>', '<Cmd>vertical resize +2<CR>')
 
 -- make <C-l> also clear document highlights
 -- default: `nnoremap <C-L> <Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>`
@@ -33,30 +28,24 @@ vim.cmd.nnoremap(
 
 -- Buffers
 
-vim.keymap.set('n', '<Leader><Tab>', vim.cmd.bnext, opts)
-vim.keymap.set('n', '<Leader><S-Tab>', vim.cmd.bNext, opts)
+vim.keymap.set('n', '<Leader><Tab>', vim.cmd.bnext)
+vim.keymap.set('n', '<Leader><S-Tab>', vim.cmd.bNext)
 
 -- Tabs
 
-vim.keymap.set('n', '<Leader>1', '1gt', opts)
-vim.keymap.set('n', '<Leader>2', '2gt', opts)
-vim.keymap.set('n', '<Leader>3', '3gt', opts)
-vim.keymap.set('n', '<Leader>4', '4gt', opts)
-vim.keymap.set('n', '<Leader>5', '5gt', opts)
-vim.keymap.set('n', '<Leader>6', '6gt', opts)
-vim.keymap.set('n', '<Leader>7', '7gt', opts)
-vim.keymap.set('n', '<Leader>8', '8gt', opts)
-vim.keymap.set('n', '<Leader>9', '9gt', opts)
-
--- Change/Delete/Put without yanking old text
-vim.keymap.set({ 'n', 'x' }, '<M-c>', '"_c', opts)
-vim.keymap.set({ 'n', 'x' }, '<M-d>', '"_d', opts)
-vim.keymap.set({ 'n', 'x' }, '<M-d><M-d>', '"_dd', opts)
-vim.keymap.set({ 'n', 'x' }, '<M-p>', '"_dP', opts)
+vim.keymap.set('n', '<Leader>1', '1gt')
+vim.keymap.set('n', '<Leader>2', '2gt')
+vim.keymap.set('n', '<Leader>3', '3gt')
+vim.keymap.set('n', '<Leader>4', '4gt')
+vim.keymap.set('n', '<Leader>5', '5gt')
+vim.keymap.set('n', '<Leader>6', '6gt')
+vim.keymap.set('n', '<Leader>7', '7gt')
+vim.keymap.set('n', '<Leader>8', '8gt')
+vim.keymap.set('n', '<Leader>9', '9gt')
 
 -- System clipboard shortcuts
-vim.keymap.set({ 'n', 'x' }, '<Leader>y', '"+y', opts)
-vim.keymap.set({ 'n', 'x' }, '<Leader>p', '"+p', opts)
+vim.keymap.set({ 'n', 'x' }, '<Leader>y', '"+y')
+vim.keymap.set({ 'n', 'x' }, '<Leader>p', '"+p')
 
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
@@ -101,20 +90,70 @@ vim.api.nvim_create_autocmd('LspAttach', {
             'List all references in Telescope'
         )
 
-        map_local('n', '<Leader>a', vim.lsp.buf.code_action, 'Execute a code action')
-        map_local('x', '<Leader>a', vim.lsp.buf.code_action, 'Execute a code action')
+        map_local(
+            'n',
+            '<Leader>j',
+            telescope_builtin.lsp_dynamic_workspace_symbols,
+            'List workspace symbols'
+        )
 
-        map_local('n', '<Leader>f', vim.lsp.buf.format, 'Format the current buffer')
-        map_local('x', '<Leader>f', vim.lsp.buf.format, 'Format the current selection')
+        map_local(
+            'n',
+            '<Leader>a',
+            vim.lsp.buf.code_action,
+            'Execute a code action'
+        )
 
-        map_local('n', '<Leader>r', vim.lsp.buf.rename, 'Rename symbol under cursor')
+        map_local(
+            'x',
+            '<Leader>a',
+            vim.lsp.buf.code_action,
+            'Execute a code action'
+        )
 
-        map_local('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder, 'Add a folder to the workspace')
-        map_local('n', '<Leader>wr', vim.lsp.buf.remove_workspace_folder, 'Remove a folder from the workspace')
+        map_local(
+            'n',
+            '<Leader>f',
+            vim.lsp.buf.format,
+            'Format the current buffer'
+        )
 
-        map_local('n', '<Leader>wl', function()
-            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-        end, 'List workspace folders')
+        map_local(
+            'x',
+            '<Leader>f',
+            vim.lsp.buf.format,
+            'Format the current selection'
+        )
+
+        map_local(
+            'n',
+            '<Leader>r',
+            vim.lsp.buf.rename,
+            'Rename symbol under cursor'
+        )
+
+        map_local(
+            'n',
+            '<Leader>wa',
+            vim.lsp.buf.add_workspace_folder,
+            'Add a folder to the workspace'
+        )
+
+        map_local(
+            'n',
+            '<Leader>wr',
+            vim.lsp.buf.remove_workspace_folder,
+            'Remove a folder from the workspace'
+        )
+
+        map_local(
+            'n',
+            '<Leader>wl',
+            function()
+                print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+            end,
+            'List workspace folders'
+        )
     end,
     group = vim.api.nvim_create_augroup('lsp_keybindings', {}),
 })

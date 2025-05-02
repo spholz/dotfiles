@@ -12,7 +12,7 @@ return {
                         case_mode = 'smart_case',
                     },
                     ['ui-select'] = {
-                        require('telescope.themes').get_dropdown {},
+                        require('telescope.themes').get_dropdown(),
                     },
                 },
             }
@@ -59,13 +59,6 @@ return {
                 '<Leader>h',
                 telescope_builtin.help_tags,
                 { desc = 'Telescope: search help tags' }
-            )
-
-            vim.keymap.set(
-                'n',
-                '<Leader>j',
-                telescope_builtin.lsp_dynamic_workspace_symbols,
-                { desc = 'Telescope: list workspace symbols' }
             )
 
             vim.keymap.set(
