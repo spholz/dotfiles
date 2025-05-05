@@ -1,3 +1,10 @@
+# HACK: Something in elftools imports readline for some reason.
+#       Importing readline causes gdb autocomplete to break.
+#       https://github.com/pwndbg/pwndbg/issues/2232
+#       https://sourceware.org/bugzilla/show_bug.cgi?id=32473
+import sys
+sys.modules["readline"] = None
+
 from argparse import ArgumentParser
 from elftools.elf.elffile import ELFFile
 import gdb
@@ -7,7 +14,7 @@ class AutoMap(gdb.Command):
         super().__init__('automap', gdb.COMMAND_USER, gdb.COMPLETE_FILENAME)
 
     def invoke(self, argument: str, from_tty: bool) -> None:
-        parser = ArgumentParser(prog='automap')
+        parser = ArgumentParser(prog='automap', exit_on_error=False, add_help=False)
         parser.add_argument('elf_file')
         parser.add_argument('-s', '--needle-size', type=int, default=100)
         parser.add_argument('-a', '--address', type=lambda x: int(x, 16), default=gdb.selected_frame().pc())

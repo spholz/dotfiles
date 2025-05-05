@@ -67,7 +67,7 @@ local servers = {
         settings = {
             Lua = {
                 diagnostics = {
-                    globals = { 'vim', 'packer_plugins' },
+                    globals = { 'vim' },
                 },
                 runtime = {},   -- needed in on_init()
                 workspace = {}, -- needed in on_init()
