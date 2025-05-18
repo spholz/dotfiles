@@ -1,0 +1,14 @@
+# Nvim
+.nvim.lua
+Session.vim
+
+# clangd
+.cache/
+.clangd
+compile_commands.json
+
+# GDB
+.gdb_history
+
+# JetBrains
+.idea/
