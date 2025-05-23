@@ -64,7 +64,6 @@
 [rebase]
 	autoSquash = true
 	autoStash = true
-	updateRefs = true
 
 [merge]
 	# tool = nvimdiff2 # doesn't support dp (:diffput)
