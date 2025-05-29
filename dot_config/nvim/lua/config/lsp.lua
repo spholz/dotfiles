@@ -42,8 +42,6 @@ vim.keymap.set(
     { desc = 'Switch between source/header' }
 )
 
-local capabilities = {}
-
 local servers = {
     clangd = {
         cmd = { 'clangd', '--clang-tidy' },
@@ -133,10 +131,6 @@ local servers = {
 }
 
 for server, config in pairs(servers) do
-    config = vim.tbl_deep_extend('keep', config, {
-        capabilities = capabilities,
-    })
-
-    vim.lsp.config[server] = config
+    vim.lsp.config(server, config)
     vim.lsp.enable(server)
 end
