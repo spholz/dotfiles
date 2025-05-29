@@ -7,7 +7,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
         if client.server_capabilities.documentHighlightProvider then
             vim.api.nvim_create_autocmd('CursorHold', {
                 buffer = args.buf,
-                callback = vim.lsp.buf.document_highlight,
+                callback = function(ev)
+                    -- LSPs usually don't work for fugitive buffers
+                    if not vim.startswith(ev.file, 'fugitive://') then
+                        vim.lsp.buf.document_highlight()
+                    end
+                end,
                 group = lsp_augroup,
             })
 
