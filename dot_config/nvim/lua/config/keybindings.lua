@@ -19,6 +19,10 @@ vim.keymap.set('n', '<C-Down>', '<Cmd>resize -2<CR>')
 vim.keymap.set('n', '<C-Up>', '<Cmd>resize +2<CR>')
 vim.keymap.set('n', '<C-Right>', '<Cmd>vertical resize +2<CR>')
 
+-- make square bracket commands (easily) usable on german keyboards
+vim.keymap.set('n', 'ö', '[', { remap = true })
+vim.keymap.set('n', 'ä', ']', { remap = true })
+
 -- make <C-l> also clear document highlights
 -- default: `nnoremap <C-L> <Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>`
 vim.cmd.nnoremap(
