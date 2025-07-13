@@ -38,6 +38,8 @@ set -g tide_vi_mode_bg_color_insert 1C1C1C
 set -g tide_vi_mode_bg_color_replace 1C1C1C
 set -g tide_vi_mode_bg_color_visual 1C1C1C
 
+set -g fish_color_command blue
+
 # enable vi mode
 set -g fish_key_bindings fish_vi_key_bindings
 
