@@ -1,3 +1,3 @@
-function rg --description 'alias rg=kitten hyperlinked_grep'
-  command kitten hyperlinked_grep $argv;
+function rg --description 'alias rg rg --hyperlink-format kitty'
+  command rg --hyperlink-format kitty $argv
 end

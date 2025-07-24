@@ -106,8 +106,8 @@ local servers = {
         settings = {
             texlab = {
                 build = {
-                    executable = 'tectonic',
-                    args = { '-X', 'compile', '%f', '--synctex', '--keep-logs', '--keep-intermediates' },
+                    -- executable = 'tectonic',
+                    -- args = { '-X', 'compile', '%f', '--synctex', '--keep-logs', '--keep-intermediates' },
                     onSave = true,
                     forwardSearchAfter = true,
                 },
