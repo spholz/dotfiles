@@ -55,10 +55,6 @@ local servers = {
     rust_analyzer = {
         settings = {
             ['rust-analyzer'] = {
-                checkOnSave = {
-                    command = 'clippy',
-                    allTargets = false,
-                },
                 assist = {
                     emitMustUse = true,
                     expressionFillDefault = 'default',
