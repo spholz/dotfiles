@@ -49,7 +49,7 @@ vim.keymap.set('n', '<Leader>9', '9gt')
 
 -- System clipboard shortcuts
 vim.keymap.set({ 'n', 'x' }, '<Leader>y', '"+y')
-vim.keymap.set({ 'n', 'x' }, '<Leader>Y', '"+Y')
+vim.keymap.set({ 'n', 'x' }, '<Leader>Y', '"+y$')
 vim.keymap.set({ 'n', 'x' }, '<Leader>p', '"+p')
 
 vim.api.nvim_create_autocmd('LspAttach', {
