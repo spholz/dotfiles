@@ -51,6 +51,7 @@ vim.keymap.set('n', '<Leader>9', '9gt')
 vim.keymap.set({ 'n', 'x' }, '<Leader>y', '"+y')
 vim.keymap.set({ 'n', 'x' }, '<Leader>Y', '"+y$')
 vim.keymap.set({ 'n', 'x' }, '<Leader>p', '"+p')
+vim.keymap.set({ 'n', 'x' }, '<Leader>P', '"+P')
 
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
