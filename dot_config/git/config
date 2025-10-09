@@ -5,6 +5,9 @@
 [includeIf "gitdir:~/Uni/**"]
 	path = ~/.config/git/uni.inc
 
+[includeIf "gitdir:~/repos/serenity/**"]
+	path = ~/.config/git/serenity.inc
+
 [column]
 	# show lists in columns
 	ui = auto
