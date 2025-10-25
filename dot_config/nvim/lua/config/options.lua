@@ -84,8 +84,7 @@ vim.api.nvim_create_autocmd('FileType', {
     group = cursorline_group,
 })
 
-vim.opt.showmode = false
--- vim.opt.showtabline = 1 -- 1: only if there are at least two tab pages -- doesn't work with lualine
+vim.opt.showtabline = 1 -- 1: only if there are at least two tab pages
 
 vim.opt.guifont = 'Fira Code:h14'
 

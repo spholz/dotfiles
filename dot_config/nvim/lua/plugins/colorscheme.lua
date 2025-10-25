@@ -13,14 +13,7 @@ return {
                         return
                     end
 
-                    local lualine_ok, lualine = pcall(require, 'lualine')
-                    if lualine_ok then
-                        local lualine_theme = lualine.get_config().options.theme
-                        if lualine_theme == 'auto' or lualine_theme == 'molokai' then
-                            vim.api.nvim_set_hl(0, 'WinSeparator', { link = 'lualine_c_normal' })
-                            vim.api.nvim_set_hl(0, 'Pmenu', { bg = '#272828' })
-                        end
-                    end
+                    vim.api.nvim_set_hl(0, 'Pmenu', { bg = '#272828' })
 
                     local old_hl = vim.api.nvim_get_hl(0, { name = 'Special' })
                     vim.api.nvim_set_hl(0, 'Special', {
@@ -28,6 +21,19 @@ return {
                         -- no background color
                         -- no italic
                     })
+
+                    local color_1 = '#66d9ef'
+                    local color_2 = '#f92672'
+                    local color_bg = '#232526'
+
+                    -- for statusline
+                    vim.api.nvim_set_hl(0, 'User1', { fg = color_1, bg = color_2 })
+                    vim.api.nvim_set_hl(0, 'User2', { fg = color_bg, bg = color_1, bold = true })
+                    vim.api.nvim_set_hl(0, 'User3', { fg = color_2, bg = color_bg })
+                    vim.api.nvim_set_hl(0, 'User4', { fg = color_bg, bg = color_2 })
+                    vim.api.nvim_set_hl(0, 'User5', { fg = color_1, bg = color_bg })
+                    vim.api.nvim_set_hl(0, 'StatusLine', { fg = '#ef5939', bg = '#232526' })
+                    vim.api.nvim_set_hl(0, 'WinSeparator', { link = 'StatusLine' })
 
                     -- for document highlights
                     vim.api.nvim_set_hl(0, 'LspReferenceText', { link = 'Visual' })
