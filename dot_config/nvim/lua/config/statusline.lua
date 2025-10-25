@@ -23,7 +23,7 @@ function Statusline.mode()
         ['!'] = 'SHELL',
         ['t'] = 'TERMINAL',
     }
-    return mode_names[string.sub(mode, 1, 1)]
+    return mode_names[string.sub(mode, 1, 1)] or ('?' .. mode)
 end
 
 vim.opt.statusline = '%<%2* %{v:lua.Statusline.mode()} %5*%* %f %w%m%r%=%{v:lua.Statusline.filetype()} %3*%4* %P %1*%2* %(%3.l:%-3.c%)'
