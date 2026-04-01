@@ -23,13 +23,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
             })
         end
 
-        if client:supports_method('textDocument/completion') then
+        if client:supports_method 'textDocument/completion' then
             vim.keymap.set('i', '<c-space>', function()
                 vim.lsp.completion.get()
             end)
 
             -- trigger autocompletion on EVERY keypress
-            local chars = {}; for i = 32, 126 do table.insert(chars, string.char(i)) end
+            local chars = {}
+            for i = 32, 126 do
+                table.insert(chars, string.char(i))
+            end
             client.server_capabilities.completionProvider.triggerCharacters = chars
 
             vim.lsp.completion.enable(true, client.id, args.buf, {
@@ -40,12 +43,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     group = lsp_augroup,
 })
 
-vim.keymap.set(
-    'n',
-    '<Leader>c',
-    vim.cmd.LspClangdSwitchSourceHeader,
-    { desc = 'Switch between source/header' }
-)
+vim.keymap.set('n', '<Leader>c', vim.cmd.LspClangdSwitchSourceHeader, { desc = 'Switch between source/header' })
 
 local servers = {
     clangd = {
@@ -62,41 +60,7 @@ local servers = {
             },
         },
     },
-    lua_ls = {
-        settings = {
-            Lua = {
-                diagnostics = {
-                    globals = { 'vim' },
-                },
-                runtime = {},   -- needed in on_init()
-                workspace = {}, -- needed in on_init()
-            },
-        },
-        on_init = function(client)
-            -- set workspace.library to nvim runtime paths if in ~/.config/nvim
-            -- slows down startup
-            -- https://github.com/neovim/nvim-lspconfig/wiki/Project-local-settings
-
-            if client.workspace_folders == nil then
-                return
-            end
-
-            local workspace_path = client.workspace_folders[1].name
-
-            if workspace_path == vim.fn.stdpath 'config' then
-                local nvim_runtime_path = vim.split(package.path, ';')
-                table.insert(nvim_runtime_path, 'lua/?.lua')
-                table.insert(nvim_runtime_path, 'lua/?/init.lua')
-
-                client.config.settings.Lua.runtime.path = nvim_runtime_path
-                client.config.settings.Lua.workspace.library = vim.api.nvim_get_runtime_file('', true)
-
-                client.notify('workspace/didChangeConfiguration', { settings = client.config.settings })
-            end
-
-            return true
-        end,
-    },
+    lua_ls = {},
     taplo = {}, -- toml
     texlab = {
         settings = {
@@ -132,6 +96,8 @@ local servers = {
 }
 
 for server, config in pairs(servers) do
-    vim.lsp.config(server, config)
+    if next(config) ~= nil then
+        -- vim.lsp.config(server, config)
+    end
     vim.lsp.enable(server)
 end

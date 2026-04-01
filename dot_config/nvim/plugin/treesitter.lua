@@ -1,0 +1,162 @@
+vim.api.nvim_create_autocmd('PackChanged', {
+    callback = function(ev)
+        local name, kind = ev.data.spec.name, ev.data.kind
+        if name == 'nvim-treesitter' and kind == 'update' then
+            if not ev.data.active then vim.cmd.packadd('nvim-treesitter') end
+            vim.cmd.TSUpdate()
+        end
+    end
+})
+
+vim.pack.add({
+    'https://github.com/nvim-treesitter/nvim-treesitter',
+    'https://github.com/nvim-treesitter/nvim-treesitter-context',
+    'https://github.com/nvim-treesitter/nvim-treesitter-textobjects',
+})
+
+
+-- minimal config
+local parsers = {
+    'bash',
+    'cmake',
+    'comment',
+    'cpp',
+    'diff',
+    'gitignore',
+    'html',
+    'java',
+    'javascript',
+    'json',
+    'latex',
+    'make',
+    'markdown',
+    'meson',
+    'python',
+    'regex',
+    'rust',
+    'toml',
+}
+
+local bundled_parsers = {
+    'c',
+    'lua',
+    'query',
+    'vim',
+    'vimdoc',
+}
+
+vim.list_extend(parsers, bundled_parsers)
+
+local more_parsers = {
+    'asm',
+    'bibtex',
+    'c_sharp',
+    'css',
+    'devicetree',
+    'dockerfile',
+    'fish',
+    'gdscript',
+    'git_config',
+    'git_rebase',
+    'gitattributes',
+    'gitignore',
+    'glsl',
+    'gn',
+    'godot_resource',
+    'haskell',
+    'kconfig',
+    'linkerscript',
+    'llvm',
+    'markdown_inline',
+    'ninja',
+    'nix',
+    'rst',
+    'ssh_config',
+    'strace',
+    'systemverilog',
+    'wgsl',
+    'yaml',
+    'zig',
+}
+
+-- more parsers!!
+vim.list_extend(parsers, more_parsers)
+
+-- remove all parsers that require tree-sitter CLI if it isn't installed
+if vim.fn.executable 'tree-sitter' == 0 then
+    local parser_defs = require('nvim-treesitter.parsers').list
+
+    for i, parser in ipairs(parsers) do
+        if parser_defs[parser].install_info.requires_generate_from_grammar then
+            parsers[i] = nil
+        end
+    end
+end
+
+require('nvim-treesitter').install(parsers)
+
+local file_types = vim.iter(parsers):map(vim.treesitter.language.get_filetypes):flatten():totable()
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = file_types,
+    callback = function()
+        vim.treesitter.start()
+
+        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        vim.wo.foldmethod = 'expr'
+
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end,
+})
+
+require('nvim-treesitter-textobjects').setup {
+    textobjects = {
+        swap = {
+            enable = true,
+            swap_next = {
+                ['<A-n>'] = '@parameter.inner',
+            },
+            swap_previous = {
+                ['<A-p>'] = '@parameter.inner',
+            },
+        },
+        select = {
+            enable = true,
+
+            -- Automatically jump forward to textobj, similar to targets.vim
+            lookahead = true,
+
+            keymaps = {
+                ['af'] = '@function.outer',
+                ['if'] = '@function.inner',
+                ['ac'] = '@class.outer',
+                ['ic'] = '@class.inner',
+            },
+            selection_modes = {
+                ['@parameter.outer'] = 'v', -- charwise
+                ['@function.outer'] = 'V',  -- linewise
+                ['@class.outer'] = '<C-v>', -- blockwise
+            },
+
+            -- If you set this to `true` (default is `false`) then any textobject is
+            -- extended to include preceding xor succeeding whitespace. Succeeding
+            -- whitespace has priority in order to act similarly to eg the built-in
+            -- `ap`.
+            include_surrounding_whitespace = true,
+        },
+    },
+}
+
+require('treesitter-context').setup {
+    enable = true,
+    multiwindow = false,
+    max_lines = 0, -- no limit
+    min_window_height = 0,
+    line_numbers = true,
+    multiline_threshold = 10,
+    trim_scope = 'outer',
+    mode = 'cursor',
+    separator = nil,
+    zindex = 20,
+    on_attach = nil,
+}
