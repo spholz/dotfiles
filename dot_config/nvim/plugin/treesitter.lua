@@ -9,9 +9,9 @@ vim.api.nvim_create_autocmd('PackChanged', {
 })
 
 vim.pack.add({
-    'https://github.com/nvim-treesitter/nvim-treesitter',
-    'https://github.com/nvim-treesitter/nvim-treesitter-context',
-    'https://github.com/nvim-treesitter/nvim-treesitter-textobjects',
+    { src = 'https://github.com/nvim-treesitter/nvim-treesitter',             version = 'master' },
+    { src = 'https://github.com/nvim-treesitter/nvim-treesitter-context',     version = 'master' },
+    { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects', version = 'master' },
 })
 
 
@@ -73,7 +73,7 @@ local more_parsers = {
     'rst',
     'ssh_config',
     'strace',
-    'systemverilog',
+    'verilog',
     'wgsl',
     'yaml',
     'zig',
@@ -93,23 +93,26 @@ if vim.fn.executable 'tree-sitter' == 0 then
     end
 end
 
-require('nvim-treesitter').install(parsers)
+require('nvim-treesitter.configs').setup {
+    ensure_installed = parsers,
+    auto_install = true,
 
-local file_types = vim.iter(parsers):map(vim.treesitter.language.get_filetypes):flatten():totable()
+    modules = {},
+    ignore_install = {},
+    sync_install = false,
 
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = file_types,
-    callback = function()
-        vim.treesitter.start()
+    highlight = {
+        enable = true,
+        disable = {},
+    },
+    incremental_selection = {
+        enable = true,
+    },
+    -- indent = {
+    --     enable = true
+    -- },
 
-        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-        vim.wo.foldmethod = 'expr'
-
-        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-    end,
-})
-
-require('nvim-treesitter-textobjects').setup {
+    -- nvim-treesitter-textobjects
     textobjects = {
         swap = {
             enable = true,
@@ -133,9 +136,9 @@ require('nvim-treesitter-textobjects').setup {
                 ['ic'] = '@class.inner',
             },
             selection_modes = {
-                ['@parameter.outer'] = 'v', -- charwise
-                ['@function.outer'] = 'V',  -- linewise
-                ['@class.outer'] = '<C-v>', -- blockwise
+                ['@parameter.outer'] = 'v',             -- charwise
+                ['@function.outer'] = 'V',              -- linewise
+                ['@class.outer'] = '<C-v>',             -- blockwise
             },
 
             -- If you set this to `true` (default is `false`) then any textobject is
@@ -146,6 +149,18 @@ require('nvim-treesitter-textobjects').setup {
         },
     },
 }
+
+local file_types = vim.iter(parsers):map(vim.treesitter.language.get_filetypes):flatten():totable()
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = file_types,
+    callback = function()
+        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        vim.wo.foldmethod = 'expr'
+
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end,
+})
 
 require('treesitter-context').setup {
     enable = true,
