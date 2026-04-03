@@ -150,18 +150,6 @@ require('nvim-treesitter.configs').setup {
     },
 }
 
-local file_types = vim.iter(parsers):map(vim.treesitter.language.get_filetypes):flatten():totable()
-
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = file_types,
-    callback = function()
-        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-        vim.wo.foldmethod = 'expr'
-
-        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-    end,
-})
-
 require('treesitter-context').setup {
     enable = true,
     multiwindow = false,
