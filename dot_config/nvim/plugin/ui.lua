@@ -1,17 +1,7 @@
 vim.pack.add({
-    'https://github.com/j-hui/fidget.nvim',
     'https://github.com/nvim-tree/nvim-web-devicons',
     'https://github.com/akinsho/bufferline.nvim',
 })
-
-require('fidget').setup {
-    progress = {
-        display = {
-            done_icon = '✔',
-            progress_icon = { pattern = { '⠂', '⠂', '⠒', '⠲', '⠴', '⠦', '⠆' } },
-        },
-    },
-}
 
 require('bufferline').setup {
     options = {

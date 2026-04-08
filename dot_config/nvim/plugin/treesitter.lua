@@ -9,9 +9,8 @@ vim.api.nvim_create_autocmd('PackChanged', {
 })
 
 vim.pack.add({
-    { src = 'https://github.com/nvim-treesitter/nvim-treesitter',             version = 'master' },
-    { src = 'https://github.com/nvim-treesitter/nvim-treesitter-context',     version = 'master' },
-    { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects', version = 'master' },
+    { src = 'https://github.com/nvim-treesitter/nvim-treesitter',         version = 'master' },
+    { src = 'https://github.com/nvim-treesitter/nvim-treesitter-context', version = 'master' },
 })
 
 
@@ -111,43 +110,6 @@ require('nvim-treesitter.configs').setup {
     -- indent = {
     --     enable = true
     -- },
-
-    -- nvim-treesitter-textobjects
-    textobjects = {
-        swap = {
-            enable = true,
-            swap_next = {
-                ['<A-n>'] = '@parameter.inner',
-            },
-            swap_previous = {
-                ['<A-p>'] = '@parameter.inner',
-            },
-        },
-        select = {
-            enable = true,
-
-            -- Automatically jump forward to textobj, similar to targets.vim
-            lookahead = true,
-
-            keymaps = {
-                ['af'] = '@function.outer',
-                ['if'] = '@function.inner',
-                ['ac'] = '@class.outer',
-                ['ic'] = '@class.inner',
-            },
-            selection_modes = {
-                ['@parameter.outer'] = 'v',             -- charwise
-                ['@function.outer'] = 'V',              -- linewise
-                ['@class.outer'] = '<C-v>',             -- blockwise
-            },
-
-            -- If you set this to `true` (default is `false`) then any textobject is
-            -- extended to include preceding xor succeeding whitespace. Succeeding
-            -- whitespace has priority in order to act similarly to eg the built-in
-            -- `ap`.
-            include_surrounding_whitespace = true,
-        },
-    },
 }
 
 require('treesitter-context').setup {
