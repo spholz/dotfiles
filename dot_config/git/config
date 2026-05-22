@@ -40,10 +40,6 @@
 [absorb]
 	maxStack = 50
 
-[rerere]
-	enabled = true
-	autoUpdate = true
-
 [interactive]
 	diffFilter = delta --color-only
 

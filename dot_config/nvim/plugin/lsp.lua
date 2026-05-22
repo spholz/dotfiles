@@ -115,7 +115,7 @@ local servers = {
 
 for server, config in pairs(servers) do
     if next(config) ~= nil then
-        vim.lsp.config(server, config)
+        -- vim.lsp.config(server, config)
     end
     vim.lsp.enable(server)
 end

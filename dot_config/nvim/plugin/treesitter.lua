@@ -9,8 +9,8 @@ vim.api.nvim_create_autocmd('PackChanged', {
 })
 
 vim.pack.add({
-    { src = 'https://github.com/nvim-treesitter/nvim-treesitter',         version = 'master' },
-    { src = 'https://github.com/nvim-treesitter/nvim-treesitter-context', version = 'master' },
+    'https://github.com/nvim-treesitter/nvim-treesitter',
+    'https://github.com/nvim-treesitter/nvim-treesitter-context',
 })
 
 
@@ -28,7 +28,6 @@ local parsers = {
     'json',
     'latex',
     'make',
-    'markdown',
     'meson',
     'python',
     'regex',
@@ -39,6 +38,7 @@ local parsers = {
 local bundled_parsers = {
     'c',
     'lua',
+    'markdown',
     'query',
     'vim',
     'vimdoc',
@@ -72,7 +72,7 @@ local more_parsers = {
     'rst',
     'ssh_config',
     'strace',
-    'verilog',
+    'systemverilog',
     'wgsl',
     'yaml',
     'zig',
@@ -81,36 +81,21 @@ local more_parsers = {
 -- more parsers!!
 vim.list_extend(parsers, more_parsers)
 
--- remove all parsers that require tree-sitter CLI if it isn't installed
-if vim.fn.executable 'tree-sitter' == 0 then
-    local parser_defs = require('nvim-treesitter.parsers').list
+require('nvim-treesitter').install(parsers)
 
-    for i, parser in ipairs(parsers) do
-        if parser_defs[parser].install_info.requires_generate_from_grammar then
-            parsers[i] = nil
-        end
-    end
-end
+local file_types = vim.iter(parsers):map(vim.treesitter.language.get_filetypes):flatten():totable()
 
-require('nvim-treesitter.configs').setup {
-    ensure_installed = parsers,
-    auto_install = true,
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = file_types,
+    callback = function()
+        vim.treesitter.start()
 
-    modules = {},
-    ignore_install = {},
-    sync_install = false,
+        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        vim.wo.foldmethod = 'expr'
 
-    highlight = {
-        enable = true,
-        disable = {},
-    },
-    incremental_selection = {
-        enable = true,
-    },
-    -- indent = {
-    --     enable = true
-    -- },
-}
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end,
+})
 
 require('treesitter-context').setup {
     enable = true,
