@@ -2,6 +2,8 @@ set -gx BROWSER firefox
 set -gx EDITOR nvim
 set -gx MANPAGER 'nvim +Man!'
 
+set -gx CMAKE_EXPORT_COMPILE_COMMANDS 'ON'
+
 # don't keep journalctl output on screeen after exiting the pager
 set -gx SYSTEMD_LESS 'FRSMK'
 
